@@ -3,8 +3,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="colorTextGuestWhite">#FFFFFF</color>
-    <color name="colorBtnRegGuestDarkGray">#1A1A1A</color>
-    <color name="colorBtnLogGuestWhite">#FFFFFF</color>
-    <color name="colorTextBtnRegGuest">#44DABD</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDarkGray">#1A1A1A</color>
+    <color name="colorGreen">#44DABD</color>
 </resources>
