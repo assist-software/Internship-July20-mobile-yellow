@@ -4,4 +4,13 @@
     <string name="loginText">LOGIN</string>
     <string name="registerText">REGISTER</string>
     <string name="sports_club">Sports Club</string>
+    <string name="welcome">WELCOME</string>
+    <string name="email_address">Email Address</string>
+    <string name="login_to_your_naccount">Login To Your\nAccount</string>
+    <string name="password">Password</string>
+    <string name="input_placeholder">Input Placeholder</string>
+    <string name="new_here">New here?</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="log_in">Log in</string>
+    <string name="register">Register</string>
 </resources>
