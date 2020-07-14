@@ -10,13 +10,16 @@ import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.screens.guest.GuestActivity;
 
 public class SplashActivity extends AppCompatActivity {
-    private static int Splash_Time_Out = 1000;
+    private final static int SPLASH_TIME_OUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        splashDelay();
+    }
 
+    private void splashDelay(){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -24,6 +27,6 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(guestActivity);
                 finish();
             }
-        }, Splash_Time_Out);
+        }, SPLASH_TIME_OUT);
     }
 }

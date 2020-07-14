@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">SportsClubManagement</string>
-    
-    <string name="splashscreen_text">Sports Club</string>
+
+    <string name="sports_club">Sports Club</string>
 </resources>
