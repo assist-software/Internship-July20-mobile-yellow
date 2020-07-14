@@ -8,10 +8,9 @@ import android.os.Handler;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.screens.guest.GuestActivity;
+import com.example.sportsclubmanagement.utils.Constants;
 
 public class SplashActivity extends AppCompatActivity {
-    private final static int SPLASH_TIME_OUT = 1000;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +26,6 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(guestActivity);
                 finish();
             }
-        }, SPLASH_TIME_OUT);
+        }, Constants.SPLASH_TIME_OUT);
     }
 }

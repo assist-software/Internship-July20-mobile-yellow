@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_12dp"
-        android:fontFamily="Inter"
+        android:fontFamily="@font/inter_normal"
         android:text="@string/sports_club"
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
