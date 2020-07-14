@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".screens.guest.GuestActivity">
 
     <ImageView
@@ -22,29 +23,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="dsadasdasdasd \n dasdas  \n dasdas \n dasdas  \n dasdas \n dasdas  \n dasdas "
+        android:text="@string/text_guest_screen"
+        android:textAlignment="center"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/loginBt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.05"
+        android:textColor="@color/colorTextGuestWhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <Button
         android:id="@+id/loginBt"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dim_4dp"
+        android:background="@drawable/btn_log_guest"
+        android:text="@string/loginText"
+        android:textColor="@color/colorBtnRegGuestDarkGray"
         app:layout_constraintBottom_toTopOf="@+id/registerBt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.8" />
 
     <Button
         android:id="@+id/registerBt"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.8"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="@dimen/dim_16dp"
+        android:background="@drawable/btn_log_guest"
+        android:backgroundTint="@color/colorBtnRegGuestDarkGray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/registerText"
+        android:textAlignment="inherit"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="@dimen/text_12sp"
+        android:textColor="@color/colorTextBtnRegGuest"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
