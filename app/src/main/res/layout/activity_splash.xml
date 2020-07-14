@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/colorDarkGray"
     tools:context=".screens.splash.SplashActivity">
 
     <ImageView
@@ -24,12 +24,12 @@
         android:id="@+id/spashsecreen_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_12dp"
+        android:layout_marginTop="@dimen/space_12dp"
         android:fontFamily="Inter"
         android:text="@string/sports_club"
         android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/dimen_22sp"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_22sp"
         android:textStyle="bold"
         android:letterSpacing="0.06"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -18,8 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".screens.guest.GuestActivity"/>
-        <activity android:name= ".screens.main.MainActivity"/>
+        <activity android:name=".screens.login.LoginActivity"/>
+        <activity android:name=".screens.register.RegisterActivity" />
+        <activity android:name=".screens.guest.GuestActivity" android:theme="@style/FullScreen" />
+        <activity android:name=".screens.main.MainActivity" />
     </application>
 
 </manifest>

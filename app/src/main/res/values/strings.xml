@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SportsClubManagement</string>
-
+    <string name="text_guest_screen">Ready to push\nyour limits?</string>
+    <string name="loginText">LOGIN</string>
+    <string name="registerText">REGISTER</string>
     <string name="sports_club">Sports Club</string>
 </resources>
