@@ -8,4 +8,6 @@
     <color name="colorGreen">#44DABD</color>
     <color name="colorBlack">#000000</color>
     <color name="colorLightGray">#8E9296</color>
+    <color name="backgroundGray">#E5E5E5</color>
+    <color name="transparent">#00000000</color>
 </resources>

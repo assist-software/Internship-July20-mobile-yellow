@@ -4,8 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+
     tools:context=".screens.guest.GuestActivity">
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/pasd"
+        android:scaleType="centerCrop"
+        />
+    <ImageView
+        android:id="@+id/filterForBackgr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/guest_screen_dark" />
+
 
     <ImageView
         android:id="@+id/imageView4"
@@ -15,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_bias="0.22"
         app:srcCompat="@drawable/logo" />
 
     <TextView
@@ -50,18 +71,19 @@
     <Button
         android:id="@+id/registerBt"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.8"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_16dp"
+        android:layout_marginBottom="64dp"
         android:background="@drawable/btn_log_guest"
         android:backgroundTint="@color/colorDarkGray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/inter_bold"
         android:text="@string/registerText"
         android:textAlignment="inherit"
-        android:fontFamily="@font/inter_bold"
-        android:textSize="@dimen/text_12sp"
         android:textColor="@color/colorGreen"
+        android:textSize="@dimen/text_12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.8" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
