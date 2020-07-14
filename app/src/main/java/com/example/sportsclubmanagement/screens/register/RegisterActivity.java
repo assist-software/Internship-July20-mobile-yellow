@@ -22,11 +22,14 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        initComponents();
+    }
+
+    private void initComponents(){
         registerBtn = findViewById(R.id.register_btn);
         registerBtn.setOnClickListener(registerButtonListener);
         loginTextView = findViewById(R.id.login_textView_link);
         loginTextView.setOnClickListener(textLoginListener);
-
     }
 
     View.OnClickListener textLoginListener = new View.OnClickListener() {
