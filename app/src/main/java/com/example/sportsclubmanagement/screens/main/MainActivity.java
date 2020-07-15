@@ -59,15 +59,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.home_drawer_layout);
         homeNavigationView = findViewById(R.id.home_nav_view);
         bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
         homeDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         homeDrawerToggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.colorWhite));
         drawerLayout.addDrawerListener(homeDrawerToggle);
         homeDrawerToggle.syncState();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); //remove the default title from the action bar
+        toolbar.setTitle(R.string.home);
+        toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit(); //show home fragment first time you enter the activity
         homeNavigationView.setNavigationItemSelectedListener(this);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -79,15 +81,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     switch (menuItem.getItemId()){
                         case R.id.bottom_nav_home:
                             selectedFragment = new HomeFragment();
+                            toolbar.setTitle(R.string.home);
+                            toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
                             break;
                         case R.id.bottom_nav_clubs:
                             selectedFragment = new ClubsFragment();
+                            toolbar.setTitle(R.string.clubs);
+                            toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
                             break;
                         case R.id.bottom_nav_events:
                             selectedFragment = new EventsFragment();
+                            toolbar.setTitle(R.string.events);
+                            toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
                             break;
                         case R.id.bottom_nav_workouts:
                             selectedFragment = new WorkoutsFragment();
+                            toolbar.setTitle(R.string.workouts);
+                            toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
