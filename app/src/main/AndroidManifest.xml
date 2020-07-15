@@ -31,7 +31,8 @@
         <activity
             android:name=".screens.guest.GuestActivity"
             android:theme="@style/FullScreen" />
-        <activity android:name=".screens.main.MainActivity" />
+        <activity android:name=".screens.main.MainActivity"
+            android:theme="@style/NoActionBarNoFullScreen"/>
     </application>
 
 </manifest>

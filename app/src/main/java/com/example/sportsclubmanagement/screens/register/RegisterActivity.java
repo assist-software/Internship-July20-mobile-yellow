@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.screens.accountsetup.AccountSetupActivity;
 import com.example.sportsclubmanagement.screens.login.LoginActivity;
+import com.example.sportsclubmanagement.screens.main.MainActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView loginTextView;
@@ -35,7 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
     View.OnClickListener textLoginListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+            //Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class); -- original code that we need
+            Intent loginIntent = new Intent(getApplicationContext(), MainActivity.class); //fake code to test main activity
             startActivity(loginIntent);
             finish();
         }

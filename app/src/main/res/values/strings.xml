@@ -18,4 +18,11 @@
     <string name="login_to_your_naccount">Login To Your\nAccount</string>
     <string name="new_here">New here?</string>
     <string name="forgot_your_password">Forgot your password?</string>
+    <string name="home">Home</string>
+    <string name="my_profile">My Profile</string>
+    <string name="notification">Notification</string>
+    <string name="calendar">Calendar</string>
+    <string name="log_out">Log out</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
