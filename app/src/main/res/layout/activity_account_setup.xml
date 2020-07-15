@@ -6,4 +6,253 @@
     android:layout_height="match_parent"
     tools:context=".screens.accountsetup.AccountSetupActivity">
 
+    <ImageView
+        android:id="@+id/ageBorderInput"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/weightText2"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <ImageView
+        android:id="@+id/weightBorderInput"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/weightText"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <ImageView
+        android:id="@+id/secondBorder"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/spinnerSecondSports"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <ImageView
+        android:id="@+id/spinnerPrimaryBorder"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <ImageView
+        android:id="@+id/heightBorderInput"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/heightText"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <EditText
+        android:id="@+id/inputAge"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="11dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/inter_normal"
+        android:hint="@string/input_placeholder"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorLightGray"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ageBorderInput"
+        app:layout_constraintEnd_toEndOf="@+id/ageBorderInput"
+        app:layout_constraintStart_toStartOf="@+id/ageBorderInput"
+        app:layout_constraintTop_toTopOf="@+id/ageBorderInput" />
+
+    <TextView
+        android:id="@+id/weightText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/age"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/weightBorderInput" />
+
+    <EditText
+        android:id="@+id/inputWeight"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="11dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/inter_normal"
+        android:hint="@string/input_placeholder"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorLightGray"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/weightBorderInput"
+        app:layout_constraintEnd_toEndOf="@+id/weightBorderInput"
+        app:layout_constraintStart_toStartOf="@+id/weightBorderInput"
+        app:layout_constraintTop_toTopOf="@+id/weightBorderInput" />
+
+    <TextView
+        android:id="@+id/weightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/weight"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/heightBorderInput" />
+
+    <Spinner
+        android:id="@+id/spinnerSecondSports"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/space_46dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPrimarySports"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <TextView
+        android:id="@+id/heightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_semibold"
+        android:text="@string/height"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/secondBorder" />
+
+    <EditText
+        android:id="@+id/inputHeight"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="11dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/inter_normal"
+        android:hint="@string/input_placeholder"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorLightGray"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/heightBorderInput"
+        app:layout_constraintEnd_toEndOf="@+id/heightBorderInput"
+        app:layout_constraintStart_toStartOf="@+id/heightBorderInput"
+        app:layout_constraintTop_toTopOf="@+id/heightBorderInput" />
+
+    <TextView
+        android:id="@+id/accoundsetup_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_42dp"
+        android:fontFamily="@font/inter_normal"
+        android:text="@string/account_setup"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_36sp"
+        app:layout_constraintBottom_toTopOf="@+id/gendertext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="56dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="41dp" />
+
+    <TextView
+        android:id="@+id/gendertext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_normal"
+        android:text="@string/gender"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/accoundsetup_text"
+        android:layout_marginTop="56dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="218dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="@dimen/space_8dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gendertext">
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="102dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_normal"
+            android:text="Female"
+            android:textColor="@color/colorLightGreen"
+            android:textSize="@dimen/text_14sp" />
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_normal"
+            android:text="Male"
+            android:textColor="@color/colorLightGreen"
+            android:textSize="@dimen/text_14sp" />
+
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinnerPrimarySports"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/space_46dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/spinnerPrimaryBorder"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="247dp" />
+
+    <Button
+        android:id="@+id/continueBtn"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.8"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_log_guest"
+        android:backgroundTint="@color/colorDarkGray"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/continue1"
+        android:textColor="@color/colorGreen"
+        android:textSize="@dimen/text_12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/ageBorderInput"
+        app:layout_constraintVertical_bias="0.68"
+         />
 </androidx.constraintlayout.widget.ConstraintLayout>

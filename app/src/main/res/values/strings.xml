@@ -18,4 +18,20 @@
     <string name="login_to_your_naccount">Login To Your\nAccount</string>
     <string name="new_here">New here?</string>
     <string name="forgot_your_password">Forgot your password?</string>
+    <string name="account_setup">Account Setup</string>
+    <string name="gender">Gender</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="age">Age</string>
+    <string name="continue1">continue</string>
+    <string-array name="spinnerPrimarySports">
+        <item>Primary Sport</item>
+        <item>Ceva 1</item>
+        <item>Ceva 2</item>
+    </string-array>
+    <string-array name="spinnerSecondarySports">
+        <item>Secondary Sport</item>
+        <item>Ceva 1</item>
+        <item>Ceva 2</item>
+    </string-array>
 </resources>
