@@ -35,15 +35,17 @@
 
     <TextView
         android:id="@+id/emailTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_42dp"
         android:layout_marginBottom="@dimen/space_6dp"
+        android:layout_marginStart="@dimen/space_42dp"
+        android:layout_marginEnd="@dimen/space_42dp"
         android:fontFamily="@font/inter_semibold"
         android:text="@string/email_address"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/text_12sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
