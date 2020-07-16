@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item android:id="@+id/nav_my_profile"
+            android:icon="@drawable/my_profile_menu_item"
+            android:title="@string/my_profile" />
+        <item android:id="@+id/nav_notification"
+            android:icon="@drawable/notification_icon"
+            android:title="@string/notification"/>
+        <item android:id="@+id/nav_calendar"
+            android:icon="@drawable/calendar_menu_icon"
+            android:title="@string/calendar"/>
+        <item android:id="@+id/nav_log_out"
+            android:icon="@drawable/logout_menu_icon"
+            android:title="@string/log_out"/>
+    </group>
+</menu>

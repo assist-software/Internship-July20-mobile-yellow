@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.screens.accountsetup.AccountSetupActivity;
 import com.example.sportsclubmanagement.screens.login.LoginActivity;
+import com.example.sportsclubmanagement.screens.main.MainActivity;
 import com.example.sportsclubmanagement.utils.Validations;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -43,7 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
         loginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                //Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class); //original code that we need
+                Intent loginIntent = new Intent(getApplicationContext(), MainActivity.class); //fake code to test main activity
                 startActivity(loginIntent);
                 finish();
             }
@@ -67,5 +69,4 @@ public class RegisterActivity extends AppCompatActivity {
         return Validations.nameValidation(name.getText().toString()) && Validations.emailValidation(email.getText().toString()) &&
                 Validations.passwordValidation(pass.getText().toString()) && Validations.confirmPasswordValidation(pass.getText().toString(),confirmPass.getText().toString());
     }
-
 }
