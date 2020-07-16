@@ -11,14 +11,13 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.fragments.clubs.ClubsFragment;
-import com.example.sportsclubmanagement.fragments.events.EventsFragment;
-import com.example.sportsclubmanagement.fragments.home.HomeFragment;
-import com.example.sportsclubmanagement.fragments.workouts.WorkoutsFragment;
+import com.example.sportsclubmanagement.screens.home.fragments.clubs.ClubsFragment;
+import com.example.sportsclubmanagement.screens.home.fragments.events.EventsFragment;
+import com.example.sportsclubmanagement.screens.home.fragments.home.HomeFragment;
+import com.example.sportsclubmanagement.screens.home.fragments.workouts.WorkoutsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -81,23 +80,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     switch (menuItem.getItemId()){
                         case R.id.bottom_nav_home:
                             selectedFragment = new HomeFragment();
-                            toolbar.setTitle(R.string.home);
-                            toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
-                            break;
+                            setToolbarStatus(toolbar, true, getResources().getString(R.string.home));
+                        break;
                         case R.id.bottom_nav_clubs:
                             selectedFragment = new ClubsFragment();
-                            toolbar.setTitle(R.string.clubs);
-                            toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
+                            setToolbarStatus(toolbar, false, getResources().getString(R.string.clubs));
                             break;
                         case R.id.bottom_nav_events:
                             selectedFragment = new EventsFragment();
-                            toolbar.setTitle(R.string.events);
-                            toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
+                            setToolbarStatus(toolbar, false, getResources().getString(R.string.events));
                             break;
                         case R.id.bottom_nav_workouts:
                             selectedFragment = new WorkoutsFragment();
-                            toolbar.setTitle(R.string.workouts);
-                            toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
+                            setToolbarStatus(toolbar, false, getResources().getString(R.string.workouts));
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
@@ -125,5 +120,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setToolbarStatus(Toolbar toolbar, boolean burgerState, String title){
+        toolbar.setTitle(title);
+        toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(burgerState);
     }
 }

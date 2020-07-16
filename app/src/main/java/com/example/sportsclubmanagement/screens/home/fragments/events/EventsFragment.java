@@ -1,4 +1,4 @@
-package com.example.sportsclubmanagement.fragments.workouts;
+package com.example.sportsclubmanagement.screens.home.fragments.events;
 
 import android.os.Bundle;
 
@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 
 import com.example.sportsclubmanagement.R;
 
-public class WorkoutsFragment extends Fragment {
+public class EventsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workouts, container, false);
+        return inflater.inflate(R.layout.fragment_events, container, false);
     }
 }
