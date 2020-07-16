@@ -1,8 +1,33 @@
 package com.example.sportsclubmanagement.models;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+
+import com.example.sportsclubmanagement.R;
+
+import java.util.Date;
+
 public class EventAdapterModel {
     private String title;
     private String location;
+    private String dataEvent;
+    private static int imgId =R.drawable.img_event;
+
+    public String getDataEvent() {
+        return dataEvent;
+    }
+
+    public void setDataEvent(String dataEvent) {
+        this.dataEvent = dataEvent;
+    }
+
+    public static int getImgId() {
+        return imgId;
+    }
+
+    public static void setImgId(int imgId) {
+        EventAdapterModel.imgId = imgId;
+    }
 
     public String getTitle() {
         return title;
@@ -20,8 +45,9 @@ public class EventAdapterModel {
         this.location = location;
     }
 
-    public EventAdapterModel(String title, String location) {
+    public EventAdapterModel(String title, String location, String dataEvent) {
         this.title = title;
         this.location = location;
+        this.dataEvent = dataEvent;
     }
 }
