@@ -1,24 +1,19 @@
 package com.example.sportsclubmanagement.rest;
 
-import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
+import com.example.sportsclubmanagement.models.apiModels.Token;
+import com.example.sportsclubmanagement.models.apiModels.UserLogin;
+
+import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface APIInterface {
-    //Exemplu
-//    @GET("/api/unknown")
-//    Call<MultipleResource> doGetListResources();
-//
-//    @POST("/api/users")
-//    Call<User> createUser(@Body User user);
-//
-//    @GET("/api/users?")
-//    Call<UserList> doGetUserList(@Query("page") String page);
-//
-//    @FormUrlEncoded
-//    @POST("/api/users?")
-//    Call<UserList> doCreateUserWithField(@Field("name") String name, @Field("job") String job);
+    @GET("api/json/get/bTyulPybma?indent=2")
+    Call<Token> user_login();
+    /*
+    @GET("/api/users?")
+    abstract public Call<UserList> doGetUserList(@Query("page") String page);
+
+    @FormUrlEncoded
+    @POST("/api/users?")
+    Call<UserList> doCreateUserWithField(@Field("name") String name, @Field("job") String job);*/
 }

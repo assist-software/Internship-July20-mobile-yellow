@@ -1,4 +1,4 @@
-package com.example.sportsclubmanagement.screens.home.fragments.clubs;
+package com.example.sportsclubmanagement.screens.main.fragments.clubs;
 
 import android.os.Bundle;
 
