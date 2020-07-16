@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -18,6 +19,8 @@ import com.example.sportsclubmanagement.screens.home.fragments.clubs.ClubsFragme
 import com.example.sportsclubmanagement.screens.home.fragments.events.EventsFragment;
 import com.example.sportsclubmanagement.screens.home.fragments.home.HomeFragment;
 import com.example.sportsclubmanagement.screens.home.fragments.workouts.WorkoutsFragment;
+import com.example.sportsclubmanagement.screens.login.LoginActivity;
+import com.example.sportsclubmanagement.screens.register.RegisterActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -115,7 +118,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Open Calendar Screen", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_log_out:
-                Toast.makeText(this, "Log out function", Toast.LENGTH_SHORT).show();
+                Intent logOutIntent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(logOutIntent);
+                finish();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
