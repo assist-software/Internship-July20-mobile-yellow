@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.screens.home.HomeActivity;
+import com.example.sportsclubmanagement.screens.main.MainActivity;
 import com.example.sportsclubmanagement.utils.Validations;
 
 public class AccountSetupActivity extends AppCompatActivity {
@@ -39,7 +39,7 @@ public class AccountSetupActivity extends AppCompatActivity {
         toHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_home = new Intent(AccountSetupActivity.this, HomeActivity.class);
+                Intent intent_home = new Intent(AccountSetupActivity.this, MainActivity.class);
                 if (checkInfo()) {
                     startActivity(intent_home);
                     finish();

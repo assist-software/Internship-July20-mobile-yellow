@@ -32,8 +32,6 @@
             android:theme="@style/NoActionBarNoFullScreen"/>
         <activity android:name=".screens.accountsetup.AccountSetupActivity"
             android:theme="@style/NoActionBarNoFullScreen" />
-        <activity android:name=".screens.event.EventActivity" />
-        <activity android:name=".screens.home.HomeActivity" />
         <activity android:name=".screens.addworkouts.AddWorkoutsActivity"/>
     </application>
 
