@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <FrameLayout
+            android:layout_marginTop="?attr/actionBarSize"
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,11 +31,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:background="@color/colorDarkGray"
             app:itemIconTint="@drawable/icons_selector"
             app:itemTextColor="@drawable/icons_selector"
-            android:background="@color/colorDarkGray"
-            app:menu="@menu/bottom_navigation"
-            app:labelVisibilityMode="labeled"/>
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_navigation" />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
