@@ -14,10 +14,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.screens.home.fragments.clubs.ClubsFragment;
-import com.example.sportsclubmanagement.screens.home.fragments.events.EventsFragment;
-import com.example.sportsclubmanagement.screens.home.fragments.home.HomeFragment;
-import com.example.sportsclubmanagement.screens.home.fragments.workouts.WorkoutsFragment;
+import com.example.sportsclubmanagement.screens.main.fragments.clubs.ClubsFragment;
+import com.example.sportsclubmanagement.screens.main.fragments.events.EventsFragment;
+import com.example.sportsclubmanagement.screens.main.fragments.home.HomeFragment;
+import com.example.sportsclubmanagement.screens.main.fragments.workouts.WorkoutsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
