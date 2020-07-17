@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,12 +16,11 @@ import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class EventsFragment extends Fragment implements EventAdapterListener {
-    RecyclerView eventRecycler;
-    EventAdapter eventAdapter;
+    RecyclerView eventRecycler,joinedRecycler,pendingRecycler;
+    EventAdapter eventAdapter,joinedAdapter,pendingAdapter;
 
     @Nullable
     @Override
@@ -32,20 +30,24 @@ public class EventsFragment extends Fragment implements EventAdapterListener {
 
         eventRecycler = rootView.findViewById(R.id.eventRecycler);
         eventAdapter = new EventAdapter(getMockedList(), this.getContext(), this);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(rootView.getContext());
-        eventRecycler.setLayoutManager(mLayoutManager);
+        eventRecycler.setLayoutManager(new LinearLayoutManager(rootView.getContext(),LinearLayoutManager.HORIZONTAL,false));
         eventRecycler.setAdapter(eventAdapter);
 
+        joinedRecycler = rootView.findViewById(R.id.joinedRecycler);
+        joinedAdapter = new EventAdapter(getMockedList(), this.getContext(), this);
+        joinedRecycler.setLayoutManager(new LinearLayoutManager(rootView.getContext(),LinearLayoutManager.HORIZONTAL,false));
+        joinedRecycler.setAdapter(joinedAdapter);
+
+        pendingRecycler = rootView.findViewById(R.id.pendingRecycler);
+        pendingAdapter = new EventAdapter(getMockedList(), this.getContext(), this);
+        pendingRecycler.setLayoutManager(new LinearLayoutManager(rootView.getContext(),LinearLayoutManager.VERTICAL,false));
+        pendingRecycler.setAdapter(pendingAdapter);
         return rootView;
     }
 
     @Override
     public void onEventClick(EventAdapterModel event) {
         Toast.makeText(this.getContext(), event.getTitle(), Toast.LENGTH_SHORT).show();
-    }
-
-    private void initComp() {
-
     }
 
     private List<EventAdapterModel> getMockedList() {

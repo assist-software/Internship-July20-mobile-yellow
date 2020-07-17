@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,9 @@ public class AccountSetupActivity extends AppCompatActivity {
     Button toHomeBtn;
     EditText height, weight, age;
     RadioButton female, male;
+
+    AdapterView.OnItemSelectedListener spinnerListener;
+    ArrayAdapter<String>  spinnerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,24 @@ public class AccountSetupActivity extends AppCompatActivity {
                 }
             }
         });
+        spinnerListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView tv = (TextView) view;
+                if (position == 0) {
+                    tv.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorLightGray));
+                } else {
+                    tv.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBlack));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
+        primarySports.setOnItemSelectedListener(spinnerListener);
+        secondarySports.setOnItemSelectedListener(spinnerListener);
     }
 
     private boolean checkInfo() {
@@ -68,7 +90,7 @@ public class AccountSetupActivity extends AppCompatActivity {
 
         //fill primary spinner
         String[] primarySportsEnum = getResources().getStringArray(R.array.spinnerPrimarySports);
-        final ArrayAdapter<String> adapterPrimary = new ArrayAdapter(AccountSetupActivity.this, R.layout.support_simple_spinner_dropdown_item, primarySportsEnum) {
+        ArrayAdapter<String> adapterPrimary = new ArrayAdapter(AccountSetupActivity.this, R.layout.support_simple_spinner_dropdown_item, primarySportsEnum) {
             @Override
             public boolean isEnabled(int position) {
                 if (position == 0) {

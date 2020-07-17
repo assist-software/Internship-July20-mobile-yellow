@@ -6,4 +6,220 @@
     android:layout_height="match_parent"
     tools:context=".screens.myprofile.MyProfileActivity">
 
+    <include
+        android:id="@+id/myprofile_toolbar"
+        layout="@layout/home_toolbar"></include>
+
+    <LinearLayout
+        android:id="@+id/profileCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/myprofile_toolbar">
+
+        <ImageView
+            android:id="@+id/image_user"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_marginBottom="@dimen/space_16dp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/name_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_24sp"
+            android:fontFamily="@font/inter_bold"
+            android:text="Hehe Boy" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/addphoto_border"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="@dimen/space_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileCard"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <ImageView
+        android:id="@+id/spinnerPrimaryBorder"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="@dimen/space_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addphoto_border"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <ImageView
+        android:id="@+id/secondBorder"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="@dimen/space_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPrimaryBorder"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <ImageView
+        android:id="@+id/heightBorderInput"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="@dimen/space_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondBorder"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <ImageView
+        android:id="@+id/weightBorderInput"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="@dimen/space_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heightBorderInput"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <ImageView
+        android:id="@+id/ageBorderInput"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="@dimen/space_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightBorderInput"
+        app:layout_constraintWidth_percent="0.8"
+        app:srcCompat="@drawable/border_input" />
+
+    <EditText
+        android:id="@+id/inputPathPhoto"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_14dp"
+        android:layout_marginTop="@dimen/space_11dp"
+        android:layout_marginEnd="@dimen/space_14dp"
+        android:layout_marginBottom="@dimen/space_11dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/inter_normal"
+        android:hint="@string/add_photo"
+        android:inputType="text"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorLightGray"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addphoto_border"
+        app:layout_constraintEnd_toEndOf="@+id/addphoto_border"
+        app:layout_constraintStart_toStartOf="@+id/addphoto_border"
+        app:layout_constraintTop_toTopOf="@+id/addphoto_border" />
+
+    <Spinner
+        android:id="@+id/spinnerPrimarySports"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="@dimen/space_42dp"
+        android:layout_marginTop="@dimen/space_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addphoto_border"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Spinner
+        android:id="@+id/spinnerSecondSports"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="@dimen/space_42dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/space_16dp"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPrimaryBorder"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <EditText
+        android:id="@+id/inputHeight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_14dp"
+        android:layout_marginTop="@dimen/space_11dp"
+        android:layout_marginEnd="@dimen/space_14dp"
+        android:layout_marginBottom="@dimen/space_11dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/inter_normal"
+        android:hint="@string/height"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorLightGray"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/heightBorderInput"
+        app:layout_constraintEnd_toEndOf="@+id/heightBorderInput"
+        app:layout_constraintStart_toStartOf="@+id/heightBorderInput"
+        app:layout_constraintTop_toTopOf="@+id/heightBorderInput" />
+
+    <EditText
+        android:id="@+id/inputWeight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_14dp"
+        android:layout_marginTop="@dimen/space_11dp"
+        android:layout_marginEnd="@dimen/space_14dp"
+        android:layout_marginBottom="@dimen/space_11dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/inter_normal"
+        android:hint="@string/weight"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorLightGray"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/weightBorderInput"
+        app:layout_constraintEnd_toEndOf="@+id/weightBorderInput"
+        app:layout_constraintStart_toStartOf="@+id/weightBorderInput"
+        app:layout_constraintTop_toTopOf="@+id/weightBorderInput" />
+
+    <EditText
+        android:id="@+id/inputAge"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_14dp"
+        android:layout_marginTop="@dimen/space_11dp"
+        android:layout_marginEnd="@dimen/space_14dp"
+        android:layout_marginBottom="@dimen/space_11dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/inter_normal"
+        android:hint="@string/age"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorLightGray"
+        android:textSize="@dimen/text_14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ageBorderInput"
+        app:layout_constraintEnd_toEndOf="@+id/ageBorderInput"
+        app:layout_constraintStart_toStartOf="@+id/ageBorderInput"
+        app:layout_constraintTop_toTopOf="@+id/ageBorderInput" />
+
+    <Button
+        android:id="@+id/continueBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_log_guest"
+        android:backgroundTint="@color/colorDarkGray"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/save_changes"
+        android:textColor="@color/colorGreen"
+        android:textSize="@dimen/text_12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ageBorderInput"
+        app:layout_constraintWidth_percent="0.8" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

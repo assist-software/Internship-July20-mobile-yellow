@@ -34,6 +34,11 @@
     <string name="weight">Weight</string>
     <string name="age">Age</string>
     <string name="continue1">continue</string>
+    <string name="save_changes">Save changes</string>
+    <string name="add_photo">Add photo</string>
+    <string name="past_events">Past Events</string>
+    <string name="joined_events">Joined Events</string>
+    <string name="pending_events">Pending Events</string>
     <string-array name="spinnerPrimarySports">
         <item>Primary Sport</item>
         <item>Ceva 1</item>
