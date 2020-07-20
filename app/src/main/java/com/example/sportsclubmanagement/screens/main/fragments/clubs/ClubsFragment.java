@@ -1,5 +1,6 @@
 package com.example.sportsclubmanagement.screens.main.fragments.clubs;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.ClubAdapterModel;
+import com.example.sportsclubmanagement.screens.clubdetails.ClubDetailsActivity;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapter;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapterListener;
 
@@ -96,5 +98,12 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
     @Override
     public void onJoinClick(String clubName) {
         Toast.makeText(this.getContext(), clubName, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClubCLick() {
+        Intent clubIntent = new Intent(getActivity(), ClubDetailsActivity.class);
+        clubIntent.putExtra("ID", "THis id");
+        startActivity(clubIntent);
     }
 }

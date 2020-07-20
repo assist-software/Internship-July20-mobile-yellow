@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sportsclubmanagement.R;
@@ -23,17 +24,25 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
         private TextView clubName;
         private TextView clubStatus;
         private FrameLayout joinBtn;
+        private RelativeLayout clubItem;
 
         public MyViewHolder(View view) {
             super(view);
             clubName = view.findViewById(R.id.club_name);
             clubStatus = view.findViewById(R.id.club_status_TextView);
             joinBtn = view.findViewById(R.id.club_status_frameLayout);
+            clubItem = view.findViewById(R.id.club_item);
         }
 
         public void bind(final ClubAdapterModel clubAdapterModel) {
             clubName.setText(clubAdapterModel.getClubName());
             clubStatus.setText(clubAdapterModel.getClubStats());
+            clubItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clubAdapterListener.onClubCLick();
+                }
+            });
             if (hasBorder) {
                 joinBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
