@@ -19,7 +19,6 @@
     <dimen name="space_10dp">10dp</dimen>
     <dimen name="space_32dp">32dp</dimen>
     <dimen name="text_20sp">20sp</dimen>
-    <dimen name="space_20dp">20dp</dimen>
     <dimen name="space_176dp">176dp</dimen>
     <dimen name="space_n20dp">-20dp</dimen>
     <dimen name="space_41dp">41dp</dimen>
@@ -31,6 +30,10 @@
     <dimen name="space_21dp">21dp</dimen>
     <dimen name="space_1dp">1dp</dimen>
     <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_24sp">24sp</dimen>
+    <dimen name="space_64dp">64dp</dimen>
+    <dimen name="size_10dp">10dp</dimen>
+    <dimen name="space_20dp">20dp</dimen>
     <dimen name="radius_4dp">4dp</dimen>
     <dimen name="space_102dp">102dp</dimen>
     <dimen name="space_19dp">19dp</dimen>

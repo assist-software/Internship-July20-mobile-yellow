@@ -1,13 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.main.fragments.events.EventsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/eventRecycler"
+    <LinearLayout
+        android:id="@+id/linearForRecycler"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical">
 
-</ScrollView>
+        <TextView
+            android:id="@+id/pastEvents_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_24dp"
+            android:layout_marginTop="@dimen/space_24dp"
+            android:fontFamily="@font/inter_normal"
+            android:text="@string/past_events"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_18sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/eventRecycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_16dp" />
+
+        <TextView
+            android:id="@+id/joinedEvents_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_24dp"
+            android:layout_marginTop="@dimen/space_24dp"
+            android:fontFamily="@font/inter_normal"
+            android:text="@string/joined_events"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_18sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/joinedRecycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_16dp" />
+
+        <TextView
+            android:id="@+id/pendingEvents_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_24dp"
+            android:layout_marginTop="@dimen/space_24dp"
+            android:fontFamily="@font/inter_normal"
+            android:text="@string/pending_events"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_18sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pendingRecycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_16dp" />
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

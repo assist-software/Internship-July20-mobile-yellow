@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
 
@@ -63,7 +64,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         }
 
         public void bind(final EventAdapterModel eventAdapterModel) {
-            img.setBackground(ContextCompat.getDrawable(ctx, R.drawable.img_event));
+            Glide.with(ctx).load(R.drawable.img_event).centerCrop().into(img);
             title.setText(eventAdapterModel.getTitle());
             loc.setText(eventAdapterModel.getLocation());
             data.setText(eventAdapterModel.getDataEvent());

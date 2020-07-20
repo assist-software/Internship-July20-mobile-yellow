@@ -24,6 +24,7 @@ import com.example.sportsclubmanagement.screens.main.fragments.events.EventsFrag
 import com.example.sportsclubmanagement.screens.main.fragments.home.HomeFragment;
 import com.example.sportsclubmanagement.screens.main.fragments.workouts.WorkoutsFragment;
 import com.example.sportsclubmanagement.screens.login.LoginActivity;
+import com.example.sportsclubmanagement.screens.myprofile.MyProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -112,7 +113,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.nav_my_profile:
-                Toast.makeText(this, "Open My Profile Screen", Toast.LENGTH_SHORT).show();
+                Intent my_prof = new Intent(getApplicationContext(), MyProfileActivity.class);
+                startActivity(my_prof);
                 break;
             case R.id.nav_notification:
                 Toast.makeText(this, "Open Notification Screen", Toast.LENGTH_SHORT).show();
