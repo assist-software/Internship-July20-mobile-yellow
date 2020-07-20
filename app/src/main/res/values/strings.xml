@@ -58,6 +58,7 @@
     <string name="coach">Coach</string>
     <string name="years_45">45 Years</string>
     <string name="members">Members</string>
+    <string name="locations">Locations</string>s
     <string-array name="spinnerPrimarySports">
         <item>Primary Sport</item>
         <item>Ceva 1</item>

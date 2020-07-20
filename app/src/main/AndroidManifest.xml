@@ -9,8 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screens.clubdetails.ClubDetailsActivity"></activity>
-        <activity android:name=".screens.myprofile.MyProfileActivity" />
         <activity
             android:name=".screens.splash.SplashActivity"
             android:theme="@style/FullScreen">
@@ -38,6 +36,10 @@
         <activity
             android:name=".screens.addworkouts.AddWorkoutsActivity"
             android:theme="@style/NoActionBarNoFullScreen" />
+        <activity android:name=".screens.eventdetails.EventActivity"
+            android:theme="@style/NoActionBarNoFullScreen"/>
+        <activity android:name=".screens.myprofile.MyProfileActivity" />
+        <activity android:name=".screens.clubdetails.ClubDetailsActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
