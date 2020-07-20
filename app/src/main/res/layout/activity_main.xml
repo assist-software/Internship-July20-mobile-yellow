@@ -19,12 +19,7 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/bottom_navigation" />
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/home_toolbar" />
-        </com.google.android.material.appbar.AppBarLayout>
+        <include layout="@layout/home_toolbar" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"

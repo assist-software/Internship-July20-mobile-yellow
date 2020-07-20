@@ -16,21 +16,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
-        android:text="@string/running_club"
+        android:text="@string/input_placeholder"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/text_20sp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"/>
-
-    <Button
-        android:id="@+id/joinClub_btn"
+    
+    <FrameLayout
+        android:id="@+id/club_status_frameLayout"
         android:layout_width="@dimen/space_102dp"
         android:layout_height="@dimen/space_46dp"
-        android:text="JOIN"
-        android:textColor="@color/colorGreen"
         android:background="@drawable/join_button"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:textAllCaps="true" />
+        android:layout_centerVertical="true">
+        <TextView
+            android:id="@+id/club_status_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/placeholder"
+            android:textSize="@dimen/text_12sp"
+            android:fontFamily="@font/inter_normal"
+            android:textStyle="bold"
+            android:textColor="@color/colorGreen"
+            android:layout_gravity="center"/>
+    </FrameLayout>
 
 </RelativeLayout>
