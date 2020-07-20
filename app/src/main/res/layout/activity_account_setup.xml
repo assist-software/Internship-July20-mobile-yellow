@@ -172,7 +172,7 @@
         app:layout_constraintBottom_toTopOf="@+id/gendertext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="56dp"/>
+        android:layout_marginTop="@dimen/space_56dp"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -196,8 +196,8 @@
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="218dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="36dp"
+        android:layout_height="@dimen/space_20dp"
+        android:layout_marginStart="@dimen/space_36dp"
         android:layout_marginTop="@dimen/space_8dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"

@@ -39,6 +39,20 @@
     <string name="past_events">Past Events</string>
     <string name="joined_events">Joined Events</string>
     <string name="pending_events">Pending Events</string>
+    <string name="running_club">Running Club</string>
+    <string name="new_clubs">New Clubs</string>
+    <string name="joined_clubs">Joined Clubs</string>
+    <string name="pending_clubs">Pending Clubs</string>
+    <string name="add_workouts">Add Workouts</string>
+    <string name="distance">Distance</string>
+    <string name="calories">Calories</string>
+    <string name="av_speed">Av. Speed</string>
+    <string name="duration">Duration</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="save">Save</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="invalid_data">Invalid Data</string>
+    <string name="saved_changes">Saved Changes</string>
     <string-array name="spinnerPrimarySports">
         <item>Primary Sport</item>
         <item>Ceva 1</item>
@@ -48,5 +62,17 @@
         <item>Secondary Sport</item>
         <item>Ceva 1</item>
         <item>Ceva 2</item>
+    </string-array>
+    <string-array name="spinnerEvents">
+        <item>Event</item>
+        <item>Event 1</item>
+        <item>Event 2</item>
+        <item>Event 3</item>
+    </string-array>
+    <string-array name="spinnerWorkoutEfectiveness">
+        <item>Workout Effectiveness</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>Intense</item>
     </string-array>
 </resources>
