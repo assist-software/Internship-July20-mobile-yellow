@@ -53,6 +53,7 @@
     <string name="placeholder">Placeholder</string>
     <string name="invalid_data">Invalid Data</string>
     <string name="saved_changes">Saved Changes</string>
+    <string name="locations">Locations</string>s
     <string-array name="spinnerPrimarySports">
         <item>Primary Sport</item>
         <item>Ceva 1</item>

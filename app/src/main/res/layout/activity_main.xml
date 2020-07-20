@@ -13,13 +13,13 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:layout_marginTop="?attr/actionBarSize"
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/bottom_navigation" />
 
-        <include layout="@layout/home_toolbar" />
+        <include layout="@layout/toolbar_with_icon"
+            android:id="@+id/home_tool"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"

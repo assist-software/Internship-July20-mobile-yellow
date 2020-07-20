@@ -130,10 +130,9 @@
         android:id="@+id/spinnerPrimarySports"
         android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginStart="@dimen/space_42dp"
-        android:layout_marginTop="@dimen/space_16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addphoto_border"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerPrimaryBorder"
+        app:layout_constraintStart_toStartOf="@+id/spinnerPrimaryBorder"
+        app:layout_constraintTop_toTopOf="@+id/spinnerPrimaryBorder"
         app:layout_constraintWidth_percent="0.8" />
 
     <Spinner

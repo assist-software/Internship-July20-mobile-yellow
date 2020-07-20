@@ -1,5 +1,6 @@
 package com.example.sportsclubmanagement.screens.main.fragments.events;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
+import com.example.sportsclubmanagement.screens.eventdetails.EventActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,10 @@ public class EventsFragment extends Fragment implements EventAdapterListener {
 
     @Override
     public void onEventClick(EventAdapterModel event) {
-        Toast.makeText(this.getContext(), event.getTitle(), Toast.LENGTH_SHORT).show();
+        String event_id = "test id";
+        Intent i = new Intent(getContext(), EventActivity.class);
+        i.putExtra("event_id",event_id);
+        startActivity(i);
     }
 
     private List<EventAdapterModel> getMockedList() {

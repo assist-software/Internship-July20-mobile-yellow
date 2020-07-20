@@ -44,4 +44,12 @@
     <dimen name="space_247dp">247dp</dimen>
     <dimen name="space_86dp">86dp</dimen>
     <dimen name="space_74dp">74dp</dimen>
+    <dimen name="space_22dp">22dp</dimen>
+    <dimen name="space_62dp">62dp</dimen>
+    <dimen name="space_47dp">47dp</dimen>
+    <dimen name="space_40dp">40dp</dimen>
+    <dimen name="space_27dp">27dp</dimen>
+    <dimen name="space_17dp">17dp</dimen>
+    <dimen name="space_18dp">18dp</dimen>
+    <dimen name="space_44dp">44dp</dimen>
 </resources>
