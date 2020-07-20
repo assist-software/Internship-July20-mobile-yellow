@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sportsclubmanagement">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -41,6 +39,9 @@
         <activity android:name=".screens.eventdetails.EventActivity"
             android:theme="@style/NoActionBarNoFullScreen"/>
         <activity android:name=".screens.myprofile.MyProfileActivity" />
+        <activity android:name=".screens.clubdetails.ClubDetailsActivity"></activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
