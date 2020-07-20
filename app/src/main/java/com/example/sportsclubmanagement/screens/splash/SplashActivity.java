@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.sportsclubmanagement.R;
+import com.example.sportsclubmanagement.screens.addworkouts.AddWorkoutsActivity;
 import com.example.sportsclubmanagement.screens.guest.GuestActivity;
 import com.example.sportsclubmanagement.utils.Constants;
 

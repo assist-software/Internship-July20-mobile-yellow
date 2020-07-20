@@ -1,9 +1,9 @@
-package com.example.sportsclubmanagement.screens.main.fragments.clubs;
+package com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.sportsclubmanagement.R;
@@ -17,31 +17,40 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
 
     private List<ClubAdapterModel> clubsList;
     private ClubAdapterListener clubAdapterListener;
+    private boolean hasBorder;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView clubName;
-        private Button joinBtn;
+        private TextView clubStatus;
+        private FrameLayout joinBtn;
 
         public MyViewHolder(View view) {
             super(view);
-            clubName = (TextView) view.findViewById(R.id.club_name);
-            joinBtn = view.findViewById(R.id.joinClub_btn);
+            clubName = view.findViewById(R.id.club_name);
+            clubStatus = view.findViewById(R.id.club_status_TextView);
+            joinBtn = view.findViewById(R.id.club_status_frameLayout);
         }
 
         public void bind(final ClubAdapterModel clubAdapterModel) {
             clubName.setText(clubAdapterModel.getClubName());
-            joinBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clubAdapterListener.onJoinClick(clubAdapterModel.getClubName());
-                }
-            });
+            clubStatus.setText(clubAdapterModel.getClubStats());
+            if (hasBorder) {
+                joinBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        clubAdapterListener.onJoinClick(clubAdapterModel.getClubName());
+                    }
+                });
+            } else {
+                joinBtn.setBackgroundResource(0);
+            }
         }
     }
 
-    public ClubAdapter(List<ClubAdapterModel> clubList, ClubAdapterListener clubAdapterListener) {
+    public ClubAdapter(List<ClubAdapterModel> clubList, ClubAdapterListener clubAdapterListener, boolean hasBorder) {
         this.clubsList = clubList;
         this.clubAdapterListener = clubAdapterListener;
+        this.hasBorder = hasBorder;
     }
 
     @Override
