@@ -15,9 +15,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.ClubsFragment;
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventsFragment;
@@ -61,17 +63,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void initComponents() {
-        toolbar = findViewById(R.id.home_tool_bar);
+        toolbar = findViewById(R.id.home_tool);
         drawerLayout = findViewById(R.id.home_drawer_layout);
         homeNavigationView = findViewById(R.id.home_nav_view);
         bottomNav = findViewById(R.id.bottom_navigation);
-        homeDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        homeDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         homeDrawerToggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, R.color.colorWhite));
         drawerLayout.addDrawerListener(homeDrawerToggle);
         homeDrawerToggle.syncState();
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false); //remove the default title from the action bar
-        toolbar.setTitle(R.string.home);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolbar.setTitle("Home");
         toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit(); //show home fragment first time you enter the activity
         homeNavigationView.setNavigationItemSelectedListener(this);
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             break;
                         case R.id.bottom_nav_events:
                             selectedFragment = new EventsFragment();
-                            setToolbarStatus(toolbar, false, getResources().getString(R.string.events));
+                            setToolbarStatus(toolbar,false,getResources().getString(R.string.events));
                             break;
                         case R.id.bottom_nav_workouts:
                             selectedFragment = new WorkoutsFragment();
@@ -133,8 +135,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setToolbarStatus(Toolbar toolbar, boolean burgerState, String title){
-        toolbar.setTitle(title);
-        toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
+        TextView title_bar = findViewById(R.id.toolbar_title);
+        title_bar.setText(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(burgerState);
+        toolbar.setTitle("");
+        ImageView img = findViewById(R.id.icon_img);
+        if(burgerState){
+            img.setVisibility(View.GONE);
+        }else{
+            img.setVisibility(View.VISIBLE);
+            Glide.with(this).load(R.drawable.img_event).apply(RequestOptions.circleCropTransform()).into(img);
+        }
     }
 }
