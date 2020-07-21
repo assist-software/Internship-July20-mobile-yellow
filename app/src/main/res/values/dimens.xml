@@ -53,4 +53,11 @@
     <dimen name="space_27dp">27dp</dimen>
     <dimen name="space_18dp">18dp</dimen>
     <dimen name="space_44dp">44dp</dimen>
+    <dimen name="text_70sp">70sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="space_26dp">26dp</dimen>
+    <dimen name="text_26sp">26sp</dimen>
+    <dimen name="space_160dp">160dp</dimen>
+    <dimen name="space_31dp">31dp</dimen>
+    <dimen name="space_61dp">61dp</dimen>
 </resources>
