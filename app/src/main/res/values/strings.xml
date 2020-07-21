@@ -19,6 +19,7 @@
     <string name="new_here">New here?</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="home">Home</string>
+    <string name="distance1">distance</string>
     <string name="my_profile">My Profile</string>
     <string name="notification">Notification</string>
     <string name="calendar">Calendar</string>
@@ -58,7 +59,20 @@
     <string name="coach">Coach</string>
     <string name="years_45">45 Years</string>
     <string name="members">Members</string>
-    <string name="locations">Locations</string>s
+    <string name="locations">Locations</string>
+    <string name="time">time</string>
+    <string name="calories1">calories</string>
+    <string name="_157_bpm">157</string>
+    <string name="bpm">BPM</string>
+    <string name="_521_00">521.00</string>
+    <string name="min">MIN</string>
+    <string name="_32_22">32:22</string>
+    <string name="km">KM</string>
+    <string name="_8_66">8.66</string>
+    <string name="_2020">2020</string>
+    <string name="monday">Monday</string>
+    <string name="may">May</string>
+    <string name="_22">22</string>s
     <string-array name="spinnerPrimarySports">
         <item>Primary Sport</item>
         <item>Ceva 1</item>
