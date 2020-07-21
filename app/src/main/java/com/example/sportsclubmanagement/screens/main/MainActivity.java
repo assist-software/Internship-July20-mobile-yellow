@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.example.sportsclubmanagement.screens.main.fragments.home.HomeFragment
 import com.example.sportsclubmanagement.screens.main.fragments.workouts.WorkoutsFragment;
 import com.example.sportsclubmanagement.screens.login.LoginActivity;
 import com.example.sportsclubmanagement.screens.myprofile.MyProfileActivity;
+import com.example.sportsclubmanagement.utils.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -78,6 +80,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit(); //show home fragment first time you enter the activity
         homeNavigationView.setNavigationItemSelectedListener(this);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+        SharedPreferences pref = getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
+        if(pref.contains(Constants.token)){
+            Toast.makeText(this, pref.getString(Constants.token, null), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -125,6 +132,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Open Calendar Screen", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_log_out:
+                SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.remove(Constants.token);
+                editor.commit();
                 Intent logOutIntent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(logOutIntent);
                 finish();

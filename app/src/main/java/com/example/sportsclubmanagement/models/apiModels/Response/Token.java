@@ -1,4 +1,4 @@
-package com.example.sportsclubmanagement.models.apiModels;
+package com.example.sportsclubmanagement.models.apiModels.Response;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,5 +8,9 @@ public class Token {
 
     public Token(String token) {
         this.token = token;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

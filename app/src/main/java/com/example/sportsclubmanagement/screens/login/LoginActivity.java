@@ -13,11 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.models.apiModels.Token;
+import com.example.sportsclubmanagement.models.apiModels.Response.Token;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.main.MainActivity;
 import com.example.sportsclubmanagement.screens.register.RegisterActivity;
+import com.example.sportsclubmanagement.utils.Constants;
 import com.example.sportsclubmanagement.utils.Validations;
 
 import retrofit2.Call;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     APIInterface apiInterface;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +47,20 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<Token>() {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
-                Log.d("TAG",response.code()+"");
-                Token body_resp = response.body();
-                Toast.makeText(LoginActivity.this,body_resp.token,Toast.LENGTH_SHORT).show();
-                editor.putString("token",body_resp.token);
-                editor.commit();
+                if (response.isSuccessful()) {
+                    Log.d("TAG", response.code() + "");
+                    Token body_resp = response.body();
+                    //Toast.makeText(LoginActivity.this,body_resp.getToken(),Toast.LENGTH_SHORT).show();
+                    editor = pref.edit();
+                    editor.putString("token", body_resp.getToken());
+                    editor.commit();
+                    Intent intent_go_home = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent_go_home);
+                    finish();
+                } else {
+                    Log.d("error message", response.message());
+                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -59,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     private boolean checkInputs() {
         StringBuilder errors = new StringBuilder("Wrong\n");
         boolean ok = true;
@@ -83,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.inputEmail);
         pass = findViewById(R.id.inputPassword);
         apiInterface = APIClient.getClient().create(APIInterface.class);
-        pref = getApplicationContext().getSharedPreferences("tokenPref", 0); // 0 - for private mode
+        pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
         editor = pref.edit();
     }
 
@@ -100,11 +112,8 @@ public class LoginActivity extends AppCompatActivity {
         logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_go_home = new Intent(LoginActivity.this, MainActivity.class);
                 if (checkInputs()) {
                     restUserLogin();
-                    startActivity(intent_go_home);
-                    finish();
                 }
             }
         });
