@@ -30,6 +30,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         initComp();
+        SharedPreferences pref = getContext().getSharedPreferences("token", 0);
+        Toast.makeText(getContext(),pref.getString("token",null),Toast.LENGTH_SHORT).show();
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 

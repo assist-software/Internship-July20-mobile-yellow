@@ -1,4 +1,4 @@
-package com.example.sportsclubmanagement.models.apiModels;
+package com.example.sportsclubmanagement.models.apiModels.Response;
 
 import com.google.gson.annotations.SerializedName;
 

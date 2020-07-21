@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.models.apiModels.Token;
+import com.example.sportsclubmanagement.models.apiModels.Response.Token;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.main.MainActivity;
@@ -42,9 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         initializeAllElement();
         initListeners();
     }
-
-    private void restUserLogin() {
-        Call<Token> call = apiInterface.user_login(email.getText().toString(), pass.getText().toString());
+    private void restUserLogin(){
+       Call<Token> call = apiInterface.user_login(email.getText().toString(),pass.getText().toString());
         call.enqueue(new Callback<Token>() {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
@@ -66,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),t.toString(),Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });
