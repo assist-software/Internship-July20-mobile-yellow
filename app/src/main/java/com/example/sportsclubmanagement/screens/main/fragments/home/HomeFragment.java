@@ -1,5 +1,6 @@
 package com.example.sportsclubmanagement.screens.main.fragments.home;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.screens.main.MainActivity;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private Toolbar toolbar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
