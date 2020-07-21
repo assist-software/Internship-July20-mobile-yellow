@@ -15,4 +15,6 @@
     <color name="colorLightGrayGreen">#848484</color>
     <color name="near_white">#F5F5F7</color>
     <color name="near_black">#231F20</color>
+    <color name="gull_gray">#97A2AF</color>
+    <color name="grayish_navy">#1F2744</color>
 </resources>
