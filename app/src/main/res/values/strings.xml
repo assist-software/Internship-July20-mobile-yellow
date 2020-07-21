@@ -72,7 +72,8 @@
     <string name="_2020">2020</string>
     <string name="monday">Monday</string>
     <string name="may">May</string>
-    <string name="_22">22</string>s
+    <string name="_22">22</string>
+    <string name="today_s_workout">Today\'s workout</string>s
     <string-array name="spinnerPrimarySports">
         <item>Primary Sport</item>
         <item>Ceva 1</item>

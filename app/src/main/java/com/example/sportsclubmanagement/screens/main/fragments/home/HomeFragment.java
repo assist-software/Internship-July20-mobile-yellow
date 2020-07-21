@@ -1,5 +1,6 @@
 package com.example.sportsclubmanagement.screens.main.fragments.home;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.screens.main.MainActivity;
@@ -27,6 +29,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         initComp();
+        SharedPreferences pref = getContext().getSharedPreferences("token", 0);
+        Toast.makeText(getContext(),pref.getString("token",null),Toast.LENGTH_SHORT).show();
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 

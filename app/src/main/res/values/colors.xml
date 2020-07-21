@@ -17,4 +17,6 @@
     <color name="near_black">#231F20</color>
     <color name="gull_gray">#97A2AF</color>
     <color name="grayish_navy">#1F2744</color>
+    <color name="top_gradient">#8EFFB8</color>
+    <color name="bottom_gradient">#159BD1</color>
 </resources>

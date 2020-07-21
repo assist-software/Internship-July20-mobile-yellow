@@ -62,4 +62,5 @@
     <dimen name="space_160dp">160dp</dimen>
     <dimen name="space_31dp">31dp</dimen>
     <dimen name="space_61dp">61dp</dimen>
+    <dimen name="space_13dp">13dp</dimen>
 </resources>
