@@ -74,6 +74,12 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         notificationIcon.setVisibility(View.GONE);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private boolean checkInfo() {
         return event.getSelectedItemId() != 0 && workoutEffectiveness.getSelectedItemId() != 0
                 && Validations.workoutDurationValidation(workoutDuration.getText().toString())

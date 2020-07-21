@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         homeDrawerToggle.syncState();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("Home");
+        toolbar.setTitle(R.string.home);
         toolbar.setTitleTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit(); //show home fragment first time you enter the activity
         homeNavigationView.setNavigationItemSelectedListener(this);

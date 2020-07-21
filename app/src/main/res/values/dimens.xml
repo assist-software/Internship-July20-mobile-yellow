@@ -53,4 +53,6 @@
     <dimen name="space_27dp">27dp</dimen>
     <dimen name="space_18dp">18dp</dimen>
     <dimen name="space_44dp">44dp</dimen>
+    <dimen name="space_58dp">58dp</dimen>
+    <dimen name="space_264dp">264dp</dimen>
 </resources>
