@@ -21,6 +21,7 @@ public class ParticipantAdapter extends RecyclerView.Adapter<ParticipantAdapter.
     private List<ParticipantAdapterModel> participantLists;
     private Context ctx;
     private ParticipantAdapterListener listener;
+    private boolean showButton;
 
     @Override
     public ParticipantAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -40,10 +41,11 @@ public class ParticipantAdapter extends RecyclerView.Adapter<ParticipantAdapter.
         return participantLists.size();
     }
 
-    public ParticipantAdapter(List<ParticipantAdapterModel> eventList, Context context, ParticipantAdapterListener listener) {
+    public ParticipantAdapter(List<ParticipantAdapterModel> eventList, Context context, ParticipantAdapterListener listener, boolean showButton) {
         this.participantLists = eventList;
         this.ctx = context;
         this.listener = listener;
+        this.showButton = showButton;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -67,6 +69,15 @@ public class ParticipantAdapter extends RecyclerView.Adapter<ParticipantAdapter.
                 Glide.with(ctx).load(R.drawable.checked_part).into(statusChecked);
             } else {
                 Glide.with(ctx).load((R.drawable.unchecked_part)).into(statusChecked);
+            }
+
+            if(showButton){
+                statusChecked.setVisibility(View.VISIBLE);
+            }
+            else {
+                statusChecked.setVisibility(View.GONE);
+                //statusChecked.setVisibility(View.INVISIBLE);
+                //statusChecked.setClickable(false);
             }
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -101,9 +101,9 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
     }
 
     @Override
-    public void onClubCLick() {
+    public void onClubCLick(String clubName) {
         Intent clubIntent = new Intent(getActivity(), ClubDetailsActivity.class);
-        clubIntent.putExtra("ID", "THis id");
+        clubIntent.putExtra("clubName", clubName);
         startActivity(clubIntent);
     }
 }

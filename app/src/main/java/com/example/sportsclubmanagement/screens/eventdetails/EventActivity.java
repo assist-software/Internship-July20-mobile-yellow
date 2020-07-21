@@ -58,7 +58,7 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
         this.getSupportActionBar().setHomeAsUpIndicator(upArrow);
         //fill recycle
         participantRecycle = findViewById(R.id.participantsRecycler);
-        participantAdapter = new ParticipantAdapter(getMockedList(),getApplicationContext(), this);
+        participantAdapter = new ParticipantAdapter(getMockedList(),getApplicationContext(), this, true);
         participantRecycle.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
         participantRecycle.setAdapter(participantAdapter);
     }

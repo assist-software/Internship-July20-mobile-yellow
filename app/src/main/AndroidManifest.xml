@@ -38,8 +38,10 @@
             android:theme="@style/NoActionBarNoFullScreen" />
         <activity android:name=".screens.eventdetails.EventActivity"
             android:theme="@style/NoActionBarNoFullScreen"/>
-        <activity android:name=".screens.myprofile.MyProfileActivity" />
-        <activity android:name=".screens.clubdetails.ClubDetailsActivity"></activity>
+        <activity android:name=".screens.myprofile.MyProfileActivity"
+            android:theme="@style/NoActionBarNoFullScreen"/>
+        <activity android:name=".screens.clubdetails.ClubDetailsActivity"
+            android:theme="@style/NoActionBarNoFullScreen"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

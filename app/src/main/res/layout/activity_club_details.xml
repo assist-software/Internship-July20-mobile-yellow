@@ -8,194 +8,211 @@
 
     <include layout="@layout/home_toolbar" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/coach_cardView"
-        android:layout_width="0dp"
-        android:layout_height="152dp"
-        android:layout_marginTop="@dimen/space_86dp"
-        android:background="@color/colorWhite"
-        android:orientation="vertical"
-        app:cardCornerRadius="@dimen/radius_8dp"
-        app:cardElevation="@dimen/space_5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.8">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/profile_picture"
-                android:layout_width="58dp"
-                android:layout_height="58dp"
-                android:layout_marginTop="@dimen/text_22sp"
-                android:background="@color/colorBlack"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/coach_linearLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintStart_toEndOf="@+id/profile_picture"
-                app:layout_constraintTop_toBottomOf="@+id/coach_name">
-
-                <TextView
-                    android:id="@+id/coach"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_normal"
-                    android:text="@string/coach"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/text_12sp" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="5dp"
-                    android:layout_height="5dp"
-                    android:layout_marginLeft="@dimen/space_7dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginRight="@dimen/space_7dp"
-                    app:cardBackgroundColor="@color/colorLightGray" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/years_45" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/clubs_linearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/coach_cardView"
+                android:layout_width="0dp"
+                android:layout_height="152dp"
+                android:layout_marginTop="@dimen/space_24dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                app:cardCornerRadius="@dimen/radius_8dp"
+                app:cardElevation="@dimen/space_5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_picture">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.9">
 
-                <TextView
-                    android:id="@+id/clubsOwned_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/space_24dp"
-                    android:fontFamily="@font/inter_normal"
-                    android:text="@string/owned_clubs"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorLightGray"
-                    android:textSize="@dimen/text_12sp" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/space_7dp"
-                    android:layout_marginRight="@dimen/space_7dp"
-                    app:cardBackgroundColor="@color/colorLightGray"
-                    app:cardElevation="0dp" />
+                    <ImageView
+                        android:id="@+id/profile_picture"
+                        android:layout_width="@dimen/space_58dp"
+                        android:layout_height="@dimen/space_58dp"
+                        android:layout_marginTop="@dimen/text_22sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/clubName1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/space_7dp"
-                    android:fontFamily="@font/inter_normal"
-                    android:text="@string/running_club"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/text_12sp" />
+                    <LinearLayout
+                        android:id="@+id/coach_linearLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.15"
+                        app:layout_constraintStart_toEndOf="@+id/profile_picture"
+                        app:layout_constraintTop_toBottomOf="@+id/coach_name">
 
-                <TextView
-                    android:id="@+id/clubName2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/space_7dp"
-                    android:fontFamily="@font/inter_normal"
-                    android:text="@string/running_club"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/text_12sp" />
-            </LinearLayout>
+                        <TextView
+                            android:id="@+id/coach"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_normal"
+                            android:text="@string/coach"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_12sp" />
 
-            <TextView
-                android:id="@+id/coach_name"
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="5dp"
+                            android:layout_height="5dp"
+                            android:layout_marginLeft="@dimen/space_7dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="@dimen/space_7dp"
+                            app:cardBackgroundColor="@color/colorLightGray" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/years_45" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/clubs_linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/profile_picture">
+
+                        <TextView
+                            android:id="@+id/clubsOwned_textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_24dp"
+                            android:fontFamily="@font/inter_normal"
+                            android:text="@string/owned_clubs"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorLightGray"
+                            android:textSize="@dimen/text_12sp" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/space_7dp"
+                            android:layout_marginRight="@dimen/space_7dp"
+                            app:cardBackgroundColor="@color/colorLightGray"
+                            app:cardElevation="0dp" />
+
+                        <TextView
+                            android:id="@+id/clubName1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_7dp"
+                            android:fontFamily="@font/inter_normal"
+                            android:text="@string/running_club"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_12sp" />
+
+                        <TextView
+                            android:id="@+id/clubName2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/space_7dp"
+                            android:fontFamily="@font/inter_normal"
+                            android:text="@string/running_club"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_12sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/coach_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_24dp"
+                        android:fontFamily="@font/inter_normal"
+                        android:text="@string/coach_name"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.2"
+                        app:layout_constraintStart_toEndOf="@+id/profile_picture"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/members_relativeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_24dp"
-                android:fontFamily="@font/inter_normal"
-                android:text="@string/coach_name"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_24sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toEndOf="@+id/profile_picture"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coach_cardView">
+
+                <TextView
+                    android:id="@+id/members_section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_normal"
+                    android:layout_marginStart="@dimen/space_24dp"
+                    android:text="@string/members"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_18sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/members_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_264dp"
+                    android:layout_below="@+id/members_section"
+                    android:layout_marginTop="@dimen/space_19dp"
+                    android:paddingStart="@dimen/space_24dp"
+                    android:paddingEnd="@dimen/space_8dp"
+                    android:scrollbars="none" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/events_relativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/members_relativeLayout">
+
+                <TextView
+                    android:id="@+id/events_section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_normal"
+                    android:layout_marginStart="@dimen/space_24dp"
+                    android:text="@string/events"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_18sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/events_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/events_section"
+                    android:layout_marginTop="@dimen/space_19dp"
+                    android:paddingEnd="@dimen/space_8dp"
+                    android:scrollbars="none" />
+            </RelativeLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 
-    <RelativeLayout
-        android:id="@+id/members_relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coach_cardView">
+    </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:id="@+id/members_section"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_normal"
-            android:paddingStart="@dimen/space_24dp"
-            android:text="@string/members"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/text_18sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/members_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/new_club_section"
-            android:layout_marginTop="@dimen/space_19dp"
-            android:paddingStart="@dimen/space_24dp"
-            android:paddingEnd="@dimen/space_8dp"
-            android:scrollbars="none" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/events_relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/members_relativeLayout">
-
-        <TextView
-            android:id="@+id/events_section"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_normal"
-            android:paddingStart="@dimen/space_24dp"
-            android:text="@string/events"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/text_18sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/events_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/events_section"
-            android:layout_marginTop="@dimen/space_19dp"
-            android:paddingStart="@dimen/space_24dp"
-            android:paddingEnd="@dimen/space_8dp"
-            android:scrollbars="none" />
-    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
