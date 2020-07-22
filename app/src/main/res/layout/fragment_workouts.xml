@@ -55,7 +55,7 @@
             android:layout_marginTop="@dimen/space_13dp"
             android:layout_marginStart="@dimen/space_24dp"/>
         <Button
-            android:id="@+id/btn_continue"
+            android:id="@+id/addWorkout_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintWidth_percent="0.8"

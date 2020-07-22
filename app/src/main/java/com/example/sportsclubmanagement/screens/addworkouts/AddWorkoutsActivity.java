@@ -144,6 +144,8 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         public void onClick(View view) {
             if (checkInfo()) {
                 Toast.makeText(AddWorkoutsActivity.this, R.string.saved_changes, Toast.LENGTH_SHORT).show();
+                //TODO: make  POST API FUNC
+                finish();
             } else {
                 Toast.makeText(AddWorkoutsActivity.this, R.string.invalid_data, Toast.LENGTH_SHORT).show();
             }
