@@ -81,11 +81,13 @@
         <item>Primary Sport</item>
         <item>Ceva 1</item>
         <item>Ceva 2</item>
+        <item>Fotbal</item>
     </string-array>
     <string-array name="spinnerSecondarySports">
         <item>Secondary Sport</item>
         <item>Ceva 1</item>
         <item>Ceva 2</item>
+        <item>Volei</item>
     </string-array>
     <string-array name="spinnerEvents">
         <item>Event</item>

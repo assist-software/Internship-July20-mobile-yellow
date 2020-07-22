@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,8 +19,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
+import com.example.sportsclubmanagement.models.apiModels.Request.UserAccountSetup;
+import com.example.sportsclubmanagement.rest.APIClient;
+import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.main.MainActivity;
+import com.example.sportsclubmanagement.utils.Constants;
 import com.example.sportsclubmanagement.utils.Validations;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AccountSetupActivity extends AppCompatActivity {
 
@@ -26,9 +36,10 @@ public class AccountSetupActivity extends AppCompatActivity {
     Button toHomeBtn;
     EditText height, weight, age;
     RadioButton female, male;
-
+    APIInterface apiInterface;
+    SharedPreferences pref;
+    ArrayAdapter<String> adapterSecondary, adapterPrimary;
     AdapterView.OnItemSelectedListener spinnerListener;
-    ArrayAdapter<String>  spinnerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +56,7 @@ public class AccountSetupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent_home = new Intent(AccountSetupActivity.this, MainActivity.class);
                 if (checkInfo()) {
+                    restAccountSetup();
                     startActivity(intent_home);
                     finish();
                 } else {
@@ -87,10 +99,12 @@ public class AccountSetupActivity extends AppCompatActivity {
         age = findViewById(R.id.inputAge);
         female = findViewById(R.id.radioFemale);
         male = findViewById(R.id.radioMale);
+        pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
+        apiInterface = APIClient.getClient().create(APIInterface.class);
 
         //fill primary spinner
         String[] primarySportsEnum = getResources().getStringArray(R.array.spinnerPrimarySports);
-        ArrayAdapter<String> adapterPrimary = new ArrayAdapter(AccountSetupActivity.this, R.layout.support_simple_spinner_dropdown_item, primarySportsEnum) {
+        adapterPrimary = new ArrayAdapter(AccountSetupActivity.this, R.layout.support_simple_spinner_dropdown_item, primarySportsEnum) {
             @Override
             public boolean isEnabled(int position) {
                 if (position == 0) {
@@ -121,7 +135,7 @@ public class AccountSetupActivity extends AppCompatActivity {
 
         //fill secondary spinner
         String[] secondarySportsEnum = getResources().getStringArray(R.array.spinnerSecondarySports);
-        ArrayAdapter<String> adapterSecondary = new ArrayAdapter(AccountSetupActivity.this, R.layout.support_simple_spinner_dropdown_item, secondarySportsEnum) {
+        adapterSecondary = new ArrayAdapter(AccountSetupActivity.this, R.layout.support_simple_spinner_dropdown_item, secondarySportsEnum) {
             @Override
             public boolean isEnabled(int position) {
                 if (position == 0) {
@@ -147,4 +161,36 @@ public class AccountSetupActivity extends AppCompatActivity {
         };
         secondarySports.setAdapter(adapterSecondary);
     }
+
+    private void restAccountSetup() {
+        String gender = "M";
+        if (male.isChecked()) {
+            gender = "M";
+        } else {
+            gender = "F";
+        }
+        UserAccountSetup userAccountSetup = new UserAccountSetup(gender, Integer.parseInt(age.getText().toString()),
+                primarySports.getSelectedItem().toString(), secondarySports.getSelectedItem().toString(),
+                Integer.parseInt(height.getText().toString()), Double.parseDouble(weight.getText().toString()));
+        Call<Void> call = apiInterface.userAccountSetup(pref.getString("token", "nimic"), userAccountSetup, pref.getInt("id", 0));
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("TAG", String.valueOf(response.code()));
+                } else {
+                    Log.d("error message", response.message());
+                    Toast.makeText(AccountSetupActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                call.cancel();
+            }
+        });
+    }
+
+
 }
