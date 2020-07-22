@@ -12,6 +12,10 @@ public interface APIInterface {
     @POST("api/signin/")
     Call<Token> user_login(@Field("email")String email, @Field("password")String pass);
 
+    @FormUrlEncoded
+    @POST("api/athlete/register/")
+    Call<Void> user_register(@Field("first_name")String first,@Field("last_name")String last,
+                       @Field("email")String email,@Field("password")String password);
     /*
     @GET("/api/users?")
     abstract public Call<UserList> doGetUserList(@Query("page") String page);
