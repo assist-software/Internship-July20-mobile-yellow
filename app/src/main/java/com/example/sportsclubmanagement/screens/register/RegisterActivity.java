@@ -55,8 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         loginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class); //original code that we need
-                Intent loginIntent = new Intent(getApplicationContext(), MainActivity.class); //fake code to test main activity
+                Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(loginIntent);
                 finish();
             }
