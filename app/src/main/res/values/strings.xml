@@ -73,7 +73,10 @@
     <string name="monday">Monday</string>
     <string name="may">May</string>
     <string name="_22">22</string>
-    <string name="today_s_workout">Today\'s workout</string>s
+    <string name="join_your_first_club">Join your first club</string>
+    <string name="join_your_first_event">Join your first event</string>
+    <string name="future_events">Future events</string>
+    <string name="today_s_workout">Today\'s workout</string>
     <string-array name="spinnerPrimarySports">
         <item>Primary Sport</item>
         <item>Ceva 1</item>

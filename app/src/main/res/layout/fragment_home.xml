@@ -22,12 +22,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/image_user"
+                android:id="@+id/home_profile_picture"
                 android:layout_width="84dp"
                 android:layout_height="84dp"
                 android:layout_marginBottom="@dimen/space_16dp"
-                android:scaleType="centerCrop"
-                android:background="@color/colorBlack"/>
+                android:scaleType="centerCrop" />
 
             <TextView
                 android:id="@+id/name_user"
@@ -38,6 +37,127 @@
                 android:fontFamily="@font/inter_bold"
                 android:text="Hehe Boy" />
         </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/home_joinClub_section"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileCard">
+
+            <RelativeLayout
+                android:id="@+id/home_joinClub_relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/space_31dp">
+
+                <TextView
+                    android:id="@+id/home_joinClub_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_normal"
+                    android:paddingStart="@dimen/space_24dp"
+                    android:text="@string/join_your_first_club"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_18sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_joinClub_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/home_joinClub_textView"
+                    android:layout_marginTop="@dimen/space_19dp"
+                    android:paddingStart="@dimen/space_24dp"
+                    android:paddingEnd="@dimen/space_8dp"
+                    android:scrollbars="none" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/home_joinEvent_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_joinClub_section">
+
+            <TextView
+                android:id="@+id/home_joinEvent_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_normal"
+                android:layout_marginStart="@dimen/space_24dp"
+                android:text="@string/join_your_first_event"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_joinEvent_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_joinEvent_textView"
+                android:layout_marginTop="@dimen/space_19dp"
+                android:scrollbars="none" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/home_club_section"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/space_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_joinEvent_section">
+
+            <TextView
+                android:id="@+id/home_club_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_normal"
+                android:paddingStart="@dimen/space_24dp"
+                android:text="@string/clubs"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_club_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_club_textView"
+                android:layout_marginTop="@dimen/space_19dp"
+                android:paddingStart="@dimen/space_24dp"
+                android:paddingEnd="@dimen/space_8dp"
+                android:scrollbars="none" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/home_futureEvents_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/home_club_section">
+
+            <TextView
+                android:id="@+id/home_futureEvents_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_normal"
+                android:layout_marginStart="@dimen/space_24dp"
+                android:text="@string/future_events"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_futureEvents_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_futureEvents_textView"
+                android:layout_marginTop="@dimen/space_19dp"
+                android:scrollbars="none" />
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -27,6 +27,7 @@ import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.Clu
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventAdapter;
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventAdapterListener;
 import com.example.sportsclubmanagement.screens.myprofile.MyProfileActivity;
+import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -49,7 +50,7 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
 
     private void initComponents() {
         Bundle bundle = getIntent().getExtras();
-        String clubName = bundle.getString("clubName");
+        String clubName = bundle.getString(Constants.CLUB_NAME);
         toolbar = findViewById(R.id.home_tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
