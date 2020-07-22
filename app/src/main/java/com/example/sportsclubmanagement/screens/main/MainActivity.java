@@ -9,7 +9,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -82,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         SharedPreferences pref = getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
-        if(pref.contains(Constants.token)){
-            Toast.makeText(this, pref.getString(Constants.token, null), Toast.LENGTH_SHORT).show();
+        if(pref.contains(Constants.TOKEN)){
+            Toast.makeText(this, pref.getString(Constants.TOKEN, null), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_log_out:
                 SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
-                editor.remove(Constants.token);
+                editor.remove(Constants.TOKEN);
                 editor.commit();
                 Intent logOutIntent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(logOutIntent);

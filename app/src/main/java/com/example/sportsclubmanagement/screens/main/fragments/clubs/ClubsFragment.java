@@ -18,6 +18,7 @@ import com.example.sportsclubmanagement.models.ClubAdapterModel;
 import com.example.sportsclubmanagement.screens.clubdetails.ClubDetailsActivity;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapter;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapterListener;
+import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,6 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
         newClubRecyclerView = view.findViewById(R.id.newClub_recyclerView);
         joinedClubRecyclerView = view.findViewById(R.id.joinedClubs_RecyclerView);
         pendingClubRecyclerView = view.findViewById(R.id.pendingClubs_RecyclerView);
-
 
         populateNewClubList();
         populateJoinedClubList();
@@ -101,9 +101,9 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
     }
 
     @Override
-    public void onClubCLick(String clubName) {
+    public void onClubClick(String clubName) {
         Intent clubIntent = new Intent(getActivity(), ClubDetailsActivity.class);
-        clubIntent.putExtra("clubName", clubName);
+        clubIntent.putExtra(Constants.CLUB_NAME, clubName);
         startActivity(clubIntent);
     }
 }

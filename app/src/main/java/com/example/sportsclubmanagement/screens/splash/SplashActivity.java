@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.screens.addworkouts.AddWorkoutsActivity;
 import com.example.sportsclubmanagement.screens.guest.GuestActivity;
 import com.example.sportsclubmanagement.screens.main.MainActivity;
 import com.example.sportsclubmanagement.utils.Constants;
@@ -27,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
-                if(pref.contains(Constants.token)){
+                if(pref.contains(Constants.TOKEN)){
                     Intent guestActivity = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(guestActivity);
                     finish();
