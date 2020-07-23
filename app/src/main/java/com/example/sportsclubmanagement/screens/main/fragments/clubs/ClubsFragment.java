@@ -1,6 +1,7 @@
 package com.example.sportsclubmanagement.screens.main.fragments.clubs;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -40,10 +41,11 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
     private ClubAdapter newClubAdapter, joinedClubAdapter, pendingClubAdapter;
     APIInterface apiInterface;
     List<Clubs> clubsList;
+    SharedPreferences pref;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_clubs, container, false);
@@ -51,13 +53,35 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
         joinedClubRecyclerView = view.findViewById(R.id.joinedClubs_RecyclerView);
         pendingClubRecyclerView = view.findViewById(R.id.pendingClubs_RecyclerView);
 
+        pref = getActivity().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, 0);
         apiInterface = APIClient.getClient().create(APIInterface.class);
-        Call<List<Clubs>> call = apiInterface.getAllClubs();
+        callFunction(this);
+
+//        populateJoinedClubList();
+//        populatePendingClubList();
+
+//        joinedClubAdapter = new ClubAdapter(clubList2, this, false);
+//        pendingClubAdapter = new ClubAdapter(clubList3, this, false);
+
+//        joinedClubRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        pendingClubRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+//        joinedClubRecyclerView.setAdapter(joinedClubAdapter);
+//        pendingClubRecyclerView.setAdapter(pendingClubAdapter);
+
+        return view;
+    }
+
+    private void callFunction(final ClubAdapterListener listener){
+        Call<List<Clubs>> call = apiInterface.getAllClubs(pref.getString("token", "nimic"));
         call.enqueue(new Callback<List<Clubs>>() {
             @Override
             public void onResponse(Call<List<Clubs>> call, Response<List<Clubs>> response) {
                 if (response.isSuccessful()) {
                     clubsList = response.body();
+                    newClubAdapter = new ClubAdapter(clubsList, listener, true);
+                    newClubRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    newClubRecyclerView.setAdapter(newClubAdapter);
                     Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -67,42 +91,8 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
                 Toast.makeText(getContext(), "Error in getClubs call", Toast.LENGTH_SHORT).show();
             }
         });
-
-//        populateNewClubList();
-//        populateJoinedClubList();
-//        populatePendingClubList();
-        newClubAdapter = new ClubAdapter(clubsList, this, true);
-//
-//        joinedClubAdapter = new ClubAdapter(clubList2, this, false);
-//
-//        pendingClubAdapter = new ClubAdapter(clubList3, this, false);
-//
-//        newClubRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        joinedClubRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        pendingClubRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//        newClubRecyclerView.setAdapter(newClubAdapter);
-//        joinedClubRecyclerView.setAdapter(joinedClubAdapter);
-//        pendingClubRecyclerView.setAdapter(pendingClubAdapter);
-
-        return view;
     }
 
-//    private void populateNewClubList() {
-//        ClubAdapterModel club = new ClubAdapterModel("Cycling", "Join");
-//        clubList.add(club);
-//        club = new ClubAdapterModel("Running", "Join");
-//        clubList.add(club);
-//        club = new ClubAdapterModel("Hiking", "Join");
-//        clubList.add(club);
-//        club = new ClubAdapterModel("Swimming", "Join");
-//        clubList.add(club);
-//        for (int i = 0; i < 100; i++) {
-//            club = new ClubAdapterModel("Running", "Join");
-//            clubList.add(club);
-//        }
-//    }
-//
 //    private void populateJoinedClubList() {
 //        ClubAdapterModel club = new ClubAdapterModel("Cycling", "Joined");
 //        clubList2.add(club);

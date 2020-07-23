@@ -1,40 +1,51 @@
 package com.example.sportsclubmanagement.models.apiModels.Response;
 
 import com.example.sportsclubmanagement.models.ClubAdapterModel;
+import com.google.gson.annotations.SerializedName;
 
 public class Clubs {
-    private int id;
-    private String name;
+    @SerializedName("id_club")
+    private ClubInfo clubInfo;
+    private boolean isInvited;
+    private boolean isRequested;
+    private boolean isMember;
 
-    public String getClubStats(){
-        return clubStats;
+    public Clubs(ClubInfo clubInfo, boolean isInvited, boolean isRequested, boolean isMember) {
+        this.clubInfo = clubInfo;
+        this.isInvited = isInvited;
+        this.isRequested = isRequested;
+        this.isMember = isMember;
     }
 
-    public void setClubStats(String clubStats) {
-        this.clubStats = clubStats;
+    public ClubInfo getClubInfo() {
+        return clubInfo;
     }
 
-    private String clubStats;
-
-    public Clubs(int id, String name, String clubStatus) {
-        this.id = id;
-        this.name = name;
-        this.clubStats = clubStatus;
+    public void setClubInfo(ClubInfo clubInfo) {
+        this.clubInfo = clubInfo;
     }
 
-    public int getId() {
-        return id;
+    public boolean isInvited() {
+        return isInvited;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setInvited(boolean invited) {
+        isInvited = invited;
     }
 
-    public String getName() {
-        return name;
+    public boolean isRequested() {
+        return isRequested;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRequested(boolean requested) {
+        isRequested = requested;
+    }
+
+    public boolean isMember() {
+        return isMember;
+    }
+
+    public void setMember(boolean member) {
+        isMember = member;
     }
 }

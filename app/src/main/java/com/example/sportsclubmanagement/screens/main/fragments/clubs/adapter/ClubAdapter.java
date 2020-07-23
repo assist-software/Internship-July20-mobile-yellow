@@ -21,48 +21,6 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
     private ClubAdapterListener clubAdapterListener;
     private boolean hasBorder;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView clubName;
-        private TextView clubStatus;
-        private FrameLayout joinBtn;
-        private RelativeLayout clubItem;
-
-        public MyViewHolder(View view) {
-            super(view);
-            clubName = view.findViewById(R.id.club_name);
-            clubStatus = view.findViewById(R.id.club_status_TextView);
-            joinBtn = view.findViewById(R.id.club_status_frameLayout);
-            clubItem = view.findViewById(R.id.club_item);
-        }
-
-        public void bind(final Clubs clubAdapterModel) {
-            clubName.setText(clubAdapterModel.getName());
-            clubStatus.setText(clubAdapterModel.getClubStats());
-            clubItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clubAdapterListener.onClubClick(clubAdapterModel.getName());
-                }
-            });
-            if (hasBorder) {
-                joinBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        clubAdapterListener.onJoinClick(clubAdapterModel.getName());
-                    }
-                });
-            } else {
-                joinBtn.setBackgroundResource(0);
-            }
-        }
-    }
-
-    public ClubAdapter(List<Clubs> clubList, ClubAdapterListener clubAdapterListener, boolean hasBorder) {
-        this.clubsList = clubList;
-        this.clubAdapterListener = clubAdapterListener;
-        this.hasBorder = hasBorder;
-    }
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -79,5 +37,55 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
         return clubsList.size();
+    }
+
+    public ClubAdapter(List<Clubs> clubList, ClubAdapterListener clubAdapterListener, boolean hasBorder) {
+        this.clubsList = clubList;
+        this.clubAdapterListener = clubAdapterListener;
+        this.hasBorder = hasBorder;
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        private TextView clubName;
+        private TextView clubStatus;
+        private FrameLayout joinBtn;
+        private RelativeLayout clubItem;
+
+        public MyViewHolder(View view) {
+            super(view);
+            clubName = view.findViewById(R.id.club_name);
+            clubStatus = view.findViewById(R.id.club_status_TextView);
+            joinBtn = view.findViewById(R.id.club_status_frameLayout);
+            clubItem = view.findViewById(R.id.club_item);
+        }
+
+        public void bind(final Clubs clubAdapterModel) {
+            clubName.setText(clubAdapterModel.getClubInfo().getName());
+            if(!(clubAdapterModel.isInvited() || clubAdapterModel.isMember() || clubAdapterModel.isRequested())){
+                clubStatus.setText(R.string.join);
+            }
+            if(clubAdapterModel.isMember()){
+                clubStatus.setText(R.string.joined);
+            }
+            if(clubAdapterModel.isRequested()){
+                clubStatus.setText(R.string.pending);
+            }
+            clubItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clubAdapterListener.onClubClick(clubAdapterModel.getClubInfo().getName());
+                }
+            });
+            if (hasBorder) {
+                joinBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        clubAdapterListener.onJoinClick(clubAdapterModel.getClubInfo().getName());
+                    }
+                });
+            } else {
+                joinBtn.setBackgroundResource(0);
+            }
+        }
     }
 }
