@@ -1,4 +1,4 @@
-package com.example.sportsclubmanagement.models.apiModels.Response;
+package com.example.sportsclubmanagement.models.apiModels;
 
 public class ClubInfo {
     private int id;

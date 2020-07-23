@@ -6,6 +6,7 @@ import com.example.sportsclubmanagement.models.apiModels.Request.UserLogin;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserRegister;
 import com.example.sportsclubmanagement.models.apiModels.Response.Token;
 import com.example.sportsclubmanagement.models.apiModels.Response.UserDetails;
+import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface APIInterface {
     Call<Token> userLogin(@Body UserLogin userLogin);
 
     @GET("api/club/")
-    Call<List<Clubs>> getAllClubs(@Header("token") String token);
+    Call<List<Clubs>> getAllClubs(@Header(Constants.TOKEN) String token);
 
     @POST("api/athlete/register/")
     Call<Void> userRegister(@Body UserRegister userRegister);

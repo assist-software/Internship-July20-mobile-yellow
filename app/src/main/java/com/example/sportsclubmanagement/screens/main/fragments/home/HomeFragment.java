@@ -23,6 +23,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.ClubAdapterModel;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
+import com.example.sportsclubmanagement.models.apiModels.ClubInfo;
+import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
 import com.example.sportsclubmanagement.screens.clubdetails.ClubDetailsActivity;
 import com.example.sportsclubmanagement.screens.eventdetails.EventActivity;
 import com.example.sportsclubmanagement.screens.eventdetails.adapterParticipant.ParticipantAdapterListener;
@@ -54,7 +56,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         Glide.with(HomeFragment.this).load(R.drawable.avatar_picture).apply(RequestOptions.circleCropTransform()).into(profilePicture);
 
         firstClubsRecyclerView = view.findViewById(R.id.home_joinClub_recyclerView);
-        //firstClubAdapter = new ClubAdapter(getClubList(), this, true);
+        firstClubAdapter = new ClubAdapter(getClubList(), this, true);
         firstClubsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         firstClubsRecyclerView.setAdapter(firstClubAdapter);
 
@@ -64,7 +66,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         firstEventsRecyclerView.setAdapter(firstEventAdapter);
 
         clubsRecyclerView = view.findViewById(R.id.home_club_recyclerView);
-        //clubAdapter = new ClubAdapter(getClubList(), this, true);
+        clubAdapter = new ClubAdapter(getClubList(), this, true);
         clubsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         clubsRecyclerView.setAdapter(clubAdapter);
 
@@ -103,16 +105,16 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
 
     private List<EventAdapterModel> getMockedList() {
         List<EventAdapterModel> mocks = new ArrayList<>();
-//        for (int i = 0; i < 5; i++) {
-//            mocks.add(new EventAdapterModel("title test", "loc test", "12.06.1998"));
-//        }
+        for (int i = 0; i < 5; i++) {
+            mocks.add(new EventAdapterModel("title test", "loc test", "12.06.1998"));
+        }
         return mocks;
     }
 
-    private List<ClubAdapterModel> getClubList() {
-        List<ClubAdapterModel> mocks = new ArrayList<>();
+    private List<Clubs> getClubList() {
+        List<Clubs> mocks = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            mocks.add(new ClubAdapterModel("Running", "Join"));
+            mocks.add(new Clubs(new ClubInfo(1, "Running"), false, false, false));
         }
         return mocks;
     }

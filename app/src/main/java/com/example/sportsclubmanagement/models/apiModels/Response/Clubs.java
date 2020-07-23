@@ -1,6 +1,6 @@
 package com.example.sportsclubmanagement.models.apiModels.Response;
 
-import com.example.sportsclubmanagement.models.ClubAdapterModel;
+import com.example.sportsclubmanagement.models.apiModels.ClubInfo;
 import com.google.gson.annotations.SerializedName;
 
 public class Clubs {

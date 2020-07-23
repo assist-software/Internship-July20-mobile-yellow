@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    Intent guestActivity = new Intent(SplashActivity.this, MainActivity.class);
+                    Intent guestActivity = new Intent(SplashActivity.this, GuestActivity.class);
                     startActivity(guestActivity);
                     finish();
                 }
