@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     APIInterface apiInterface;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    boolean isHaveDetails = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                     Token body_resp = response.body();
                     updatePref(body_resp);
                     checkIfUserHaveDetails();
-
                 } else {
                     Log.d("error message", response.message());
                     Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
@@ -73,29 +73,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
-                call.cancel();
-            }
-        });
-    }
-
-    private void checkIfUserHaveDetails() {
-        Call<UserDetails> call = apiInterface.userDetails(pref.getString("token", null), pref.getInt("id", 0));
-        call.enqueue(new Callback<UserDetails>() {
-            @Override
-            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
-                if (response.isSuccessful()) {
-                    Log.d("TAG", response.code() + "");
-                    UserDetails resp = response.body();
-                    redirect(resp.getAge() != 0);
-                } else {
-                    Log.d("error message", response.message());
-                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserDetails> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
@@ -155,9 +132,48 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkInputs()) {
                     restUserLogin();
+                    if (checkIfUserHaveDetails()) {
+                        Intent intent_go_home = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent_go_home);
+                    } else {
+                        Intent intent_go_home = new Intent(LoginActivity.this, AccountSetupActivity.class);
+                        startActivity(intent_go_home);
+                    }
+
                     finish();
                 }
             }
         });
+    }
+
+    private boolean checkIfUserHaveDetails() {
+
+        Call<UserDetails> call = apiInterface.userDetails(pref.getString("token", null), pref.getInt("id", 0));
+        call.enqueue(new Callback<UserDetails>() {
+            @Override
+            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
+                if (response.isSuccessful()) {
+                    Log.d("TAG", response.code() + "");
+                    UserDetails resp = response.body();
+                    if (resp.getGender().equals("M") || resp.getGender().equals("F")) {
+                        updateHaveDetails();
+                    }
+                } else {
+                    Log.d("error message", response.message());
+                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDetails> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                call.cancel();
+            }
+        });
+        return isHaveDetails;
+    }
+
+    private void updateHaveDetails() {
+        isHaveDetails = true;
     }
 }
