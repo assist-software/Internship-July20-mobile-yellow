@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private ActionBarDrawerToggle homeDrawerToggle;
     private BottomNavigationView bottomNav;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +81,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit(); //show home fragment first time you enter the activity
         homeNavigationView.setNavigationItemSelectedListener(this);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-
-        SharedPreferences pref = getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
+        pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
+        editor = pref.edit();
         if(pref.contains(Constants.TOKEN)){
-            Toast.makeText(this, pref.getString(Constants.TOKEN, null), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, pref.getString(Constants.TOKEN, null)+" "+pref.getInt("id",0), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -131,9 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Open Calendar Screen", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_log_out:
-                SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.remove(Constants.TOKEN);
+                editor.clear();
                 editor.commit();
                 Intent logOutIntent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(logOutIntent);

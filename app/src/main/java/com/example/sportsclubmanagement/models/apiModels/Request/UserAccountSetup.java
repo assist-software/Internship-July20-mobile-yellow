@@ -29,6 +29,14 @@ public class UserAccountSetup {
         this.avatar = avatar;
     }
 
+    public UserAccountSetup(int age, String primarySport, String secondarySport, int height, double weight) {
+        this.age = age;
+        this.primarySport = primarySport;
+        this.secondarySport = secondarySport;
+        this.height = height;
+        this.weight = weight;
+    }
+
     public UserAccountSetup(String gender, int age, String primarySport, String secondarySport, int height, double weight) {
         this.gender = gender;
         this.age = age;
