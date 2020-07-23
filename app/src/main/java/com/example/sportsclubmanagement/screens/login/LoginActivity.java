@@ -1,7 +1,5 @@
 package com.example.sportsclubmanagement.screens.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserLogin;
@@ -24,21 +24,17 @@ import com.example.sportsclubmanagement.screens.register.RegisterActivity;
 import com.example.sportsclubmanagement.utils.Constants;
 import com.example.sportsclubmanagement.utils.Validations;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-
-    TextView regTxt;
-    Button logBtn;
-    EditText email, pass;
-    APIInterface apiInterface;
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
-    boolean isHaveDetails = false;
+    private TextView regTxt;
+    private Button logBtn;
+    private EditText email, pass;
+    private APIInterface apiInterface;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent_go_home = new Intent(LoginActivity.this, AccountSetupActivity.class);
             startActivity(intent_go_home);
         }
+        finish();
     }
 
     private boolean checkInputs() {
@@ -103,11 +100,10 @@ public class LoginActivity extends AppCompatActivity {
         if (!ok) {
             Toast.makeText(LoginActivity.this, errors, Toast.LENGTH_SHORT).show();
         }
-
         return ok;
     }
 
-    void initializeAllElement() {
+    private void initializeAllElement() {
         regTxt = findViewById(R.id.registerTxt);
         logBtn = findViewById(R.id.loginBtn);
         email = findViewById(R.id.inputEmail);
@@ -132,22 +128,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkInputs()) {
                     restUserLogin();
-                    if (checkIfUserHaveDetails()) {
-                        Intent intent_go_home = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent_go_home);
-                    } else {
-                        Intent intent_go_home = new Intent(LoginActivity.this, AccountSetupActivity.class);
-                        startActivity(intent_go_home);
-                    }
-
-                    finish();
                 }
             }
         });
     }
 
-    private boolean checkIfUserHaveDetails() {
-
+    private void checkIfUserHaveDetails() {
         Call<UserDetails> call = apiInterface.userDetails(pref.getString("token", null), pref.getInt("id", 0));
         call.enqueue(new Callback<UserDetails>() {
             @Override
@@ -155,9 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("TAG", response.code() + "");
                     UserDetails resp = response.body();
-                    if (resp.getGender().equals("M") || resp.getGender().equals("F")) {
-                        updateHaveDetails();
-                    }
+                    redirect(resp.getAge() != 0);
                 } else {
                     Log.d("error message", response.message());
                     Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
@@ -170,10 +154,5 @@ public class LoginActivity extends AppCompatActivity {
                 call.cancel();
             }
         });
-        return isHaveDetails;
-    }
-
-    private void updateHaveDetails() {
-        isHaveDetails = true;
     }
 }

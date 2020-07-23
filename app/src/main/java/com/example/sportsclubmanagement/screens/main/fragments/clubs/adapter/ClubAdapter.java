@@ -7,13 +7,12 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.models.ClubAdapterModel;
 import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
 
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> {
 
@@ -61,13 +60,13 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
 
         public void bind(final Clubs clubAdapterModel) {
             clubName.setText(clubAdapterModel.getClubInfo().getName());
-            if(!(clubAdapterModel.isInvited() || clubAdapterModel.isMember() || clubAdapterModel.isRequested())){
+            if (!(clubAdapterModel.isInvited() || clubAdapterModel.isMember() || clubAdapterModel.isRequested())) {
                 clubStatus.setText(R.string.join);
             }
-            if(clubAdapterModel.isMember()){
+            if (clubAdapterModel.isMember()) {
                 clubStatus.setText(R.string.joined);
             }
-            if(clubAdapterModel.isRequested()){
+            if (clubAdapterModel.isRequested()) {
                 clubStatus.setText(R.string.pending);
             }
             clubItem.setOnClickListener(new View.OnClickListener() {

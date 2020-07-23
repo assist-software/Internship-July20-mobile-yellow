@@ -3,19 +3,15 @@ package com.example.sportsclubmanagement.screens.main.fragments.clubs;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
@@ -28,13 +24,17 @@ import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ClubsFragment extends Fragment implements ClubAdapterListener {
 
     private RecyclerView newClubRecyclerView, joinedClubRecyclerView, pendingClubRecyclerView;
     private ClubAdapter newClubAdapter, joinedClubAdapter, pendingClubAdapter;
-    APIInterface apiInterface;
-    List<Clubs> clubsList;
-    SharedPreferences pref;
+    private APIInterface apiInterface;
+    private List<Clubs> clubsList;
+    private SharedPreferences pref;
 
     @Nullable
     @Override
@@ -42,18 +42,20 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_clubs, container, false);
-        newClubRecyclerView = view.findViewById(R.id.newClub_recyclerView);
-        joinedClubRecyclerView = view.findViewById(R.id.joinedClubs_RecyclerView);
-        pendingClubRecyclerView = view.findViewById(R.id.pendingClubs_RecyclerView);
-
-        pref = getActivity().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, 0);
-        apiInterface = APIClient.getClient().create(APIInterface.class);
+        initComp(view);
         requestClubs(this);
-
         return view;
     }
 
-    private void requestClubs(final ClubAdapterListener listener){
+    private void initComp(View view) {
+        newClubRecyclerView = view.findViewById(R.id.newClub_recyclerView);
+        joinedClubRecyclerView = view.findViewById(R.id.joinedClubs_RecyclerView);
+        pendingClubRecyclerView = view.findViewById(R.id.pendingClubs_RecyclerView);
+        pref = getActivity().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, 0);
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+    }
+
+    private void requestClubs(final ClubAdapterListener listener) {
         Call<List<Clubs>> call = apiInterface.getAllClubs(pref.getString(Constants.TOKEN, null));
         call.enqueue(new Callback<List<Clubs>>() {
             @Override

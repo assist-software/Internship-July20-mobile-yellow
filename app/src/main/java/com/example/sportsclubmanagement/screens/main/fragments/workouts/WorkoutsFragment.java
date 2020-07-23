@@ -2,6 +2,10 @@ package com.example.sportsclubmanagement.screens.main.fragments.workouts;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,13 +13,6 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.text.Layout;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.WorkoutAdapterModel;
@@ -27,10 +24,10 @@ import java.util.Calendar;
 import java.util.List;
 
 public class WorkoutsFragment extends Fragment {
-    RecyclerView workoutRecycler;
-    workoutAdapter adapter;
-    CardView todayWorkout;
-    Button addWorkoutBtn;
+    private RecyclerView workoutRecycler;
+    private workoutAdapter adapter;
+    private CardView todayWorkout;
+    private Button addWorkoutBtn;
 
     @Nullable
     @Override
@@ -50,6 +47,7 @@ public class WorkoutsFragment extends Fragment {
         workoutRecycler = this.getView().findViewById(R.id.recyclerWorkoutsHistory);
         todayWorkout = this.getView().findViewById(R.id.today_work_card);
         addWorkoutBtn = this.getView().findViewById(R.id.addWorkout_btn);
+
         //fill recycler
         adapter = new workoutAdapter(getMockedList(), getActivity().getApplicationContext());
         workoutRecycler.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));

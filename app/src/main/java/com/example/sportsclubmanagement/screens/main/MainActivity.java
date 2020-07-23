@@ -83,9 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
         editor = pref.edit();
-        if(pref.contains(Constants.TOKEN)){
-            Toast.makeText(this, pref.getString(Constants.TOKEN, null)+" "+pref.getInt("id",0), Toast.LENGTH_SHORT).show();
-        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
