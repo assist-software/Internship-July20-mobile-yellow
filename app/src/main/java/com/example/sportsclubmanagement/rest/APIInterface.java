@@ -24,6 +24,6 @@ public interface APIInterface {
     @PUT("/api/athlete/{id}/")
     Call<Void> userAccountSetup(@Header("token") String token, @Body UserAccountSetup userAccountSetup, @Path("id") int user_id);
 
-    @GET("/api/athlete/get{id}")
+    @GET("/api/athlete/{id}/")
     Call<UserDetails> userDetails(@Header("token")String token, @Path("id")int user_id);
 }
