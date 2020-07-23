@@ -48,13 +48,13 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
 
         pref = getActivity().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, 0);
         apiInterface = APIClient.getClient().create(APIInterface.class);
-        callFunction(this);
+        requestClubs(this);
 
         return view;
     }
 
-    private void callFunction(final ClubAdapterListener listener){
-        Call<List<Clubs>> call = apiInterface.getAllClubs(pref.getString("token", "nimic"));
+    private void requestClubs(final ClubAdapterListener listener){
+        Call<List<Clubs>> call = apiInterface.getAllClubs(pref.getString(Constants.TOKEN, null));
         call.enqueue(new Callback<List<Clubs>>() {
             @Override
             public void onResponse(Call<List<Clubs>> call, Response<List<Clubs>> response) {
@@ -63,7 +63,6 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
                     newClubAdapter = new ClubAdapter(clubsList, listener, true);
                     newClubRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     newClubRecyclerView.setAdapter(newClubAdapter);
-                    Toast.makeText(getContext(), "", Toast.LENGTH_SHORT).show();
                 }
             }
 
