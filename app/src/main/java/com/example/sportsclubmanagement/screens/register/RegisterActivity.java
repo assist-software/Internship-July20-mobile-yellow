@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
+import com.example.sportsclubmanagement.models.apiModels.Request.UserRegister;
 import com.example.sportsclubmanagement.models.apiModels.Response.Token;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
@@ -92,7 +93,8 @@ public class RegisterActivity extends AppCompatActivity {
             first = first_last[0];
             last = first_last[1];
         }
-        Call<Void> call = apiInterface.user_register(first,last,email.getText().toString(),pass.getText().toString());
+        UserRegister userRegister = new UserRegister(first,last,email.getText().toString(),pass.getText().toString());
+        Call<Void> call = apiInterface.userRegister(userRegister);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
