@@ -12,20 +12,20 @@ import com.example.sportsclubmanagement.screens.login.LoginActivity;
 import com.example.sportsclubmanagement.screens.register.RegisterActivity;
 
 public class GuestActivity extends AppCompatActivity {
-    Button logBtn ;
-    Button regBtn ;
+    Button logBtn;
+    Button regBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest);
-
+        //TODO: create init function
         logBtn = findViewById(R.id.loginBt);
         regBtn = findViewById(R.id.registerBt);
-
         goToNextScreen();
     }
 
-    private void goToNextScreen(){
+    private void goToNextScreen() {
         final Intent intent_login = new Intent(this, LoginActivity.class);
         final Intent intent_register = new Intent(this, RegisterActivity.class);
 

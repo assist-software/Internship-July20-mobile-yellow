@@ -3,8 +3,11 @@ package com.example.sportsclubmanagement.rest;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserAccountSetup;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserLogin;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserRegister;
+import com.example.sportsclubmanagement.models.apiModels.Response.Sports;
 import com.example.sportsclubmanagement.models.apiModels.Response.Token;
 import com.example.sportsclubmanagement.models.apiModels.Response.UserDetails;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -26,4 +29,7 @@ public interface APIInterface {
 
     @GET("/api/athlete/{id}/")
     Call<UserDetails> userDetails(@Header("token")String token, @Path("id")int user_id);
+
+    @GET("/api/sports/")
+    Call<List<Sports>> getSports();
 }

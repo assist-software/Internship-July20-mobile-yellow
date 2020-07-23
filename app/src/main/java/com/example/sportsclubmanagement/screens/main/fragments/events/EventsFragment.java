@@ -27,6 +27,7 @@ public class EventsFragment extends Fragment implements EventAdapterListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //TODO: move in a function
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
 
         eventRecycler = rootView.findViewById(R.id.eventRecycler);

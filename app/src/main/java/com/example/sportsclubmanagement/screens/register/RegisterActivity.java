@@ -83,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void restUserRegister(){
+        //TODO: create method that handle this functionality
         String[] first_last = name.getText().toString().split(" ");
         String first ;
         String last;

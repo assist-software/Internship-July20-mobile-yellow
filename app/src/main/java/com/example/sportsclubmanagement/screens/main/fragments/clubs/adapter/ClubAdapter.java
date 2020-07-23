@@ -20,6 +20,12 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
     private ClubAdapterListener clubAdapterListener;
     private boolean hasBorder;
 
+    public ClubAdapter(List<ClubAdapterModel> clubList, ClubAdapterListener clubAdapterListener, boolean hasBorder) {
+        this.clubsList = clubList;
+        this.clubAdapterListener = clubAdapterListener;
+        this.hasBorder = hasBorder;
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView clubName;
         private TextView clubStatus;
@@ -54,12 +60,6 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
                 joinBtn.setBackgroundResource(0);
             }
         }
-    }
-
-    public ClubAdapter(List<ClubAdapterModel> clubList, ClubAdapterListener clubAdapterListener, boolean hasBorder) {
-        this.clubsList = clubList;
-        this.clubAdapterListener = clubAdapterListener;
-        this.hasBorder = hasBorder;
     }
 
     @Override

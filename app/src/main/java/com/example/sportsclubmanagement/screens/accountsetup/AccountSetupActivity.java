@@ -31,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AccountSetupActivity extends AppCompatActivity {
-
+    //TODO: make private
     Spinner primarySports, secondarySports;
     Button toHomeBtn;
     EditText height, weight, age;
@@ -163,7 +163,7 @@ public class AccountSetupActivity extends AppCompatActivity {
     }
 
     private void restAccountSetup() {
-        String gender = "M";
+        String gender;
         if (male.isChecked()) {
             gender = "M";
         } else {
@@ -191,6 +191,4 @@ public class AccountSetupActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

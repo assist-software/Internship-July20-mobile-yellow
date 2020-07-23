@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class WorkoutsFragment extends Fragment {
+    //TODO: make private
     RecyclerView workoutRecycler;
     workoutAdapter adapter;
     CardView todayWorkout;

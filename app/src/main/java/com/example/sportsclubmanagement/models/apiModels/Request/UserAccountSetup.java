@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class UserAccountSetup {
+    @SerializedName("name")
+    private String name="";
     @SerializedName("gender")
     public String gender;
     @SerializedName("age")
@@ -18,16 +20,6 @@ public class UserAccountSetup {
     public double weight;
     @SerializedName("avatar")
     public String avatar;
-
-    public UserAccountSetup(String gender, int age, String primarySport, String secondarySport, int height, double weight, String avatar) {
-        this.gender = gender;
-        this.age = age;
-        this.primarySport = primarySport;
-        this.secondarySport = secondarySport;
-        this.height = height;
-        this.weight = weight;
-        this.avatar = avatar;
-    }
 
     public UserAccountSetup(int age, String primarySport, String secondarySport, int height, double weight) {
         this.age = age;

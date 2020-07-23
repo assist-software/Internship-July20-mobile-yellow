@@ -34,6 +34,7 @@ import java.util.EventListener;
 import java.util.List;
 
 public class ClubDetailsActivity extends AppCompatActivity implements ParticipantAdapterListener, EventAdapterListener {
+    //TODO: make private fields
     RecyclerView eventsRecycler, membersRecyclerView;
     EventAdapter eventsAdapter;
     ParticipantAdapter membersAdapter;

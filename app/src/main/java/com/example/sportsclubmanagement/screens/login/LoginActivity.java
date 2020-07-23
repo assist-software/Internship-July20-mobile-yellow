@@ -24,14 +24,12 @@ import com.example.sportsclubmanagement.screens.register.RegisterActivity;
 import com.example.sportsclubmanagement.utils.Constants;
 import com.example.sportsclubmanagement.utils.Validations;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-
+    //TODO: make all fields private
     TextView regTxt;
     Button logBtn;
     EditText email, pass;
@@ -64,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
                     Token body_resp = response.body();
                     updatePref(body_resp);
                     checkIfUserHaveDetails();
-
                 } else {
                     Log.d("error message", response.message());
                     Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
@@ -110,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent_go_home = new Intent(LoginActivity.this, AccountSetupActivity.class);
             startActivity(intent_go_home);
         }
+        finish();
     }
 
     private boolean checkInputs() {
@@ -126,11 +124,10 @@ public class LoginActivity extends AppCompatActivity {
         if (!ok) {
             Toast.makeText(LoginActivity.this, errors, Toast.LENGTH_SHORT).show();
         }
-
         return ok;
     }
 
-    void initializeAllElement() {
+    private void initializeAllElement() {
         regTxt = findViewById(R.id.registerTxt);
         logBtn = findViewById(R.id.loginBtn);
         email = findViewById(R.id.inputEmail);
@@ -155,7 +152,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkInputs()) {
                     restUserLogin();
-                    finish();
                 }
             }
         });

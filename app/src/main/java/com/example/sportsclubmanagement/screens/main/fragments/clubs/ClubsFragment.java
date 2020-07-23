@@ -69,6 +69,7 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
         clubList.add(club);
         club = new ClubAdapterModel("Swimming", "Join");
         clubList.add(club);
+        //TODO:remove commented code
 //        for (int i = 0; i < 100; i++) {
 //            club = new ClubAdapterModel("Running", "Join");
 //            clubList.add(club);
