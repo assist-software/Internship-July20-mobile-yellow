@@ -1,5 +1,6 @@
 package com.example.sportsclubmanagement.screens.accountsetup;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,11 +21,16 @@ import androidx.core.content.ContextCompat;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserAccountSetup;
+import com.example.sportsclubmanagement.models.apiModels.Response.Sports;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.main.MainActivity;
+import com.example.sportsclubmanagement.screens.myprofile.MyProfileActivity;
 import com.example.sportsclubmanagement.utils.Constants;
 import com.example.sportsclubmanagement.utils.Validations;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,15 +43,35 @@ public class AccountSetupActivity extends AppCompatActivity {
     private RadioButton female, male;
     private APIInterface apiInterface;
     private SharedPreferences pref;
-    private ArrayAdapter<String> adapterSecondary, adapterPrimary;
     private AdapterView.OnItemSelectedListener spinnerListener;
+    private List<String> sports;
+    private List<String> prm, scd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setup);
         initializeComponents();
+        //get all sporst from server
+        getSports();
         initListeners();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initSpinnerListeners();
+    }
+
+    private void fillSpinners() {
+        //fill primary sports
+        prm.add("Primary sport");
+        prm.addAll(sports);
+        primarySports.setAdapter(populateSpinner(getApplicationContext(), prm));
+        //fill secondary spinner
+        scd.add("Secondary sport");
+        scd.addAll(sports);
+        secondarySports.setAdapter(populateSpinner(getApplicationContext(), scd));
     }
 
     private void initListeners() {
@@ -87,6 +113,51 @@ public class AccountSetupActivity extends AppCompatActivity {
                 && Validations.heightValidation(height.getText().toString()) && Validations.ageValidation(age.getText().toString()) && (female.isChecked() || male.isChecked());
     }
 
+    private void getSports() {
+        Call<List<Sports>> call = apiInterface.getSports();
+        call.enqueue(new Callback<List<Sports>>() {
+            @Override
+            public void onResponse(Call<List<Sports>> call, Response<List<Sports>> response) {
+                if (response.isSuccessful()) {
+                    for (Sports s : response.body()) {
+                        sports.add(s.getDescrioption());
+                    }
+                    fillSpinners();
+                    Log.d("SpinnerFill", "get sports successful");
+                } else {
+                    Log.d("SpinnerFill", "get sports error");
+                    Toast.makeText(AccountSetupActivity.this, "get sports error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Sports>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                call.cancel();
+            }
+        });
+    }
+
+    private void initSpinnerListeners() {
+        spinnerListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView tv = (TextView) view;
+                if (position == 0) {
+                    tv.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorLightGray));
+                } else {
+                    tv.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBlack));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
+        primarySports.setOnItemSelectedListener(spinnerListener);
+        secondarySports.setOnItemSelectedListener(spinnerListener);
+    }
+
     private void initializeComponents() {
         //initialize all
         primarySports = findViewById(R.id.spinnerPrimarySports);
@@ -99,72 +170,16 @@ public class AccountSetupActivity extends AppCompatActivity {
         male = findViewById(R.id.radioMale);
         pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
         apiInterface = APIClient.getClient().create(APIInterface.class);
-
-        //fill primary spinner
-        String[] primarySportsEnum = getResources().getStringArray(R.array.spinnerPrimarySports);
-        adapterPrimary = new ArrayAdapter(AccountSetupActivity.this, R.layout.support_simple_spinner_dropdown_item, primarySportsEnum) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == 0) {
-                    // Set the hint text color gray
-                    tv.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorLightGray));
-                } else {
-                    tv.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorBlack));
-                }
-                return view;
-            }
-
-        };
-        primarySports.setAdapter(adapterPrimary);
-
-        //fill secondary spinner
-        String[] secondarySportsEnum = getResources().getStringArray(R.array.spinnerSecondarySports);
-        adapterSecondary = new ArrayAdapter(AccountSetupActivity.this, R.layout.support_simple_spinner_dropdown_item, secondarySportsEnum) {
-            @Override
-            public boolean isEnabled(int position) {
-                if (position == 0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == 0) {
-                    // Set the hint text color gray
-                    tv.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorLightGray));
-                } else {
-                    tv.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorBlack));
-                }
-                return view;
-            }
-        };
-        secondarySports.setAdapter(adapterSecondary);
+        sports = new ArrayList<>();
+        prm = new ArrayList<>();
+        scd = new ArrayList<>();
     }
     private UserAccountSetup createEntity(){
         String gender;
         if (male.isChecked()) {
-            gender = "M";
+            gender = Constants.male;
         } else {
-            gender = "F";
+            gender = Constants.female;
         }
         return new UserAccountSetup(gender, Integer.parseInt(age.getText().toString()),
                 primarySports.getSelectedItem().toString(), secondarySports.getSelectedItem().toString(),
@@ -190,5 +205,34 @@ public class AccountSetupActivity extends AppCompatActivity {
                 call.cancel();
             }
         });
+    }
+
+    private ArrayAdapter<String> populateSpinner(Context context, final List<String> spinnerElements) {
+        final ArrayAdapter<String> adapterPrimary = new ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, spinnerElements) {
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0) {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                }
+                return true;
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if (position == 0) {
+                    // Set the hint text color gray
+                    tv.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorLightGray));
+                } else {
+                    tv.setTextColor(ContextCompat.getColor(this.getContext(), R.color.colorBlack));
+                }
+                return view;
+            }
+        };
+        return adapterPrimary;
     }
 }

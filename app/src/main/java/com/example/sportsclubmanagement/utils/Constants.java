@@ -3,6 +3,7 @@ package com.example.sportsclubmanagement.utils;
 public class Constants {
     public static final String TOKEN_SHARED_PREFERENCES = "TOKEN_SHARED_PREFERENCES"; //nume fisier cutoken
     public static final String TOKEN = "token"; //key for token string
+    public static final String AUTHORIZATION = "Authorization";
     public static final String CLUB_NAME = "CLUB_NAME";
     public static final int SPLASH_TIME_OUT = 1000;
     public static final int minAge = 12;
@@ -21,4 +22,7 @@ public class Constants {
     public static final int maxWorkoutCalories = 7000;
     public static final double minWorkoutAvSpeed = 5.00;
     public static final double maxWorkoutAvSpeed = 9.79;
+    public static final String male = "M";
+    public static final String female = "F";
+
 }
