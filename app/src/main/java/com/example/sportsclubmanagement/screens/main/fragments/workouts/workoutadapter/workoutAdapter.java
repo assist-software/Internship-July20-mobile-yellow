@@ -1,9 +1,7 @@
 package com.example.sportsclubmanagement.screens.main.fragments.workouts.workoutadapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.LinearGradient;
-import android.graphics.Paint;
 import android.graphics.Shader;
 import android.view.LayoutInflater;
 import android.view.View;

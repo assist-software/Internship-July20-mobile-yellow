@@ -1,17 +1,22 @@
 package com.example.sportsclubmanagement.rest;
 
+import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserAccountSetup;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserLogin;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserRegister;
 import com.example.sportsclubmanagement.models.apiModels.Response.Sports;
 import com.example.sportsclubmanagement.models.apiModels.Response.Token;
 import com.example.sportsclubmanagement.models.apiModels.Response.UserDetails;
+import com.example.sportsclubmanagement.utils.Constants;
+
+import java.util.List;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Body;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -20,6 +25,9 @@ import retrofit2.http.Path;
 public interface APIInterface {
     @POST("api/signin/")
     Call<Token> userLogin(@Body UserLogin userLogin);
+
+    @GET("api/club/")
+    Call<List<Clubs>> getAllClubs(@Header(Constants.TOKEN) String token);
 
     @POST("api/athlete/register/")
     Call<Void> userRegister(@Body UserRegister userRegister);

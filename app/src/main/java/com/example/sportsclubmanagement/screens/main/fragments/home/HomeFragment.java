@@ -4,17 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,29 +12,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.models.ClubAdapterModel;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
+import com.example.sportsclubmanagement.models.apiModels.ClubInfo;
+import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
 import com.example.sportsclubmanagement.models.apiModels.Response.UserDetails;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.clubdetails.ClubDetailsActivity;
 import com.example.sportsclubmanagement.screens.eventdetails.EventActivity;
-import com.example.sportsclubmanagement.screens.eventdetails.adapterParticipant.ParticipantAdapterListener;
-import com.example.sportsclubmanagement.screens.login.LoginActivity;
-import com.example.sportsclubmanagement.screens.main.MainActivity;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapter;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapterListener;
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventAdapter;
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventAdapterListener;
 import com.example.sportsclubmanagement.utils.Constants;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.prefs.Preferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,12 +46,12 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment implements ClubAdapterListener, EventAdapterListener {
     private Toolbar toolbar;
     private RecyclerView firstClubsRecyclerView, firstEventsRecyclerView, clubsRecyclerView, futureEventsRecyclerView;
-    EventAdapter firstEventAdapter, futureEventsAdapter;
-    ClubAdapter firstClubAdapter, clubAdapter;
-    TextView name;
-    APIInterface apiInterface;
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
+    private EventAdapter firstEventAdapter, futureEventsAdapter;
+    private ClubAdapter firstClubAdapter, clubAdapter;
+    private TextView name;
+    private APIInterface apiInterface;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,9 +74,6 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         pref = getContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         editor = pref.edit();
         name = view.findViewById(R.id.name_user);
-
-        SharedPreferences pref = getContext().getSharedPreferences(Constants.TOKEN, 0);
-        Toast.makeText(getContext(),pref.getString(Constants.TOKEN,null),Toast.LENGTH_SHORT).show();
 
         ImageView profilePicture = view.findViewById(R.id.home_profile_picture);
         Glide.with(HomeFragment.this).load(R.drawable.avatar_picture).apply(RequestOptions.circleCropTransform()).into(profilePicture);
@@ -163,10 +152,10 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         return mocks;
     }
 
-    private List<ClubAdapterModel> getClubList() {
-        List<ClubAdapterModel> mocks = new ArrayList<>();
+    private List<Clubs> getClubList() {
+        List<Clubs> mocks = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            mocks.add(new ClubAdapterModel("Running", "Join"));
+            mocks.add(new Clubs(new ClubInfo(1, "Running"), false, false, false));
         }
         return mocks;
     }

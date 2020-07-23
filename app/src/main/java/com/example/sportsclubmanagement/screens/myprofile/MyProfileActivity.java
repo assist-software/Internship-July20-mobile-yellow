@@ -44,19 +44,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyProfileActivity extends AppCompatActivity {
-    Toolbar profileBar;
-    Spinner primarySports, secondarySports;
-    AdapterView.OnItemSelectedListener spinnerListener;
-    TextView fullName;
-    EditText height, weight, age;
-    ImageView img_user;
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
-    UserDetails userDetails;
-    APIInterface apiInterface;
-    Button save_btn;
-    List<String> sports;
-    List<String> prm, scd;
+    private Toolbar profileBar;
+    private Spinner primarySports, secondarySports;
+    private AdapterView.OnItemSelectedListener spinnerListener;
+    private TextView fullName;
+    private EditText height, weight, age;
+    private ImageView img_user;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private UserDetails userDetails;
+    private APIInterface apiInterface;
+    private Button save_btn;
+    private List<String> sports;
+    private List<String> prm, scd;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -75,7 +75,6 @@ public class MyProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //fill spinners with sports
         //all listeners
         initSpinnerListeners();
     }

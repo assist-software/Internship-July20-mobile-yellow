@@ -1,9 +1,5 @@
 package com.example.sportsclubmanagement.screens.addworkouts;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -19,9 +15,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.screens.accountsetup.AccountSetupActivity;
-import com.example.sportsclubmanagement.screens.main.MainActivity;
 import com.example.sportsclubmanagement.utils.Validations;
 
 public class AddWorkoutsActivity extends AppCompatActivity {
@@ -37,7 +35,6 @@ public class AddWorkoutsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_workouts);
-
         initListener();
         initComponents();
     }
@@ -51,6 +48,7 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         avSpeed = findViewById(R.id.avspeed_editText);
         distance = findViewById(R.id.distance_editText);
         toolbar = findViewById(R.id.home_tool_bar);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); //remove the default title from the action bar
         toolbar.setTitle(R.string.workouts);

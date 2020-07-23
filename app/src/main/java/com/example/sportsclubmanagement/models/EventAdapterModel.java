@@ -1,17 +1,12 @@
 package com.example.sportsclubmanagement.models;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-
 import com.example.sportsclubmanagement.R;
-
-import java.util.Date;
 
 public class EventAdapterModel {
     private String title;
     private String location;
     private String dataEvent;
-    private static int imgId =R.drawable.img_event;
+    private static int imgId = R.drawable.img_event;
 
     public String getDataEvent() {
         return dataEvent;

@@ -1,15 +1,15 @@
 package com.example.sportsclubmanagement.screens.eventdetails;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.widget.TextView;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.ParticipantAdapterModel;
@@ -22,7 +22,6 @@ import java.util.List;
 public class EventActivity extends AppCompatActivity implements ParticipantAdapterListener {
     private Toolbar event_toolbar;
     private TextView title_event;
-
     private RecyclerView participantRecycle;
     private ParticipantAdapter participantAdapter;
 
@@ -30,7 +29,6 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-
         initComp();
     }
 
@@ -56,8 +54,8 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
         this.getSupportActionBar().setHomeAsUpIndicator(upArrow);
         //fill recycle
         participantRecycle = findViewById(R.id.participantsRecycler);
-        participantAdapter = new ParticipantAdapter(getMockedList(),getApplicationContext(), this, true);
-        participantRecycle.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
+        participantAdapter = new ParticipantAdapter(getMockedList(), getApplicationContext(), this, true);
+        participantRecycle.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         participantRecycle.setAdapter(participantAdapter);
     }
 

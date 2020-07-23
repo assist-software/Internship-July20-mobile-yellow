@@ -71,13 +71,10 @@ public class ParticipantAdapter extends RecyclerView.Adapter<ParticipantAdapter.
                 Glide.with(ctx).load((R.drawable.unchecked_part)).into(statusChecked);
             }
 
-            if(showButton){
+            if (showButton) {
                 statusChecked.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 statusChecked.setVisibility(View.GONE);
-                //statusChecked.setVisibility(View.INVISIBLE);
-                //statusChecked.setClickable(false);
             }
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override

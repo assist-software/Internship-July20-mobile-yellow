@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserAccountSetup {
     @SerializedName("name")
-    private String name="";
+    private String name = "";
     @SerializedName("gender")
     public String gender;
     @SerializedName("age")

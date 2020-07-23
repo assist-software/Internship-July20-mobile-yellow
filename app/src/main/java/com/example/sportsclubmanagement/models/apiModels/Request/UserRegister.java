@@ -10,7 +10,7 @@ public class UserRegister {
     @SerializedName("email")
     public String email;
     @SerializedName("password")
-    public  String password;
+    public String password;
 
     public UserRegister(String first, String last, String email, String password) {
         this.first = first;

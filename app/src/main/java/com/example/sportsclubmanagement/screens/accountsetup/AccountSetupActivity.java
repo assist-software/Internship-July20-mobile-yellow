@@ -1,8 +1,5 @@
 package com.example.sportsclubmanagement.screens.accountsetup;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,6 +15,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserAccountSetup;
 import com.example.sportsclubmanagement.rest.APIClient;
@@ -31,21 +31,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AccountSetupActivity extends AppCompatActivity {
-    //TODO: make private
-    Spinner primarySports, secondarySports;
-    Button toHomeBtn;
-    EditText height, weight, age;
-    RadioButton female, male;
-    APIInterface apiInterface;
-    SharedPreferences pref;
-    ArrayAdapter<String> adapterSecondary, adapterPrimary;
-    AdapterView.OnItemSelectedListener spinnerListener;
+    private Spinner primarySports, secondarySports;
+    private Button toHomeBtn;
+    private EditText height, weight, age;
+    private RadioButton female, male;
+    private APIInterface apiInterface;
+    private SharedPreferences pref;
+    private ArrayAdapter<String> adapterSecondary, adapterPrimary;
+    private AdapterView.OnItemSelectedListener spinnerListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setup);
-
         initializeComponents();
         initListeners();
     }
@@ -56,7 +54,7 @@ public class AccountSetupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent_home = new Intent(AccountSetupActivity.this, MainActivity.class);
                 if (checkInfo()) {
-                    restAccountSetup();
+                    restAccountSetup(createEntity());
                     startActivity(intent_home);
                     finish();
                 } else {
@@ -161,17 +159,19 @@ public class AccountSetupActivity extends AppCompatActivity {
         };
         secondarySports.setAdapter(adapterSecondary);
     }
-
-    private void restAccountSetup() {
+    private UserAccountSetup createEntity(){
         String gender;
         if (male.isChecked()) {
             gender = "M";
         } else {
             gender = "F";
         }
-        UserAccountSetup userAccountSetup = new UserAccountSetup(gender, Integer.parseInt(age.getText().toString()),
+        return new UserAccountSetup(gender, Integer.parseInt(age.getText().toString()),
                 primarySports.getSelectedItem().toString(), secondarySports.getSelectedItem().toString(),
                 Integer.parseInt(height.getText().toString()), Double.parseDouble(weight.getText().toString()));
+    }
+    private void restAccountSetup(UserAccountSetup userAccountSetup) {
+
         Call<Void> call = apiInterface.userAccountSetup(pref.getString("token", "nimic"), userAccountSetup, pref.getInt("id", 0));
         call.enqueue(new Callback<Void>() {
             @Override

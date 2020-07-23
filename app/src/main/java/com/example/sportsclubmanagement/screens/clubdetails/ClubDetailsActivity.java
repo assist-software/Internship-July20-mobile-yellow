@@ -1,51 +1,41 @@
 package com.example.sportsclubmanagement.screens.clubdetails;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.models.ClubAdapterModel;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
 import com.example.sportsclubmanagement.models.ParticipantAdapterModel;
 import com.example.sportsclubmanagement.screens.eventdetails.adapterParticipant.ParticipantAdapter;
 import com.example.sportsclubmanagement.screens.eventdetails.adapterParticipant.ParticipantAdapterListener;
-import com.example.sportsclubmanagement.screens.main.MainActivity;
-import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapter;
-import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapterListener;
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventAdapter;
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventAdapterListener;
-import com.example.sportsclubmanagement.screens.myprofile.MyProfileActivity;
 import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 public class ClubDetailsActivity extends AppCompatActivity implements ParticipantAdapterListener, EventAdapterListener {
-    //TODO: make private fields
-    RecyclerView eventsRecycler, membersRecyclerView;
-    EventAdapter eventsAdapter;
-    ParticipantAdapter membersAdapter;
+    private RecyclerView eventsRecycler, membersRecyclerView;
+    private EventAdapter eventsAdapter;
+    private ParticipantAdapter membersAdapter;
     private List<ParticipantAdapterModel> memberList = new ArrayList<>();
-    Toolbar toolbar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_details);
-
         initComponents();
     }
 
@@ -65,7 +55,7 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
 
         eventsRecycler = findViewById(R.id.events_recyclerView);
         eventsAdapter = new EventAdapter(getMockedList(), this, this);
-        eventsRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
+        eventsRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
         eventsRecycler.setAdapter(eventsAdapter);
 
         //add back button to toolbar

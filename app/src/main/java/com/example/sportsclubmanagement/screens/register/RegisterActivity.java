@@ -1,7 +1,5 @@
 package com.example.sportsclubmanagement.screens.register;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,14 +10,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserRegister;
-import com.example.sportsclubmanagement.models.apiModels.Response.Token;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
-import com.example.sportsclubmanagement.screens.accountsetup.AccountSetupActivity;
 import com.example.sportsclubmanagement.screens.login.LoginActivity;
-import com.example.sportsclubmanagement.screens.main.MainActivity;
 import com.example.sportsclubmanagement.utils.Validations;
 
 import retrofit2.Call;
@@ -29,7 +26,7 @@ import retrofit2.Response;
 public class RegisterActivity extends AppCompatActivity {
     TextView loginTextView;
     Button registerBtn;
-    EditText name,email,pass,confirmPass;
+    EditText name, email, pass, confirmPass;
     APIInterface apiInterface;
 
     @Override
@@ -66,12 +63,12 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent registerIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                if(checkInfo()){
-                    restUserRegister();
-                startActivity(registerIntent);
-                finish();
-                }else {
-                    Toast.makeText(RegisterActivity.this,"Invalid data",Toast.LENGTH_SHORT).show();
+                if (checkInfo()) {
+                    restUserRegister(createEntity());
+                    startActivity(registerIntent);
+                    finish();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Invalid data", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -79,22 +76,24 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean checkInfo() {
         return Validations.nameValidation(name.getText().toString()) && Validations.emailValidation(email.getText().toString()) &&
-                Validations.passwordValidation(pass.getText().toString()) && Validations.confirmPasswordValidation(pass.getText().toString(),confirmPass.getText().toString());
+                Validations.passwordValidation(pass.getText().toString()) && Validations.confirmPasswordValidation(pass.getText().toString(), confirmPass.getText().toString());
     }
 
-    private void restUserRegister(){
-        //TODO: create method that handle this functionality
+    private UserRegister createEntity() {
         String[] first_last = name.getText().toString().split(" ");
-        String first ;
+        String first;
         String last;
-        if(first_last.length==3){
-            first = first_last[0]+" "+first_last[1];
+        if (first_last.length == 3) {
+            first = first_last[0] + " " + first_last[1];
             last = first_last[2];
-        }else{
+        } else {
             first = first_last[0];
             last = first_last[1];
         }
-        UserRegister userRegister = new UserRegister(first,last,email.getText().toString(),pass.getText().toString());
+        return new UserRegister(first, last, email.getText().toString(), pass.getText().toString());
+    }
+
+    private void restUserRegister(UserRegister userRegister) {
         Call<Void> call = apiInterface.userRegister(userRegister);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -109,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),t.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });

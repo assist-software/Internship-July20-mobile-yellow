@@ -1,7 +1,5 @@
 package com.example.sportsclubmanagement.screens.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserLogin;
@@ -29,13 +29,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    //TODO: make all fields private
-    TextView regTxt;
-    Button logBtn;
-    EditText email, pass;
-    APIInterface apiInterface;
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
+    private TextView regTxt;
+    private Button logBtn;
+    private EditText email, pass;
+    private APIInterface apiInterface;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,29 +69,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
-                call.cancel();
-            }
-        });
-    }
-
-    private void checkIfUserHaveDetails() {
-        Call<UserDetails> call = apiInterface.userDetails(pref.getString("token", null), pref.getInt("id", 0));
-        call.enqueue(new Callback<UserDetails>() {
-            @Override
-            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
-                if (response.isSuccessful()) {
-                    Log.d("TAG", response.code() + "");
-                    UserDetails resp = response.body();
-                    redirect(resp.getAge() != 0);
-                } else {
-                    Log.d("error message", response.message());
-                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<UserDetails> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
@@ -153,6 +129,29 @@ public class LoginActivity extends AppCompatActivity {
                 if (checkInputs()) {
                     restUserLogin();
                 }
+            }
+        });
+    }
+
+    private void checkIfUserHaveDetails() {
+        Call<UserDetails> call = apiInterface.userDetails(pref.getString("token", null), pref.getInt("id", 0));
+        call.enqueue(new Callback<UserDetails>() {
+            @Override
+            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
+                if (response.isSuccessful()) {
+                    Log.d("TAG", response.code() + "");
+                    UserDetails resp = response.body();
+                    redirect(resp.getAge() != 0);
+                } else {
+                    Log.d("error message", response.message());
+                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDetails> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                call.cancel();
             }
         });
     }
