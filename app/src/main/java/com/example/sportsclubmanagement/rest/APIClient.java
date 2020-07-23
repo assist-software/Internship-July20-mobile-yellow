@@ -16,11 +16,10 @@ public class APIClient {
 
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.149.50:8001/") //Se modifica cu endpoint de pe server
+                .baseUrl("http://192.168.100.228:8001/") //Se modifica cu endpoint de pe server
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
-
 
         return retrofit;
     }

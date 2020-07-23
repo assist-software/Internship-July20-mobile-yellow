@@ -63,7 +63,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             Glide.with(ctx).load(R.drawable.img_event).centerCrop().into(img);
             title.setText(eventAdapterModel.getTitle());
             loc.setText(eventAdapterModel.getLocation());
-            data.setText(eventAdapterModel.getDataEvent());
+            String string = String.valueOf(eventAdapterModel.getDataEvent());
+            data.setText(string);
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

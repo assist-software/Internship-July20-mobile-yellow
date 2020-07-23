@@ -1,10 +1,16 @@
 package com.example.sportsclubmanagement.rest;
 
+import com.example.sportsclubmanagement.models.EventAdapterModel;
+import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
+import com.example.sportsclubmanagement.models.apiModels.Response.Events;
 import com.example.sportsclubmanagement.models.apiModels.Response.Token;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface APIInterface {
@@ -16,6 +22,13 @@ public interface APIInterface {
     @POST("api/athlete/register/")
     Call<Void> user_register(@Field("first_name")String first,@Field("last_name")String last,
                        @Field("email")String email,@Field("password")String password);
+
+    @GET("api/events")
+    Call<List<Events>> getAllEvents();
+
+    @GET("club")
+    Call<List<Clubs>> getAllClubs();
+
     /*
     @GET("/api/users?")
     abstract public Call<UserList> doGetUserList(@Query("page") String page);

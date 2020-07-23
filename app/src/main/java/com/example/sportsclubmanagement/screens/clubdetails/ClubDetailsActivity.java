@@ -106,9 +106,9 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
 
     private List<EventAdapterModel> getMockedList() {
         List<EventAdapterModel> mocks = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            mocks.add(new EventAdapterModel("title test", "loc test", "12.06.1998"));
-        }
+//        for (int i = 0; i < 5; i++) {
+//            mocks.add(new EventAdapterModel("title test", "loc test", "12.06.1998"));
+//        }
         return mocks;
     }
 }

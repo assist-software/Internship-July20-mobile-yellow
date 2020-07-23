@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.ClubAdapterModel;
+import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> {
 
-    private List<ClubAdapterModel> clubsList;
+    private List<Clubs> clubsList;
     private ClubAdapterListener clubAdapterListener;
     private boolean hasBorder;
 
@@ -34,20 +35,20 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
             clubItem = view.findViewById(R.id.club_item);
         }
 
-        public void bind(final ClubAdapterModel clubAdapterModel) {
-            clubName.setText(clubAdapterModel.getClubName());
+        public void bind(final Clubs clubAdapterModel) {
+            clubName.setText(clubAdapterModel.getName());
             clubStatus.setText(clubAdapterModel.getClubStats());
             clubItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    clubAdapterListener.onClubClick(clubAdapterModel.getClubName());
+                    clubAdapterListener.onClubClick(clubAdapterModel.getName());
                 }
             });
             if (hasBorder) {
                 joinBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        clubAdapterListener.onJoinClick(clubAdapterModel.getClubName());
+                        clubAdapterListener.onJoinClick(clubAdapterModel.getName());
                     }
                 });
             } else {
@@ -56,7 +57,7 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
         }
     }
 
-    public ClubAdapter(List<ClubAdapterModel> clubList, ClubAdapterListener clubAdapterListener, boolean hasBorder) {
+    public ClubAdapter(List<Clubs> clubList, ClubAdapterListener clubAdapterListener, boolean hasBorder) {
         this.clubsList = clubList;
         this.clubAdapterListener = clubAdapterListener;
         this.hasBorder = hasBorder;

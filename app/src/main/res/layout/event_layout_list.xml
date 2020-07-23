@@ -81,6 +81,7 @@
             android:textColor="@color/colorLightGrayGreen"
             android:textSize="@dimen/text_14sp" />
     </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
