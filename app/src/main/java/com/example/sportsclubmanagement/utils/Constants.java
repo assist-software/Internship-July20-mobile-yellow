@@ -24,5 +24,7 @@ public class Constants {
     public static final double maxWorkoutAvSpeed = 9.79;
     public static final String male = "M";
     public static final String female = "F";
+    public static final String Home_get_list_accpet="List of events was accepted";
+    public static final String Home_get_list_error="Fail gave all events";
 
 }

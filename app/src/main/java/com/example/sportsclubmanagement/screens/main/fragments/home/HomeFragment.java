@@ -29,6 +29,7 @@ import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.clubdetails.ClubDetailsActivity;
 import com.example.sportsclubmanagement.screens.eventdetails.EventActivity;
+import com.example.sportsclubmanagement.screens.main.fragments.clubs.ClubsFragment;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapter;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.adapter.ClubAdapterListener;
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventAdapter;
@@ -129,10 +130,10 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                         future.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), true, true));
                     }
                     populateRecyclerEvents();
-                    Log.d("Hom", "List of events was accepted");
+                    Log.d("Hom", Constants.Home_get_list_accpet);
                 } else {
                     Log.d("Home", "Error");
-                    Toast.makeText(getContext(), "Fail gave all events", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), Constants.Home_get_list_error, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -146,14 +147,9 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
 
     private void populateRecyclerEvents() {
         //first evetns
-        firstEventAdapter = new EventAdapter(events, this.getContext(), this);
-        firstEventsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        firstEventsRecyclerView.setAdapter(firstEventAdapter);
-
+        initAdapter(events,firstEventAdapter,firstEventsRecyclerView);
         //future events
-        futureEventsAdapter = new EventAdapter(future, this.getContext(), this);
-        futureEventsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        futureEventsRecyclerView.setAdapter(futureEventsAdapter);
+        initAdapter(future,futureEventsAdapter,futureEventsRecyclerView);
     }
 
     @Override
@@ -182,5 +178,11 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
             mocks.add(new Clubs(new ClubInfo(1, "Running"), false, false, false));
         }
         return mocks;
+    }
+
+    private void initAdapter(List<EventAdapterModel> list, EventAdapter adapter, RecyclerView recyclerView) {
+        adapter = new EventAdapter(list, HomeFragment.this.getContext(),this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
     }
 }
