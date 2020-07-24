@@ -4,9 +4,12 @@ import com.example.sportsclubmanagement.models.apiModels.Request.UserAccountSetu
 import com.example.sportsclubmanagement.models.apiModels.Request.UserLogin;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserRegister;
 import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
+import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
+import com.example.sportsclubmanagement.models.apiModels.Response.EventsAvailable;
 import com.example.sportsclubmanagement.models.apiModels.Response.Sports;
 import com.example.sportsclubmanagement.models.apiModels.Response.Token;
 import com.example.sportsclubmanagement.models.apiModels.Response.UserDetails;
+import com.example.sportsclubmanagement.models.apiModels.Response.WorkoutsDetails;
 import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.List;
@@ -37,4 +40,13 @@ public interface APIInterface {
 
     @GET("/api/sports/")
     Call<List<Sports>> getSports();
+
+    @GET("/api/evetdetails{id}/")
+    Call<EventDetails> getEventDetails(@Header(Constants.AUTHORIZATION) String token, @Path("id") int eventId);
+
+    @GET("/api/event/view/")
+    Call<List<EventsAvailable>> getEvents(@Header(Constants.AUTHORIZATION) String token);
+
+    @GET("/api/workouts{id}/")
+    Call<List<WorkoutsDetails>> getAllWorkout(@Header(Constants.AUTHORIZATION) String token);
 }

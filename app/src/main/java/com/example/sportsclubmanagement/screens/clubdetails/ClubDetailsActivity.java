@@ -23,6 +23,7 @@ import com.example.sportsclubmanagement.screens.main.fragments.events.EventAdapt
 import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ClubDetailsActivity extends AppCompatActivity implements ParticipantAdapterListener, EventAdapterListener {
@@ -98,7 +99,7 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
     private List<EventAdapterModel> getMockedList() {
         List<EventAdapterModel> mocks = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            mocks.add(new EventAdapterModel("title test", "loc test", "12.06.1998"));
+            mocks.add(new EventAdapterModel(1,"title test", "loc test", new Date(),false,false));
         }
         return mocks;
     }

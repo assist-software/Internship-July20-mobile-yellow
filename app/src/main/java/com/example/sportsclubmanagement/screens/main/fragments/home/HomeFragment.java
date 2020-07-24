@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +23,7 @@ import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
 import com.example.sportsclubmanagement.models.apiModels.ClubInfo;
 import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
+import com.example.sportsclubmanagement.models.apiModels.Response.EventsAvailable;
 import com.example.sportsclubmanagement.models.apiModels.Response.UserDetails;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
@@ -52,6 +51,8 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
     private APIInterface apiInterface;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+    private List<EventAdapterModel> events;
+    private List<EventAdapterModel> future;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,9 +64,8 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initComponents(view);
+    public void onResume() {
+        super.onResume();
     }
 
     private void initComponents(View view) {
@@ -74,7 +74,8 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         pref = getContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         editor = pref.edit();
         name = view.findViewById(R.id.name_user);
-
+        events = new ArrayList<>();
+        future = new ArrayList<>();
         ImageView profilePicture = view.findViewById(R.id.home_profile_picture);
         Glide.with(HomeFragment.this).load(R.drawable.avatar_picture).apply(RequestOptions.circleCropTransform()).into(profilePicture);
 
@@ -83,22 +84,15 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         firstClubsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         firstClubsRecyclerView.setAdapter(firstClubAdapter);
 
-        firstEventsRecyclerView = view.findViewById(R.id.home_joinEvent_recyclerView);
-        firstEventAdapter = new EventAdapter(getMockedList(), this.getContext(), this);
-        firstEventsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-        firstEventsRecyclerView.setAdapter(firstEventAdapter);
-
         clubsRecyclerView = view.findViewById(R.id.home_club_recyclerView);
         clubAdapter = new ClubAdapter(getClubList(), this, true);
         clubsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         clubsRecyclerView.setAdapter(clubAdapter);
 
+        firstEventsRecyclerView = view.findViewById(R.id.home_joinEvent_recyclerView);
         futureEventsRecyclerView = view.findViewById(R.id.home_futureEvents_recyclerView);
-        futureEventsAdapter = new EventAdapter(getMockedList(), this.getContext(), this);
-        futureEventsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
-        futureEventsRecyclerView.setAdapter(futureEventsAdapter);
-
         showUserInfo();
+        getAllEvents();
     }
 
     private void showUserInfo() {
@@ -109,7 +103,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                 if (response.isSuccessful()) {
                     Log.d("Hom", "The information was accepted");
                     UserDetails resp = response.body();
-                    name.setText(resp.getFirstName()+" "+resp.getLastName());
+                    name.setText(resp.getFirstName() + " " + resp.getLastName());
                 } else {
                     Log.d("Home", "Error");
                     Toast.makeText(getContext(), "Fail gave info", Toast.LENGTH_SHORT).show();
@@ -122,6 +116,44 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                 call.cancel();
             }
         });
+    }
+
+    private void getAllEvents() {
+        Call<List<EventsAvailable>> call = apiInterface.getEvents(pref.getString("token", null));
+        call.enqueue(new Callback<List<EventsAvailable>>() {
+            @Override
+            public void onResponse(Call<List<EventsAvailable>> call, Response<List<EventsAvailable>> response) {
+                if (response.isSuccessful()) {
+                    for (EventsAvailable event : response.body()) {
+                        events.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), true, false));
+                        future.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), true, true));
+                    }
+                    populateRecyclerEvents();
+                    Log.d("Hom", "List of events was accepted");
+                } else {
+                    Log.d("Home", "Error");
+                    Toast.makeText(getContext(), "Fail gave all events", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EventsAvailable>> call, Throwable t) {
+                Toast.makeText(getContext(), t.toString(), Toast.LENGTH_LONG).show();
+                call.cancel();
+            }
+        });
+    }
+
+    private void populateRecyclerEvents() {
+        //first evetns
+        firstEventAdapter = new EventAdapter(events, this.getContext(), this);
+        firstEventsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        firstEventsRecyclerView.setAdapter(firstEventAdapter);
+
+        //future events
+        futureEventsAdapter = new EventAdapter(future, this.getContext(), this);
+        futureEventsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        futureEventsRecyclerView.setAdapter(futureEventsAdapter);
     }
 
     @Override
@@ -140,16 +172,8 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
     public void onEventClick(EventAdapterModel event) {
         String event_id = "test id";
         Intent i = new Intent(getContext(), EventActivity.class);
-        i.putExtra("event_id",event_id);
+        i.putExtra("event_id", event_id);
         startActivity(i);
-    }
-
-    private List<EventAdapterModel> getMockedList() {
-        List<EventAdapterModel> mocks = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            mocks.add(new EventAdapterModel("title test", "loc test", "12.06.1998"));
-        }
-        return mocks;
     }
 
     private List<Clubs> getClubList() {
