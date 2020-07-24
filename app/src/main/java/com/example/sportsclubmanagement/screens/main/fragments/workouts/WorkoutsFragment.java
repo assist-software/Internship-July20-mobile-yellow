@@ -1,6 +1,8 @@
 package com.example.sportsclubmanagement.screens.main.fragments.workouts;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.WorkoutAdapterModel;
+import com.example.sportsclubmanagement.rest.APIClient;
+import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.addworkouts.AddWorkoutsActivity;
 import com.example.sportsclubmanagement.screens.main.fragments.workouts.workoutadapter.workoutAdapter;
+import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +33,9 @@ public class WorkoutsFragment extends Fragment {
     private workoutAdapter adapter;
     private CardView todayWorkout;
     private Button addWorkoutBtn;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private APIInterface apiInterface;
 
     @Nullable
     @Override
@@ -52,6 +60,10 @@ public class WorkoutsFragment extends Fragment {
         adapter = new workoutAdapter(getMockedList(), getActivity().getApplicationContext());
         workoutRecycler.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
         workoutRecycler.setAdapter(adapter);
+
+        pref = getContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        editor = pref.edit();
+        apiInterface = APIClient.getClient().create(APIInterface.class);
     }
 
     private void initListeners() {

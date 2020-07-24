@@ -3,6 +3,8 @@ package com.example.sportsclubmanagement.models.apiModels.Response;
 import com.google.gson.annotations.SerializedName;
 
 public class UserDetails {
+    @SerializedName("id")
+    private int userId;
     @SerializedName("first_name")
     private String firstName;
     @SerializedName("last_name")
@@ -21,6 +23,31 @@ public class UserDetails {
     private double weight;
     @SerializedName("avatar")
     private String avatar;
+
+    public UserDetails(int userId, String firstName, String lastName, String gender, int age, String primarySport, String secondarySport, int height, double weight, String avatar) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.age = age;
+        this.primarySport = primarySport;
+        this.secondarySport = secondarySport;
+        this.height = height;
+        this.weight = weight;
+        this.avatar = avatar;
+    }
+
+    public UserDetails(int userId, String firstName, String lastName, String gender, int age, String primarySport, String secondarySport, int height, double weight) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.age = age;
+        this.primarySport = primarySport;
+        this.secondarySport = secondarySport;
+        this.height = height;
+        this.weight = weight;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -92,28 +119,5 @@ public class UserDetails {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public UserDetails(String firstName, String lastName, String gender, int age, String primarySport, String secondarySport, int height, double weight, String avatar) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.age = age;
-        this.primarySport = primarySport;
-        this.secondarySport = secondarySport;
-        this.height = height;
-        this.weight = weight;
-        this.avatar = avatar;
-    }
-
-    public UserDetails(String firstName, String lastName, String gender, int age, String primarySport, String secondarySport, int height, double weight) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.age = age;
-        this.primarySport = primarySport;
-        this.secondarySport = secondarySport;
-        this.height = height;
-        this.weight = weight;
     }
 }

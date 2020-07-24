@@ -2,17 +2,30 @@ package com.example.sportsclubmanagement.models;
 
 import com.example.sportsclubmanagement.R;
 
+import java.util.Date;
+
 public class EventAdapterModel {
+    private int id;
     private String title;
     private String location;
-    private String dataEvent;
+    private Date dataEvent;
     private static int imgId = R.drawable.img_event;
+    private boolean visibleBtn ;
+    private boolean upPositionBtn;
 
-    public String getDataEvent() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getDataEvent() {
         return dataEvent;
     }
 
-    public void setDataEvent(String dataEvent) {
+    public void setDataEvent(Date dataEvent) {
         this.dataEvent = dataEvent;
     }
 
@@ -40,9 +53,28 @@ public class EventAdapterModel {
         this.location = location;
     }
 
-    public EventAdapterModel(String title, String location, String dataEvent) {
+    public boolean isVisibleBtn() {
+        return visibleBtn;
+    }
+
+    public void setVisibleBtn(boolean visibleBtn) {
+        this.visibleBtn = visibleBtn;
+    }
+
+    public boolean isUpPositionBtn() {
+        return upPositionBtn;
+    }
+
+    public void setUpPositionBtn(boolean upPositionBtn) {
+        this.upPositionBtn = upPositionBtn;
+    }
+
+    public EventAdapterModel(int id, String title, String location, Date dataEvent, boolean visibleBtn, boolean upPositionBtn) {
+        this.id = id;
         this.title = title;
         this.location = location;
         this.dataEvent = dataEvent;
+        this.visibleBtn = visibleBtn;
+        this.upPositionBtn = upPositionBtn;
     }
 }

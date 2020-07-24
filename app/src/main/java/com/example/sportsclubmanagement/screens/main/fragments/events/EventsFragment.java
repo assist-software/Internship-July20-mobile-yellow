@@ -16,6 +16,7 @@ import com.example.sportsclubmanagement.models.EventAdapterModel;
 import com.example.sportsclubmanagement.screens.eventdetails.EventActivity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EventsFragment extends Fragment implements EventAdapterListener {
@@ -51,16 +52,15 @@ public class EventsFragment extends Fragment implements EventAdapterListener {
 
     @Override
     public void onEventClick(EventAdapterModel event) {
-        String event_id = "test id";
         Intent i = new Intent(getContext(), EventActivity.class);
-        i.putExtra("event_id", event_id);
+        i.putExtra("eventId", event.getId());
         startActivity(i);
     }
 
     private List<EventAdapterModel> getMockedList() {
         List<EventAdapterModel> mocks = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            mocks.add(new EventAdapterModel("title test", "loc test", "12.06.1998"));
+            mocks.add(new EventAdapterModel(1,"title test", "loc test", new Date(),false,false));
         }
         return mocks;
     }

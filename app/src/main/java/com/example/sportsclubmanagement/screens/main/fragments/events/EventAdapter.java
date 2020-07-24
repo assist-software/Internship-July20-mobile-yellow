@@ -1,9 +1,13 @@
 package com.example.sportsclubmanagement.screens.main.fragments.events;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder> {
@@ -49,6 +55,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
         private TextView title, loc, data;
         private ImageView img;
         private LinearLayout layout;
+        private Button upBtn;
+        private Button downBtn;
 
         public MyViewHolder(View view) {
             super(view);
@@ -57,19 +65,35 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             loc = (TextView) view.findViewById(R.id.card_location);
             data = (TextView) view.findViewById(R.id.card_date);
             layout = view.findViewById(R.id.linear_card);
+            upBtn = view.findViewById(R.id.join_event_btn_up);
+            downBtn = view.findViewById(R.id.joinEvent_btn_down);
         }
 
         public void bind(final EventAdapterModel eventAdapterModel) {
             Glide.with(ctx).load(R.drawable.img_event).centerCrop().into(img);
             title.setText(eventAdapterModel.getTitle());
             loc.setText(eventAdapterModel.getLocation());
-            data.setText(eventAdapterModel.getDataEvent());
+            SimpleDateFormat DateFor = new SimpleDateFormat("dd.MM.yyyy");
+            data.setText(DateFor.format(eventAdapterModel.getDataEvent()));
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onEventClick(eventAdapterModel);
                 }
             });
+            if(eventAdapterModel.isVisibleBtn()){
+                if(eventAdapterModel.isUpPositionBtn()){
+                    downBtn.setVisibility(View.GONE);
+                }else{
+                    upBtn.setVisibility(View.GONE);
+                    img.getLayoutParams().width= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 350, ctx.getResources().getDisplayMetrics());
+                    img.getLayoutParams().height= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180, ctx.getResources().getDisplayMetrics());
+                    img.requestLayout();
+                }
+            }else{
+                downBtn.setVisibility(View.GONE);
+                upBtn.setVisibility(View.GONE);
+            }
         }
     }
 }

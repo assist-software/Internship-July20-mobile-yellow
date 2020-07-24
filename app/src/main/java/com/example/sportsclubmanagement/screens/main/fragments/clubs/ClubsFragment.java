@@ -2,6 +2,7 @@ package com.example.sportsclubmanagement.screens.main.fragments.clubs;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +60,7 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
     private void requestClubs() {
         Call<List<Clubs>> call = apiInterface.getAllClubs(pref.getString(Constants.TOKEN, null));
         call.enqueue(new Callback<List<Clubs>>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(Call<List<Clubs>> call, Response<List<Clubs>> response) {
                 if (response.isSuccessful()) {
