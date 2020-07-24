@@ -29,6 +29,12 @@ public interface APIInterface {
     @GET("api/club/")
     Call<List<Clubs>> getAllClubs(@Header(Constants.AUTHORIZATION) String token);
 
+    @GET("api/club/")
+    Call<String> getAllClubsTest(@Header(Constants.AUTHORIZATION) String token);
+
+    @POST("api/club/{id}/join/")
+    Call<Void> joinClub(@Header(Constants.AUTHORIZATION) String token, @Path("id") int club_id);
+
     @POST("api/athlete/register/")
     Call<Void> userRegister(@Body UserRegister userRegister);
 
