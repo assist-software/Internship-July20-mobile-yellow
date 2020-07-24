@@ -6,9 +6,15 @@ import com.google.gson.annotations.SerializedName;
 public class Clubs {
     @SerializedName("id_club")
     private ClubInfo clubInfo;
+    @SerializedName("is_invited")
     private boolean isInvited;
+    @SerializedName("is_requested")
     private boolean isRequested;
+    @SerializedName("is_member")
     private boolean isMember;
+
+    public Clubs() {
+    }
 
     public Clubs(ClubInfo clubInfo, boolean isInvited, boolean isRequested, boolean isMember) {
         this.clubInfo = clubInfo;
