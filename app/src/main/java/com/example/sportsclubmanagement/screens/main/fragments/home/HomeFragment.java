@@ -125,7 +125,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
     }
 
     @Override
-    public void onJoinClick(String clubName) {
+    public void onJoinClick(String clubName, int clubId) {
         Toast.makeText(this.getContext(), clubName, Toast.LENGTH_SHORT).show();
     }
 

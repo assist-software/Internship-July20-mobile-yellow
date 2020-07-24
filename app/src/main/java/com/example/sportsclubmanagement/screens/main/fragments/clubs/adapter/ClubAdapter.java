@@ -79,10 +79,17 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
                 joinBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        clubAdapterListener.onJoinClick(clubAdapterModel.getClubInfo().getName());
+                        clubAdapterListener.onJoinClick(clubAdapterModel.getClubInfo().getName(), clubAdapterModel.getClubInfo().getId());
                     }
                 });
             } else {
+                if(clubAdapterModel.isRequested()){
+                    clubStatus.setText("Pending");
+                }
+                if(clubAdapterModel.isMember())
+                {
+                    clubStatus.setText("Joined");
+                }
                 joinBtn.setBackgroundResource(0);
             }
         }
