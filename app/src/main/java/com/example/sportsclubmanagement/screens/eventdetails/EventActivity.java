@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +41,7 @@ import retrofit2.Response;
 
 public class EventActivity extends AppCompatActivity implements ParticipantAdapterListener {
     private Toolbar event_toolbar;
-    private TextView title_event,dateEvent,timeEvent,locationEvent,descriptionEvent,titleTextEvent;
+    private TextView title_event,dateEvent,timeEvent,locationEvent,descriptionEvent,titleTextEvent, textHintParticipations, noInformationTextView;
     private ImageView imgEvent;
     private RecyclerView participantRecycle;
     private ParticipantAdapter participantAdapter;
@@ -99,6 +100,11 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
             participantAdapter = new ParticipantAdapter(new ArrayList<>(participantResult.keySet()), getApplicationContext(), this, true);
             participantRecycle.setAdapter(participantAdapter);
         }
+        else {
+            participantRecycle.setVisibility(View.GONE);
+            textHintParticipations.setVisibility(View.GONE);
+            noInformationTextView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -132,6 +138,7 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
         locationEvent = findViewById(R.id.text_loc);
         imgEvent = findViewById(R.id.img_event);
         title_event = findViewById(R.id.title_event);
+        textHintParticipations = findViewById(R.id.text_hint_participants);
     }
 
     @Override

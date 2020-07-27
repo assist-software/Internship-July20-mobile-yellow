@@ -171,6 +171,17 @@
                     android:paddingStart="@dimen/space_24dp"
                     android:paddingEnd="@dimen/space_8dp"
                     android:scrollbars="none" />
+
+                <TextView
+                    android:id="@+id/noInformationTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_information"
+                    android:layout_margin="@dimen/space_8dp"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@+id/members_section"
+                    android:visibility="gone"/>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -200,6 +211,16 @@
                     android:layout_marginTop="@dimen/space_19dp"
                     android:paddingEnd="@dimen/space_8dp"
                     android:scrollbars="none" />
+
+                <TextView
+                    android:id="@+id/noInformationTextView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_information"
+                    android:layout_margin="@dimen/space_8dp"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@+id/events_section"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

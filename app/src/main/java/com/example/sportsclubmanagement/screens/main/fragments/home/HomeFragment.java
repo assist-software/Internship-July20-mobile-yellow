@@ -55,7 +55,8 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
     private ClubAdapter firstClubAdapter, myNewClubsAdapter;
     private EventAdapter futureEventsAdapter, firstEventAdapter;
     private workoutAdapter adapterWorkout;
-    private TextView name, txtClub, txtEvent, clubJoinListTxt, futureEvetnsTxt,workoutTxt;
+    private TextView name, txtClub, txtEvent, clubJoinListTxt, futureEvetnsTxt, noInformation1,
+            noInformation2, noInformation3, noInformation4, noInformation5, workoutTxt;
     private APIInterface apiInterface;
     private SharedPreferences pref;
     private RecyclerView newClubRecyclerView;
@@ -96,6 +97,12 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         futureEvetnsTxt = view.findViewById(R.id.home_futureEvents_textView);
         workoutTxt = view.findViewById(R.id.home_workout_text);
 
+        noInformation1 = view.findViewById(R.id.noInformationTextView1);
+        noInformation2 = view.findViewById(R.id.noInformationTextView2);
+        noInformation3 = view.findViewById(R.id.noInformationTextView3);
+        noInformation4 = view.findViewById(R.id.noInformationTextView4);
+        noInformation5 = view.findViewById(R.id.noInformationTextView5);
+
         showUserInfo();
         getAllEvents();
         hasEvents();
@@ -116,9 +123,10 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                     }
                     if (workouts.size() != 0) {
                         initWorkoutAdapter(workouts,adapterWorkout,workoutRecyclerView);
-                    }else{
-                        workoutTxt.setVisibility(View.GONE);
+                    }
+                    else {
                         workoutRecyclerView.setVisibility(View.GONE);
+                        noInformation5.setVisibility(View.VISIBLE);
                     }
                 } else {
                     Log.d("Home", "Error");
@@ -195,13 +203,13 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
     }
 
     private void hideClubTxt() {
-        clubJoinListTxt.setVisibility(View.GONE);
+        noInformation3.setVisibility(View.VISIBLE);
         clubsRecyclerView.setVisibility(View.GONE);
     }
 
     private void hideFirstJoinClub() {
         firstClubsRecyclerView.setVisibility(View.GONE);
-        txtClub.setVisibility(View.GONE);
+        noInformation1.setVisibility(View.VISIBLE);
     }
 
     private void hasEvents() {
@@ -231,7 +239,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
 
     private void hideFirstJoinEvent() {
         firstEventsRecyclerView.setVisibility(View.GONE);
-        txtEvent.setVisibility(View.GONE);
+        noInformation2.setVisibility(View.VISIBLE);
     }
 
     private void getAllEvents() {
@@ -286,7 +294,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
 
     private void hideFutureEvent() {
         futureEventsRecyclerView.setVisibility(View.GONE);
-        futureEvetnsTxt.setVisibility(View.GONE);
+        noInformation4.setVisibility(View.VISIBLE);
     }
 
     @Override
