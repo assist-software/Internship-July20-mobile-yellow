@@ -31,6 +31,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_16dp" />
+            <TextView
+                android:id="@+id/noInformationTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/pastEvents_txt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/no_information"
+                android:layout_margin="@dimen/space_8dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/joinedEvents_txt"
@@ -54,6 +65,18 @@
                 android:layout_marginTop="@dimen/space_16dp" />
 
             <TextView
+                android:id="@+id/noInformationTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/joinedEvents_txt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/no_information"
+                android:layout_margin="@dimen/space_8dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
+
+            <TextView
                 android:id="@+id/pendingEvents_txt"
                 android:layout_width="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +95,17 @@
                     app:layout_constraintTop_toBottomOf="@id/pendingEvents_txt"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="@dimen/space_16dp" />
+            <TextView
+                android:id="@+id/noInformationTextView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/pendingEvents_txt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/no_information"
+                android:layout_margin="@dimen/space_8dp"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

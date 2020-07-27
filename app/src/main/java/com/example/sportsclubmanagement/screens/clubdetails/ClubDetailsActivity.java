@@ -48,7 +48,7 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
     private APIInterface apiInterface;
     private SharedPreferences pref;
     private int clubId;
-    private TextView coachName, coachAge, ownedClubs;
+    private TextView coachName, coachAge, ownedClubs, noInformation1, noInformation2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,8 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
         toolbar.setTitleTextColor(ContextCompat.getColor(ClubDetailsActivity.this, R.color.colorWhite));
         pref = this.getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, 0);
         apiInterface = APIClient.getClient().create(APIInterface.class);
+        noInformation1 = findViewById(R.id.noInformationTextView1);
+        noInformation2 = findViewById(R.id.noInformationTextView2);
 
         //coach info
         coachName = findViewById(R.id.coach_name);
@@ -145,6 +147,7 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
             membersRecyclerView.setAdapter(membersAdapter);
         } else {
             membersRecyclerView.setVisibility(View.GONE);
+            noInformation1.setVisibility(View.VISIBLE);
         }
     }
 
@@ -160,6 +163,7 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
             eventsRecyclerView.setAdapter(eventsAdapter);
         } else {
             eventsRecyclerView.setVisibility(View.GONE);
+            noInformation2.setVisibility(View.VISIBLE);
         }
 
     }

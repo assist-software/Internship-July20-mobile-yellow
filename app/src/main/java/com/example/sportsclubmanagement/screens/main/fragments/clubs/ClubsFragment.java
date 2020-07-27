@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sportsclubmanagement.R;
@@ -37,6 +38,7 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
     private APIInterface apiInterface;
     private List<Clubs> clubsList, newClubList, pendingClubList, joinedClubList;
     private SharedPreferences pref;
+    private TextView noInformation1, noInformation2, noInformation3;
 
     @Nullable
     @Override
@@ -55,6 +57,9 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
         pendingClubRecyclerView = view.findViewById(R.id.pendingClubs_RecyclerView);
         pref = getActivity().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, 0);
         apiInterface = APIClient.getClient().create(APIInterface.class);
+        noInformation1 = view.findViewById(R.id.noInformationTextView1);
+        noInformation2 = view.findViewById(R.id.noInformationTextView2);
+        noInformation3 = view.findViewById(R.id.noInformationTextView3);
     }
 
     private void requestClubs() {
@@ -124,8 +129,22 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
     }
 
     private void initAdapter(List<Clubs> list, ClubAdapter adapter, RecyclerView recyclerView, boolean hasBorder) {
-        adapter = new ClubAdapter(list, ClubsFragment.this, hasBorder);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+        if(list.size()!=0){
+            adapter = new ClubAdapter(list, ClubsFragment.this, hasBorder);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(adapter);
+        }
+        else {
+            recyclerView.setVisibility(View.GONE);
+            if(recyclerView == newClubRecyclerView){
+                noInformation1.setVisibility(View.VISIBLE);
+            }
+            if(recyclerView == joinedClubRecyclerView){
+                noInformation2.setVisibility(View.VISIBLE);
+            }
+            if(recyclerView == pendingClubRecyclerView){
+                noInformation3.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }

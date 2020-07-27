@@ -69,14 +69,24 @@
                     android:paddingStart="@dimen/space_24dp"
                     android:paddingEnd="@dimen/space_8dp"
                     android:scrollbars="none" />
+
+                <TextView
+                    android:id="@+id/noInformationTextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_information"
+                    android:layout_margin="@dimen/space_8dp"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@+id/home_joinClub_textView"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/home_joinEvent_section"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/space_24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,6 +109,16 @@
                 android:layout_below="@+id/home_joinEvent_textView"
                 android:layout_marginTop="@dimen/space_19dp"
                 android:scrollbars="none" />
+
+            <TextView
+                android:id="@+id/noInformationTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_information"
+                android:layout_margin="@dimen/space_8dp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/home_joinEvent_textView"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -129,6 +149,16 @@
                 android:paddingStart="@dimen/space_24dp"
                 android:paddingEnd="@dimen/space_8dp"
                 android:scrollbars="none" />
+
+            <TextView
+                android:id="@+id/noInformationTextView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_information"
+                android:layout_margin="@dimen/space_8dp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/home_club_textView"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -157,6 +187,16 @@
                 android:layout_below="@+id/home_futureEvents_textView"
                 android:layout_marginTop="@dimen/space_19dp"
                 android:scrollbars="none" />
+
+            <TextView
+                android:id="@+id/noInformationTextView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_information"
+                android:layout_margin="@dimen/space_8dp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/home_futureEvents_textView"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -184,6 +224,18 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/home_workout_text"
                 android:layout_marginTop="@dimen/space_24dp"/>
+            <TextView
+                android:id="@+id/noInformationTextView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_information"
+                android:layout_margin="@dimen/space_8dp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/home_workout_text"
+                app:layout_constraintTop_toBottomOf="@id/home_workout_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="gone"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

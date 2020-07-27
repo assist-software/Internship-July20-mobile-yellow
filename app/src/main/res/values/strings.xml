@@ -82,6 +82,7 @@
     <string name="today_s_workout">Today\'s workout</string>
     <string name="workouts">Workouts</string>
     <string name="workouts_history">Workouts history</string>
+    <string name="no_information">No information to show</string>
     <string-array name="spinnerPrimarySports">
         <item>Primary Sport</item>
         <item>Ceva 1</item>
