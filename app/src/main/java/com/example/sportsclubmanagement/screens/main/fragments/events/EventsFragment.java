@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
-import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventMainInfo;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
@@ -30,10 +28,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Header;
 
 public class EventsFragment extends Fragment implements EventAdapterListener {
-    private RecyclerView eventRecycler, joinedRecycler, pendingRecycler;
+    private RecyclerView pastRecycler, joinedRecycler, pendingRecycler;
     private EventAdapter eventAdapter, joinedAdapter, pendingAdapter;
     private SharedPreferences pref;
     private APIInterface apiInterface;
@@ -68,8 +65,8 @@ public class EventsFragment extends Fragment implements EventAdapterListener {
                         }
                         allEvents.add(new EventAdapterModel(ev.getId(),ev.getTitle(),ev.getLocatia(),ev.getDate(),false,false,false));
                     }
-                    initEventsHAdapter(pastEvents, joinedRecycler);
-                    initEventsHAdapter(allEvents, eventRecycler);
+                    initEventsHAdapter(allEvents, joinedRecycler);
+                    initEventsHAdapter(pastEvents, pastRecycler);
                     initEventsVAdapter(futureEvents, pendingRecycler);
                 }
             }
@@ -86,7 +83,7 @@ public class EventsFragment extends Fragment implements EventAdapterListener {
         pref = rootView.getContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         apiInterface = APIClient.getClient().create(APIInterface.class);
         //recyclers
-        eventRecycler = rootView.findViewById(R.id.eventRecycler);
+        pastRecycler = rootView.findViewById(R.id.eventRecycler);
         joinedRecycler = rootView.findViewById(R.id.joinedRecycler);
         pendingRecycler = rootView.findViewById(R.id.pendingRecycler);
     }

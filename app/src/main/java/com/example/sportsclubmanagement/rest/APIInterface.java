@@ -3,6 +3,7 @@ package com.example.sportsclubmanagement.rest;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserAccountSetup;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserLogin;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserRegister;
+import com.example.sportsclubmanagement.models.apiModels.Response.ClubDetailsObj;
 import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventMainInfo;
@@ -51,7 +52,7 @@ public interface APIInterface {
     @GET("/api/event/evetdetails{id}/")
     Call<EventDetails> getEventDetails(@Header(Constants.AUTHORIZATION) String token, @Path("id") int eventId);
 
-    @GET("/api/event/eventsjoined/")
+    @GET("/api/event/is_member/")
     Call<List<EventMainInfo>> getUsersEvents(@Header(Constants.AUTHORIZATION) String token);
 
     @GET("/api/event/view/")
@@ -68,4 +69,7 @@ public interface APIInterface {
 
     @POST("api/workout{id}/")
     Call<Void> addWorkout(@Header(Constants.AUTHORIZATION)String token,@Path("event_id")int event_id);
+
+    @GET("/api/club/{id}/")
+    Call<ClubDetailsObj> getClubDetails(@Header(Constants.AUTHORIZATION) String token, @Path("id") int clubId);
 }
