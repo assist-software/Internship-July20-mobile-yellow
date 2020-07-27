@@ -22,19 +22,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.example.sportsclubmanagement.R;
-import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
+import com.example.sportsclubmanagement.models.apiModels.Request.Workout;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventMainInfo;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.utils.Constants;
 import com.example.sportsclubmanagement.utils.Validations;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,7 +50,7 @@ public class AddWorkoutsActivity extends AppCompatActivity {
     private EditText workoutDuration, heartRate, calories, avSpeed, distance;
     private APIInterface apiInterface;
     private SharedPreferences pref;
-    private Map<Integer,String> spinnerEventData;
+    private Map<Integer, String> spinnerEventData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,29 +62,30 @@ public class AddWorkoutsActivity extends AppCompatActivity {
     }
 
     private void getListOfEventsForSpinner() {
-        Call<List<EventMainInfo>> call = apiInterface.getUsersEvents(pref.getString(Constants.TOKEN,null));
+        Call<List<EventMainInfo>> call = apiInterface.getUsersEvents(pref.getString(Constants.TOKEN, null));
         call.enqueue(new Callback<List<EventMainInfo>>() {
             @Override
             public void onResponse(Call<List<EventMainInfo>> call, Response<List<EventMainInfo>> response) {
-                if(response.isSuccessful()){
-                    if(response.body()!=null){
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
                         spinnerEventData = new HashMap<>();
-                        for(EventMainInfo ev : response.body()){
-                            spinnerEventData.put(ev.getId(),ev.getTitle());
+                        for (EventMainInfo ev : response.body()) {
+                            spinnerEventData.put(ev.getId(), ev.getTitle());
                         }
-                        if(spinnerEventData.size()!=0){
-                        ArrayList<String> lst = new ArrayList<>(spinnerEventData.values());
-                        lst.add(0,"Event");
-                        event.setAdapter(populateSpinner(AddWorkoutsActivity.this,lst.toArray(new String[0])));
-                        }else{
-                            event.setAdapter(populateSpinner(AddWorkoutsActivity.this,new String[]{"No events available"}));
+                        if (spinnerEventData.size() != 0) {
+                            ArrayList<String> lst = new ArrayList<>(spinnerEventData.values());
+                            lst.add(0, "Event");
+                            event.setAdapter(populateSpinner(AddWorkoutsActivity.this, lst.toArray(new String[0])));
+                        } else {
+                            event.setAdapter(populateSpinner(AddWorkoutsActivity.this, new String[]{"No events available"}));
                         }
                     }
-                }else{
-                    Log.d("AddWorkoutScreen","No events response from server");
-                    Toast.makeText(getApplicationContext(),Constants.ADD_WORKOUT_ERROR,Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("AddWorkoutScreen", "No events response from server");
+                    Toast.makeText(getApplicationContext(), Constants.ADD_WORKOUT_ERROR, Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Call<List<EventMainInfo>> call, Throwable t) {
 
@@ -102,7 +103,7 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         distance = findViewById(R.id.distance_editText);
         toolbar = findViewById(R.id.home_tool_bar);
         apiInterface = APIClient.getClient().create(APIInterface.class);
-        pref =getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES,MODE_PRIVATE);
+        pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); //remove the default title from the action bar
@@ -196,7 +197,8 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         public void onClick(View view) {
             if (checkInfo()) {
                 Toast.makeText(AddWorkoutsActivity.this, R.string.saved_changes, Toast.LENGTH_SHORT).show();
-                addWorkout(Integer.parseInt(spinnerEventData.get(event.getSelectedItem())));
+
+                addWorkout(collectInfoWorkout());
                 finish();
             } else {
                 Toast.makeText(AddWorkoutsActivity.this, R.string.invalid_data, Toast.LENGTH_SHORT).show();
@@ -204,13 +206,23 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         }
     };
 
-    private void addWorkout(int eventID) {
-        Call<Void> call = apiInterface.addWorkout(pref.getString("token", null),eventID);
+    private Workout collectInfoWorkout() {
+        for(Map.Entry<Integer,String> entry : spinnerEventData.entrySet()){
+            if(entry.getValue().equals(event.getSelectedItem())){
+                return new Workout(entry.getKey(), Integer.parseInt(workoutDuration.getText().toString()),
+                        Integer.parseInt(distance.getText().toString()), Integer.parseInt(heartRate.getText().toString()),
+                        Integer.parseInt(calories.getText().toString()), (int) workoutEffectiveness.getSelectedItemId(), Double.parseDouble(avSpeed.getText().toString()));
+            }
+        }
+        return  null;
+    }
+
+    private void addWorkout(Workout workout) {
+        Call<Void> call = apiInterface.addWorkout(pref.getString("token", null), workout);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-
                     Log.d("EventDetails", "Workout was added successful");
                 } else {
                     Log.d("EventDetails", "Error added workout");
@@ -219,7 +231,7 @@ public class AddWorkoutsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                if(t!=null)
+                if (t != null)
                     Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
                 call.cancel();
             }
