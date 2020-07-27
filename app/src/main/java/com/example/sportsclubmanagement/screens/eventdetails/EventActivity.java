@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.ParticipantAdapterModel;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
+import com.example.sportsclubmanagement.models.apiModels.Response.EventParticipant;
+import com.example.sportsclubmanagement.models.apiModels.Response.WorkoutsDetails;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.eventdetails.adapterParticipant.ParticipantAdapter;
@@ -26,8 +28,10 @@ import com.example.sportsclubmanagement.utils.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,12 +43,11 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
     private ImageView imgEvent;
     private RecyclerView participantRecycle;
     private ParticipantAdapter participantAdapter;
-    private EventDetails eventDetails;
     private APIInterface apiInterface;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+    private Map<ParticipantAdapterModel, WorkoutsDetails> participantResult;
     private int eventID;
-    private List<ParticipantAdapterModel> participants;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +63,8 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
             @Override
             public void onResponse(Call<EventDetails> call, Response<EventDetails> response) {
                 if (response.isSuccessful()) {
-                    eventDetails = response.body();
-                    fillEventDetailsOnPage();
+                    EventDetails eventDetails = response.body();
+                    fillEventDetailsOnPage(eventDetails);
                     Log.d("EventDetails", "Got event details successful");
                 } else {
                     Log.d("EventDetails", "Error getting event details");
@@ -76,21 +79,25 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
         });
     }
 
-    private void fillEventDetailsOnPage() {
+    private void fillEventDetailsOnPage(EventDetails eventDetails) {
         title_event.setText(eventDetails.getTitle());
         locationEvent.setText(eventDetails.getLocation());
         SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         timeEvent.setText(formatterTime.format(eventDetails.getTimeEvent()));
         SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
         dateEvent.setText(formatter.format(eventDetails.getDataEvent()));
-        //cand am imaginea de pe back
-        //Glide.with(this.getApplicationContext()).load().centerCrop().into(imgEvent);
         descriptionEvent.setText(eventDetails.getDescription());
         titleTextEvent.setText(eventDetails.getDescription().split(".")[0]);
-        participants.addAll(eventDetails.getParticipants());
         //for recycler with participants
-        participantAdapter = new ParticipantAdapter(participants, getApplicationContext(), this, true);
-        participantRecycle.setAdapter(participantAdapter);
+        if(eventDetails.getParticipants().size()!=0){
+            participantResult = new HashMap<>();
+            List<EventParticipant> participantsFromBackend = eventDetails.getParticipants();
+            for(EventParticipant participant : participantsFromBackend){
+                participantResult.put(new ParticipantAdapterModel(participant.getFirstName()+" "+participant.getLastName(),participant.getImg()),participant.getWorkout());
+            }
+            participantAdapter = new ParticipantAdapter(new ArrayList<>(participantResult.keySet()), getApplicationContext(), this, true);
+            participantRecycle.setAdapter(participantAdapter);
+        }
     }
 
     @Override
@@ -101,10 +108,6 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
 
     private void initComp() {
         event_toolbar = findViewById(R.id.event_toolbar);
-        title_event = findViewById(R.id.title_event);
-        //change title
-        //iau de pe server (pentru test preiau id din intent)
-        title_event.setText(getIntent().getStringExtra("event_id"));
         //customize toolbar
         event_toolbar.setTitleTextColor(ContextCompat.getColor(EventActivity.this, R.color.colorWhite));
         event_toolbar.setTitle("Events");
@@ -127,7 +130,7 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
         timeEvent = findViewById(R.id.text_ora);
         locationEvent = findViewById(R.id.text_loc);
         imgEvent = findViewById(R.id.img_event);
-        participants = new ArrayList<>();
+        title_event = findViewById(R.id.title_event);
     }
 
     @Override

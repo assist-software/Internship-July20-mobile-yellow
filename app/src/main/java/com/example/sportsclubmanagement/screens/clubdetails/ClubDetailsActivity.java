@@ -1,5 +1,6 @@
 package com.example.sportsclubmanagement.screens.clubdetails;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -15,11 +16,12 @@ import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
 import com.example.sportsclubmanagement.models.ParticipantAdapterModel;
 import com.example.sportsclubmanagement.models.apiModels.Response.ClubDetailsObj;
-import com.example.sportsclubmanagement.models.apiModels.Response.EventsAvailable;
+import com.example.sportsclubmanagement.models.apiModels.Response.EventMainInfo;
 import com.example.sportsclubmanagement.models.apiModels.Response.MembersListItem;
 import com.example.sportsclubmanagement.models.apiModels.Response.OwnerInfo;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
+import com.example.sportsclubmanagement.screens.eventdetails.EventActivity;
 import com.example.sportsclubmanagement.screens.eventdetails.adapterParticipant.ParticipantAdapter;
 import com.example.sportsclubmanagement.screens.eventdetails.adapterParticipant.ParticipantAdapterListener;
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventAdapter;
@@ -95,6 +97,13 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
 
     @Override
     public void onEventClick(EventAdapterModel event) {
+        Intent i = new Intent(getApplicationContext(), EventActivity.class);
+        i.putExtra("eventId", event.getId());
+        startActivity(i);
+    }
+
+    @Override
+    public void onEventJoinClick(EventAdapterModel event) {
 
     }
 
@@ -140,10 +149,10 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
     }
 
     private void initEventsAdapter(ClubDetailsObj clubDetailsObj) {
-        List<EventsAvailable> eventsList = clubDetailsObj.getEvents();
+        List<EventMainInfo> eventsList = clubDetailsObj.getEvents();
         List<EventAdapterModel> localEventsList = new ArrayList<>();
-        for (EventsAvailable event : eventsList) {
-            localEventsList.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), false, false));
+        for (EventMainInfo event : eventsList) {
+            localEventsList.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), false, false,false));
         }
         if (localEventsList.size() != 0) {
             eventsAdapter = new EventAdapter(localEventsList, getApplicationContext(), ClubDetailsActivity.this);

@@ -81,18 +81,32 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
                     listener.onEventClick(eventAdapterModel);
                 }
             });
+            downBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onEventJoinClick(eventAdapterModel);
+                }
+            });
+            upBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onEventJoinClick(eventAdapterModel);
+                }
+            });
             if(eventAdapterModel.isVisibleBtn()){
                 if(eventAdapterModel.isUpPositionBtn()){
                     downBtn.setVisibility(View.GONE);
+                    img.requestLayout();
                 }else{
                     upBtn.setVisibility(View.GONE);
-                    img.getLayoutParams().width= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 350, ctx.getResources().getDisplayMetrics());
-                    img.getLayoutParams().height= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180, ctx.getResources().getDisplayMetrics());
-                    img.requestLayout();
                 }
             }else{
                 downBtn.setVisibility(View.GONE);
                 upBtn.setVisibility(View.GONE);
+            }
+            if(eventAdapterModel.isBig()){
+                img.getLayoutParams().width= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 350, ctx.getResources().getDisplayMetrics());
+                img.getLayoutParams().height= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180, ctx.getResources().getDisplayMetrics());
             }
         }
     }

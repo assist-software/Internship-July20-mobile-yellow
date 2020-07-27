@@ -6,7 +6,8 @@ import com.example.sportsclubmanagement.models.apiModels.Request.UserRegister;
 import com.example.sportsclubmanagement.models.apiModels.Response.ClubDetailsObj;
 import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
-import com.example.sportsclubmanagement.models.apiModels.Response.EventsAvailable;
+import com.example.sportsclubmanagement.models.apiModels.Response.EventMainInfo;
+import com.example.sportsclubmanagement.models.apiModels.Response.HasEvent;
 import com.example.sportsclubmanagement.models.apiModels.Response.Sports;
 import com.example.sportsclubmanagement.models.apiModels.Response.Token;
 import com.example.sportsclubmanagement.models.apiModels.Response.UserDetails;
@@ -48,14 +49,26 @@ public interface APIInterface {
     @GET("/api/sports/")
     Call<List<Sports>> getSports();
 
-    @GET("/api/evetdetails{id}/")
+    @GET("/api/event/evetdetails{id}/")
     Call<EventDetails> getEventDetails(@Header(Constants.AUTHORIZATION) String token, @Path("id") int eventId);
 
-    @GET("/api/event/view/")
-    Call<List<EventsAvailable>> getEvents(@Header(Constants.AUTHORIZATION) String token);
+    @GET("/api/event/is_member/")
+    Call<List<EventMainInfo>> getUsersEvents(@Header(Constants.AUTHORIZATION) String token);
 
-    @GET("/api/workouts{id}/")
+    @GET("/api/event/view/")
+    Call<List<EventMainInfo>> getEvents(@Header(Constants.AUTHORIZATION) String token);
+
+    @GET("/api/event/has_events")
+    Call<HasEvent> hasEvent(@Header(Constants.AUTHORIZATION) String token);
+
+    @GET("/api/workout/view/")
     Call<List<WorkoutsDetails>> getAllWorkout(@Header(Constants.AUTHORIZATION) String token);
+
+    @POST("api/event/join/{id}/")
+    Call<Void> joinEvent(@Header(Constants.AUTHORIZATION) String token,@Path("id") int event_id);
+
+    @POST("api/workout{id}/")
+    Call<Void> addWorkout(@Header(Constants.AUTHORIZATION)String token,@Path("event_id")int event_id);
 
     @GET("/api/club/{id}/")
     Call<ClubDetailsObj> getClubDetails(@Header(Constants.AUTHORIZATION) String token, @Path("id") int clubId);

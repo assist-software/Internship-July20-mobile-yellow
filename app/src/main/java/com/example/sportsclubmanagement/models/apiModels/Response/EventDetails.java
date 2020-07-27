@@ -1,14 +1,12 @@
 package com.example.sportsclubmanagement.models.apiModels.Response;
 
-import com.example.sportsclubmanagement.models.ParticipantAdapterModel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 import java.util.List;
 
 public class EventDetails {
-    private int id;
-    @SerializedName("title")
+    @SerializedName("name")
     private String title;
     @SerializedName("location")
     private String location;
@@ -18,25 +16,16 @@ public class EventDetails {
     private Date dataEvent;
     @SerializedName("time")
     private Date timeEvent;
-    @SerializedName("participants")
-    private List<ParticipantAdapterModel> participants;
+    @SerializedName("participants_details")
+    private List<EventParticipant> participants;
 
-    public EventDetails(int id, String title, String location, String description, Date dataEvent, Date timeEvent, List<ParticipantAdapterModel> participants) {
-        this.id = id;
+    public EventDetails(String title, String location, String description, Date dataEvent, Date timeEvent, List<EventParticipant> participants) {
         this.title = title;
         this.location = location;
         this.description = description;
         this.dataEvent = dataEvent;
         this.timeEvent = timeEvent;
         this.participants = participants;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -79,11 +68,11 @@ public class EventDetails {
         this.timeEvent = timeEvent;
     }
 
-    public List<ParticipantAdapterModel> getParticipants() {
+    public List<EventParticipant> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(List<ParticipantAdapterModel> participants) {
+    public void setParticipants(List<EventParticipant> participants) {
         this.participants = participants;
     }
 }

@@ -155,7 +155,8 @@ public class MyProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Sports>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                if(t!=null)
+                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });
@@ -177,7 +178,8 @@ public class MyProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<UserDetails> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                if(t!=null)
+                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });
@@ -202,7 +204,8 @@ public class MyProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                if(t!=null)
+                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });

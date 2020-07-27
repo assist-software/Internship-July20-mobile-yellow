@@ -25,7 +25,6 @@ import com.example.sportsclubmanagement.models.apiModels.Response.Sports;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.main.MainActivity;
-import com.example.sportsclubmanagement.screens.myprofile.MyProfileActivity;
 import com.example.sportsclubmanagement.utils.Constants;
 import com.example.sportsclubmanagement.utils.Validations;
 
@@ -110,7 +109,7 @@ public class AccountSetupActivity extends AppCompatActivity {
 
     private boolean checkInfo() {
         return primarySports.getSelectedItemId() != 0 && secondarySports.getSelectedItemId() != 0 && Validations.weightValidation(weight.getText().toString())
-                && Validations.heightValidation(height.getText().toString()) && Validations.ageValidation(age.getText().toString()) && (female.isChecked() || male.isChecked());
+                && Validations.heightValidation(height.getText().toString()) && Validations.ageValidation(age.getText().toString()) && (female.isChecked() || male.isChecked()) && primarySports.getSelectedItemId() != secondarySports.getSelectedItemId();
     }
 
     private void getSports() {
@@ -132,7 +131,8 @@ public class AccountSetupActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Sports>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                if(t!=null)
+                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });
@@ -174,7 +174,8 @@ public class AccountSetupActivity extends AppCompatActivity {
         prm = new ArrayList<>();
         scd = new ArrayList<>();
     }
-    private UserAccountSetup createEntity(){
+
+    private UserAccountSetup createEntity() {
         String gender;
         if (male.isChecked()) {
             gender = Constants.male;
@@ -185,6 +186,7 @@ public class AccountSetupActivity extends AppCompatActivity {
                 primarySports.getSelectedItem().toString(), secondarySports.getSelectedItem().toString(),
                 Integer.parseInt(height.getText().toString()), Double.parseDouble(weight.getText().toString()));
     }
+
     private void restAccountSetup(UserAccountSetup userAccountSetup) {
 
         Call<Void> call = apiInterface.userAccountSetup(pref.getString("token", "nimic"), userAccountSetup, pref.getInt("id", 0));
@@ -201,7 +203,8 @@ public class AccountSetupActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                if(t!=null)
+                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });

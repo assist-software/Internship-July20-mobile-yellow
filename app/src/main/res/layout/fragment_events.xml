@@ -3,22 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.main.fragments.events.EventsFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/generalLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout
-            android:id="@+id/linearForRecycler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
             <TextView
                 android:id="@+id/pastEvents_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/space_24dp"
                 android:layout_marginTop="@dimen/space_24dp"
                 android:fontFamily="@font/inter_normal"
@@ -28,12 +26,16 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/eventRecycler"
+                app:layout_constraintTop_toBottomOf="@id/pastEvents_txt"
+                app:layout_constraintStart_toStartOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_16dp" />
 
             <TextView
                 android:id="@+id/joinedEvents_txt"
+                app:layout_constraintTop_toBottomOf="@id/eventRecycler"
+                app:layout_constraintStart_toStartOf="parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_24dp"
@@ -45,6 +47,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/joinedRecycler"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/joinedEvents_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_16dp" />
@@ -52,6 +56,8 @@
             <TextView
                 android:id="@+id/pendingEvents_txt"
                 android:layout_width="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/joinedRecycler"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_24dp"
                 android:layout_marginTop="@dimen/space_24dp"
@@ -59,14 +65,15 @@
                 android:text="@string/pending_events"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_18sp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/pendingRecycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/pendingEvents_txt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/space_16dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/pendingRecycler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_16dp" />
-        </LinearLayout>
-    </LinearLayout>
 
 
 

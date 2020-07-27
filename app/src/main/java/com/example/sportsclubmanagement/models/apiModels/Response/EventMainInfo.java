@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class EventsAvailable {
+public class EventMainInfo {
     @SerializedName("id")
     private int id;
     @SerializedName("name")
@@ -13,6 +13,24 @@ public class EventsAvailable {
     private String locatia;
     @SerializedName("date")
     private Date date;
+    @SerializedName("image")
+    private String img;
+
+    public EventMainInfo(int id, String title, String locatia, Date date, String img) {
+        this.id = id;
+        this.title = title;
+        this.locatia = locatia;
+        this.date = date;
+        this.img = img;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public int getId() {
         return id;
@@ -43,13 +61,6 @@ public class EventsAvailable {
     }
 
     public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public EventsAvailable(int id, String title, String locatia, Date date) {
-        this.id = id;
-        this.title = title;
-        this.locatia = locatia;
         this.date = date;
     }
 }

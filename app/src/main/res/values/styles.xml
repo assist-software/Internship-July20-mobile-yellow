@@ -31,4 +31,16 @@
         <item name="android:statusBarColor">@color/colorDarkGray</item>
     </style>
 
+    <style name="calendar_text_days">
+        <item name="android:textColor">@color/colorDarkGray</item>
+        <item name="android:textSize">@dimen/space_16dp</item>
+    </style>
+    <style name="selected_day_calendar">
+        <item name="android:textSize">@dimen/text_16sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="background">@style/selected_day_calendar</item>
+        <item name="android:layout_height">@dimen/space_44dp</item>
+        <item name="android:layout_weight">@dimen/space_44dp</item>
+    </style>
+
 </resources>

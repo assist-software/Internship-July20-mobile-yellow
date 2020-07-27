@@ -10,11 +10,11 @@ public class ClubDetailsObj {
     @SerializedName("Members")
     private List<MembersListItem> members;
     @SerializedName("Events")
-    private List<EventsAvailable> events;
+    private List<EventMainInfo> events;
     @SerializedName("Coach clubs")
     private List<OwnerInfo> ownedClubs;
 
-    public ClubDetailsObj(OwnerInfo ownerInfo, List<MembersListItem> members, List<EventsAvailable> events, List<OwnerInfo> ownedClubs) {
+    public ClubDetailsObj(OwnerInfo ownerInfo, List<MembersListItem> members, List<EventMainInfo> events, List<OwnerInfo> ownedClubs) {
         this.ownerInfo = ownerInfo;
         this.members = members;
         this.events = events;
@@ -37,11 +37,11 @@ public class ClubDetailsObj {
         this.members = members;
     }
 
-    public List<EventsAvailable> getEvents() {
+    public List<EventMainInfo> getEvents() {
         return events;
     }
 
-    public void setEvents(List<EventsAvailable> events) {
+    public void setEvents(List<EventMainInfo> events) {
         this.events = events;
     }
 

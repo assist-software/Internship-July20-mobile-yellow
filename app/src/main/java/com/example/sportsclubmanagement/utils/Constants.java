@@ -27,5 +27,9 @@ public class Constants {
     public static final String female = "F";
     public static final String Home_get_list_accpet="List of events was accepted";
     public static final String Home_get_list_error="Fail gave all events";
+    public static final String Home_join_event_error="Failed join event";
+    public static final String URL_SERVER="http://34.65.176.55:8081/";
+    public static final String URL_LOCAL="http://192.168.100.228:8001/";
+    public static final String ADD_WORKOUT_ERROR="No response from server";
 
 }
