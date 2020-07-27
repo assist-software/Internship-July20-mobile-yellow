@@ -2,6 +2,7 @@ package com.example.sportsclubmanagement.models.apiModels.Response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,11 +16,11 @@ public class EventDetails {
     @SerializedName("date")
     private Date dataEvent;
     @SerializedName("time")
-    private Date timeEvent;
-    @SerializedName("participants_details")
+    private long timeEvent;
+    @SerializedName("participants_detail")
     private List<EventParticipant> participants;
 
-    public EventDetails(String title, String location, String description, Date dataEvent, Date timeEvent, List<EventParticipant> participants) {
+    public EventDetails(String title, String location, String description, Date dataEvent, long timeEvent, List<EventParticipant> participants) {
         this.title = title;
         this.location = location;
         this.description = description;
@@ -60,11 +61,11 @@ public class EventDetails {
         this.dataEvent = dataEvent;
     }
 
-    public Date getTimeEvent() {
+    public long getTimeEvent() {
         return timeEvent;
     }
 
-    public void setTimeEvent(Date timeEvent) {
+    public void setTimeEvent(long timeEvent) {
         this.timeEvent = timeEvent;
     }
 
