@@ -3,6 +3,7 @@ package com.example.sportsclubmanagement.rest;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserAccountSetup;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserLogin;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserRegister;
+import com.example.sportsclubmanagement.models.apiModels.Request.Workout;
 import com.example.sportsclubmanagement.models.apiModels.Response.ClubDetailsObj;
 import com.example.sportsclubmanagement.models.apiModels.Response.Clubs;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
@@ -49,7 +50,7 @@ public interface APIInterface {
     @GET("/api/sports/")
     Call<List<Sports>> getSports();
 
-    @GET("/api/event/evetdetails{id}/")
+    @GET("/api/event/detail/{id}/")
     Call<EventDetails> getEventDetails(@Header(Constants.AUTHORIZATION) String token, @Path("id") int eventId);
 
     @GET("/api/event/is_member/")
@@ -67,8 +68,8 @@ public interface APIInterface {
     @POST("api/event/join/{id}/")
     Call<Void> joinEvent(@Header(Constants.AUTHORIZATION) String token,@Path("id") int event_id);
 
-    @POST("api/workout{id}/")
-    Call<Void> addWorkout(@Header(Constants.AUTHORIZATION)String token,@Path("event_id")int event_id);
+    @POST("api/workout/create/")
+    Call<Void> addWorkout(@Header(Constants.AUTHORIZATION)String token,@Body Workout workout);
 
     @GET("/api/club/{id}/")
     Call<ClubDetailsObj> getClubDetails(@Header(Constants.AUTHORIZATION) String token, @Path("id") int clubId);

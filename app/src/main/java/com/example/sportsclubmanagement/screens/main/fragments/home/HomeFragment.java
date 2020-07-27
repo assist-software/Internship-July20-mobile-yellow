@@ -42,7 +42,6 @@ import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,7 +55,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
     private ClubAdapter firstClubAdapter, myNewClubsAdapter;
     private EventAdapter futureEventsAdapter, firstEventAdapter;
     private workoutAdapter adapterWorkout;
-    private TextView name, txtClub, txtEvent, clubJoinListTxt, futureEvetnsTxt;
+    private TextView name, txtClub, txtEvent, clubJoinListTxt, futureEvetnsTxt,workoutTxt;
     private APIInterface apiInterface;
     private SharedPreferences pref;
     private RecyclerView newClubRecyclerView;
@@ -95,6 +94,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         txtEvent = view.findViewById(R.id.home_joinEvent_textView);
         clubJoinListTxt = view.findViewById(R.id.home_club_textView);
         futureEvetnsTxt = view.findViewById(R.id.home_futureEvents_textView);
+        workoutTxt = view.findViewById(R.id.home_workout_text);
 
         showUserInfo();
         getAllEvents();
@@ -116,6 +116,9 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                     }
                     if (workouts.size() != 0) {
                         initWorkoutAdapter(workouts,adapterWorkout,workoutRecyclerView);
+                    }else{
+                        workoutTxt.setVisibility(View.GONE);
+                        workoutRecyclerView.setVisibility(View.GONE);
                     }
                 } else {
                     Log.d("Home", "Error");
@@ -173,6 +176,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                     }
                     if (myNewClubs.size() == 0) {
                         hideClubTxt();
+                        hideFirstJoinClub();
                     } else {
                         initClubsAdapter(myNewClubs, myNewClubsAdapter, newClubRecyclerView, true);
                     }
@@ -258,7 +262,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                     if (firstEventsRecyclerView.getVisibility() != View.GONE) {
                         initEventsAdapter(allEventsAvailable, firstEventAdapter, firstEventsRecyclerView);
                     }
-                    Log.d("Hom", Constants.Home_get_list_accpet);
+                    Log.d("Hom", Constants.Home_get_list_accept);
                 } else {
                     Log.d("Home", "Error");
                     Toast.makeText(getContext(), Constants.Home_get_list_error, Toast.LENGTH_SHORT).show();

@@ -56,6 +56,11 @@ public class WorkoutsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initComp();
         initListeners();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         getWorkoutsFromBackend();
     }
 

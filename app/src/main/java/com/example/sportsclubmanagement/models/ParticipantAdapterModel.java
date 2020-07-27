@@ -1,11 +1,11 @@
 package com.example.sportsclubmanagement.models;
 
-import com.example.sportsclubmanagement.models.apiModels.Response.WorkoutsDetails;
+import com.example.sportsclubmanagement.models.apiModels.Response.WorkoutForEventParticipation;
 
 public class ParticipantAdapterModel {
     private String fullName;
     private String img;
-    private WorkoutsDetails workout;
+    private WorkoutForEventParticipation workout;
     private boolean status = false;
 
     public ParticipantAdapterModel(String fullName, String img) {
@@ -13,6 +13,14 @@ public class ParticipantAdapterModel {
         this.img = img;
     }
 
+
+    public WorkoutForEventParticipation getWorkout() {
+        return workout;
+    }
+
+    public void setWorkout(WorkoutForEventParticipation workout) {
+        this.workout = workout;
+    }
     public String getImg() {
         return img;
     }
@@ -38,7 +46,12 @@ public class ParticipantAdapterModel {
     }
 
 
-    public ParticipantAdapterModel(String fullName) {
+    public ParticipantAdapterModel(String fullName,WorkoutForEventParticipation workout) {
+        this.fullName = fullName;
+        this.workout = workout;
+    }
+
+    public ParticipantAdapterModel(String fullName){
         this.fullName = fullName;
     }
 }

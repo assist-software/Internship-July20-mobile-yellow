@@ -19,6 +19,7 @@ import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.ParticipantAdapterModel;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventParticipant;
+import com.example.sportsclubmanagement.models.apiModels.Response.WorkoutForEventParticipation;
 import com.example.sportsclubmanagement.models.apiModels.Response.WorkoutsDetails;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
@@ -46,7 +47,7 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
     private APIInterface apiInterface;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    private Map<ParticipantAdapterModel, WorkoutsDetails> participantResult;
+    private Map<ParticipantAdapterModel, WorkoutForEventParticipation> participantResult;
     private int eventID;
 
     @Override
@@ -93,7 +94,7 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
             participantResult = new HashMap<>();
             List<EventParticipant> participantsFromBackend = eventDetails.getParticipants();
             for(EventParticipant participant : participantsFromBackend){
-                participantResult.put(new ParticipantAdapterModel(participant.getFirstName()+" "+participant.getLastName(),participant.getImg()),participant.getWorkout());
+                participantResult.put(new ParticipantAdapterModel(participant.getFirstName()+" "+participant.getLastName()),participant.getWorkout());
             }
             participantAdapter = new ParticipantAdapter(new ArrayList<>(participantResult.keySet()), getApplicationContext(), this, true);
             participantRecycle.setAdapter(participantAdapter);
@@ -125,7 +126,7 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
         pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
         editor = pref.edit();
         //event info component
-        eventID = pref.getInt("eventId",-1);
+        eventID = getIntent().getIntExtra("eventId",-1);
         dateEvent = findViewById(R.id.text_calendar);
         timeEvent = findViewById(R.id.text_ora);
         locationEvent = findViewById(R.id.text_loc);
