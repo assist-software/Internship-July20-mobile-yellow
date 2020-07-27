@@ -158,7 +158,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
     }
 
     @Override
-    public void onClubClick(String clubName) {
+    public void onClubClick(String clubName, int clubId) {
         Intent clubIntent = new Intent(getActivity(), ClubDetailsActivity.class);
         clubIntent.putExtra(Constants.CLUB_NAME, clubName);
         startActivity(clubIntent);

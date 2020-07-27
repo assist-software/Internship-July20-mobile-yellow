@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class EventDetails {
+    private int id;
     @SerializedName("title")
     private String title;
     @SerializedName("location")
@@ -20,13 +21,22 @@ public class EventDetails {
     @SerializedName("participants")
     private List<ParticipantAdapterModel> participants;
 
-    public EventDetails(String title, String location, String description, Date dataEvent, Date timeEvent, List<ParticipantAdapterModel> participants) {
+    public EventDetails(int id, String title, String location, String description, Date dataEvent, Date timeEvent, List<ParticipantAdapterModel> participants) {
+        this.id = id;
         this.title = title;
         this.location = location;
         this.description = description;
         this.dataEvent = dataEvent;
         this.timeEvent = timeEvent;
         this.participants = participants;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

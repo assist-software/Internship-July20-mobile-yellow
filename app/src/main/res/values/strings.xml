@@ -78,6 +78,7 @@
     <string name="join">Join</string>
     <string name="joined">Joined</string>
     <string name="pending">Pending</string>
+    <string name="years">Years</string>
     <string name="future_events">Future events</string>
     <string name="today_s_workout">Today\'s workout</string>
     <string-array name="spinnerPrimarySports">
