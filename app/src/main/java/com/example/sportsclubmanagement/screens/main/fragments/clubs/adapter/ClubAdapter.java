@@ -72,7 +72,7 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.MyViewHolder> 
             clubItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    clubAdapterListener.onClubClick(clubAdapterModel.getClubInfo().getName());
+                    clubAdapterListener.onClubClick(clubAdapterModel.getClubInfo().getName(), clubAdapterModel.getClubInfo().getId());
                 }
             });
             if (hasBorder) {

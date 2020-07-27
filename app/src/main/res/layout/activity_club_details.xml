@@ -78,6 +78,7 @@
                             app:cardBackgroundColor="@color/colorLightGray" />
 
                         <TextView
+                            android:id="@+id/coach_age"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/years_45" />
@@ -114,24 +115,16 @@
                             app:cardElevation="0dp" />
 
                         <TextView
-                            android:id="@+id/clubName1"
+                            android:id="@+id/ownedClubs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/space_7dp"
                             android:fontFamily="@font/inter_normal"
                             android:text="@string/running_club"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/text_12sp" />
-
-                        <TextView
-                            android:id="@+id/clubName2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/space_7dp"
-                            android:fontFamily="@font/inter_normal"
-                            android:text="@string/running_club"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/text_12sp" />
+                            android:textSize="@dimen/text_12sp"
+                            android:ellipsize="end"
+                            android:maxLines="1"/>
                     </LinearLayout>
 
                     <TextView
@@ -152,7 +145,7 @@
 
             <RelativeLayout
                 android:id="@+id/members_relativeLayout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
