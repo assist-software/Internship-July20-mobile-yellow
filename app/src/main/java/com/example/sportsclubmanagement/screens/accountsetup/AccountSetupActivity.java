@@ -109,7 +109,7 @@ public class AccountSetupActivity extends AppCompatActivity {
 
     private boolean checkInfo() {
         return primarySports.getSelectedItemId() != 0 && secondarySports.getSelectedItemId() != 0 && Validations.weightValidation(weight.getText().toString())
-                && Validations.heightValidation(height.getText().toString()) && Validations.ageValidation(age.getText().toString()) && (female.isChecked() || male.isChecked());
+                && Validations.heightValidation(height.getText().toString()) && Validations.ageValidation(age.getText().toString()) && (female.isChecked() || male.isChecked()) && primarySports.getSelectedItemId() != secondarySports.getSelectedItemId();
     }
 
     private void getSports() {

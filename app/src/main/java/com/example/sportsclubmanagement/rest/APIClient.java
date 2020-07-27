@@ -1,5 +1,6 @@
 package com.example.sportsclubmanagement.rest;
 
+import com.example.sportsclubmanagement.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -18,8 +19,8 @@ public class APIClient {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         retrofit = new Retrofit.Builder()
-                //.baseUrl("http://34.65.176.55:8081/")
-                .baseUrl("http://192.168.100.228:8001/") //Se modifica cu endpoint de pe server
+                //.baseUrl(Constants.URL_SERVER)
+                .baseUrl(Constants.URL_LOCAL) //Se modifica cu endpoint de pe server
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

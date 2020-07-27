@@ -29,6 +29,7 @@ import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.utils.Constants;
 import com.example.sportsclubmanagement.utils.Validations;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -72,13 +73,16 @@ public class AddWorkoutsActivity extends AppCompatActivity {
                             spinnerEventData.put(ev.getId(),ev.getTitle());
                         }
                         if(spinnerEventData.size()!=0){
-                            event.setAdapter(populateSpinner(AddWorkoutsActivity.this,spinnerEventData.values().toArray((new String[0]))));
+                        ArrayList<String> lst = new ArrayList<>(spinnerEventData.values());
+                        lst.add(0,"Event");
+                        event.setAdapter(populateSpinner(AddWorkoutsActivity.this,lst.toArray(new String[0])));
                         }else{
-                            //TODO: if arent events?
+                            event.setAdapter(populateSpinner(AddWorkoutsActivity.this,new String[]{"No events available"}));
                         }
                     }
                 }else{
-
+                    Log.d("AddWorkoutScreen","No events response from server");
+                    Toast.makeText(getApplicationContext(),Constants.ADD_WORKOUT_ERROR,Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -206,6 +210,7 @@ public class AddWorkoutsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
+
                     Log.d("EventDetails", "Workout was added successful");
                 } else {
                     Log.d("EventDetails", "Error added workout");

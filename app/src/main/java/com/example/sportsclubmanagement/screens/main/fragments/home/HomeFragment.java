@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ import com.example.sportsclubmanagement.screens.main.fragments.workouts.workouta
 import com.example.sportsclubmanagement.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -237,7 +239,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                     futureEvents = new ArrayList<>();
                     allEventsAvailable = new ArrayList<>();
                     for (EventMainInfo event : response.body()) {
-                        if (checkIfEventIsInFuture(event.getDate())) {
+                        if (checkIfEventIsInFutureOrToday(event.getDate())) {
                             futureEvents.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), true, true, true));
                         }
                         if (firstEventsRecyclerView.getVisibility() != View.GONE) {
@@ -248,6 +250,9 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                         hideFutureEvent();
                     } else {
                         initEventsAdapter(futureEvents, futureEventsAdapter, futureEventsRecyclerView);
+                    }
+                    if(futureEvents.size()==1){
+                        futureEventsRecyclerView.getLayoutParams().height=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getContext().getResources().getDisplayMetrics());
                     }
                     //if user has been wasnt join into events
                     if (firstEventsRecyclerView.getVisibility() != View.GONE) {
@@ -268,9 +273,11 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         });
     }
 
-    private boolean checkIfEventIsInFuture(Date eventDate) {
+    private boolean checkIfEventIsInFutureOrToday(Date eventDate) {
         Date now = new Date();
-        return eventDate.after(now);
+        Calendar calendar =Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR,-1);
+        return eventDate.after(calendar.getTime());
     }
 
     private void hideFutureEvent() {
