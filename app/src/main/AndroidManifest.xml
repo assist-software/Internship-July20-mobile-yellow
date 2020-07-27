@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".screens.calendar.CalendarActivity"></activity>
         <activity
             android:name=".screens.splash.SplashActivity"
             android:theme="@style/FullScreen">
@@ -39,12 +40,15 @@
         <activity
             android:name=".screens.addworkouts.AddWorkoutsActivity"
             android:theme="@style/NoActionBarNoFullScreen" />
-        <activity android:name=".screens.eventdetails.EventActivity"
-            android:theme="@style/NoActionBarNoFullScreen"/>
-        <activity android:name=".screens.myprofile.MyProfileActivity"
-            android:theme="@style/NoActionBarNoFullScreen"/>
-        <activity android:name=".screens.clubdetails.ClubDetailsActivity"
-            android:theme="@style/NoActionBarNoFullScreen"/>
+        <activity
+            android:name=".screens.eventdetails.EventActivity"
+            android:theme="@style/NoActionBarNoFullScreen" />
+        <activity
+            android:name=".screens.myprofile.MyProfileActivity"
+            android:theme="@style/NoActionBarNoFullScreen" />
+        <activity
+            android:name=".screens.clubdetails.ClubDetailsActivity"
+            android:theme="@style/NoActionBarNoFullScreen" />
     </application>
 
 </manifest>

@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
 public class WorkoutsDetails {
-    @SerializedName("user_id")
-    private int user_id;
     @SerializedName("date")
     private Date date_workout;
     @SerializedName("time")
@@ -20,22 +18,13 @@ public class WorkoutsDetails {
     @SerializedName("bpm")
     private int bpm;
 
-    public WorkoutsDetails(int user_id, Date date_workout, int time_workout, double distance_travelled, double calories, double avgSpeed, int bpm) {
-        this.user_id = user_id;
+    public WorkoutsDetails(Date date_workout, int time_workout, double distance_travelled, double calories, double avgSpeed, int bpm) {
         this.date_workout = date_workout;
         this.time_workout = time_workout;
         this.distance_travelled = distance_travelled;
         this.calories = calories;
         this.avgSpeed = avgSpeed;
         this.bpm = bpm;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public Date getDate_workout() {

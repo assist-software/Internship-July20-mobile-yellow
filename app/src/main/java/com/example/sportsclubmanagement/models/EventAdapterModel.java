@@ -12,6 +12,7 @@ public class EventAdapterModel {
     private static int imgId = R.drawable.img_event;
     private boolean visibleBtn ;
     private boolean upPositionBtn;
+    private boolean big;
 
     public int getId() {
         return id;
@@ -69,12 +70,21 @@ public class EventAdapterModel {
         this.upPositionBtn = upPositionBtn;
     }
 
-    public EventAdapterModel(int id, String title, String location, Date dataEvent, boolean visibleBtn, boolean upPositionBtn) {
+    public EventAdapterModel(int id, String title, String location, Date dataEvent, boolean visibleBtn, boolean upPositionBtn, boolean big) {
         this.id = id;
         this.title = title;
         this.location = location;
         this.dataEvent = dataEvent;
         this.visibleBtn = visibleBtn;
         this.upPositionBtn = upPositionBtn;
+        this.big = big;
+    }
+
+    public boolean isBig() {
+        return big;
+    }
+
+    public void setBig(boolean big) {
+        this.big = big;
     }
 }

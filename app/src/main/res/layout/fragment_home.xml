@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.main.fragments.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +17,8 @@
             android:layout_marginTop="@dimen/space_16dp"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -32,10 +32,10 @@
                 android:id="@+id/name_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/text_24sp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Hehe Boy" />
+                android:text="Hehe Boy"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_24sp" />
         </LinearLayout>
 
         <RelativeLayout
@@ -55,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_normal"
-                    android:paddingStart="@dimen/space_24dp"
+                    android:paddingStart="@dimen/space_16dp"
                     android:text="@string/join_your_first_club"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/text_18sp" />
@@ -86,8 +86,8 @@
                 android:id="@+id/home_joinEvent_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
                 android:fontFamily="@font/inter_normal"
-                android:layout_marginStart="@dimen/space_24dp"
                 android:text="@string/join_your_first_event"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_18sp" />
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_normal"
-                android:paddingStart="@dimen/space_24dp"
+                android:paddingStart="@dimen/space_16dp"
                 android:text="@string/clubs"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_18sp" />
@@ -144,8 +144,8 @@
                 android:id="@+id/home_futureEvents_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16dp"
                 android:fontFamily="@font/inter_normal"
-                android:layout_marginStart="@dimen/space_24dp"
                 android:text="@string/future_events"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_18sp" />
@@ -159,6 +159,32 @@
                 android:scrollbars="none" />
         </RelativeLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/home_workout_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_36sp"
+            app:layout_constraintTop_toBottomOf="@id/home_futureEvents_section"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/home_workout_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/workouts"
+                android:layout_marginStart="@dimen/space_16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_18sp"
+                android:fontFamily="@font/inter_normal"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_workout_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/home_workout_text"
+                android:layout_marginTop="@dimen/space_24dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

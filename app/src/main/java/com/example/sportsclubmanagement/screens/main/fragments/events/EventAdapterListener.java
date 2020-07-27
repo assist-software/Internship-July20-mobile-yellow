@@ -4,4 +4,5 @@ import com.example.sportsclubmanagement.models.EventAdapterModel;
 
 public interface EventAdapterListener {
     void onEventClick(EventAdapterModel event);
+    void onEventJoinClick(EventAdapterModel event);
 }

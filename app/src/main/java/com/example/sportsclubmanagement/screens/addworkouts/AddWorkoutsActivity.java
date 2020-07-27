@@ -1,9 +1,11 @@
 package com.example.sportsclubmanagement.screens.addworkouts;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,16 +22,34 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import com.example.sportsclubmanagement.R;
+import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
+import com.example.sportsclubmanagement.models.apiModels.Response.EventMainInfo;
+import com.example.sportsclubmanagement.rest.APIClient;
+import com.example.sportsclubmanagement.rest.APIInterface;
+import com.example.sportsclubmanagement.utils.Constants;
 import com.example.sportsclubmanagement.utils.Validations;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddWorkoutsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    Spinner event, workoutEffectiveness;
-    ImageView notificationIcon;
-    AdapterView.OnItemSelectedListener spinnerListener;
-    Button saveWorkout;
-    EditText workoutDuration, heartRate, calories, avSpeed, distance;
+    private Spinner event, workoutEffectiveness;
+    private ImageView notificationIcon;
+    private AdapterView.OnItemSelectedListener spinnerListener;
+    private Button saveWorkout;
+    private EditText workoutDuration, heartRate, calories, avSpeed, distance;
+    private APIInterface apiInterface;
+    private SharedPreferences pref;
+    private Map<Integer,String> spinnerEventData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +57,35 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_workouts);
         initListener();
         initComponents();
+        getListOfEventsForSpinner();
+    }
+
+    private void getListOfEventsForSpinner() {
+        Call<List<EventMainInfo>> call = apiInterface.getUsersEvents(pref.getString(Constants.TOKEN,null));
+        call.enqueue(new Callback<List<EventMainInfo>>() {
+            @Override
+            public void onResponse(Call<List<EventMainInfo>> call, Response<List<EventMainInfo>> response) {
+                if(response.isSuccessful()){
+                    if(response.body()!=null){
+                        spinnerEventData = new HashMap<>();
+                        for(EventMainInfo ev : response.body()){
+                            spinnerEventData.put(ev.getId(),ev.getTitle());
+                        }
+                        if(spinnerEventData.size()!=0){
+                            event.setAdapter(populateSpinner(AddWorkoutsActivity.this,spinnerEventData.values().toArray((new String[0]))));
+                        }else{
+                            //TODO: if arent events?
+                        }
+                    }
+                }else{
+
+                }
+            }
+            @Override
+            public void onFailure(Call<List<EventMainInfo>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void initComponents() {
@@ -48,6 +97,8 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         avSpeed = findViewById(R.id.avspeed_editText);
         distance = findViewById(R.id.distance_editText);
         toolbar = findViewById(R.id.home_tool_bar);
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+        pref =getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES,MODE_PRIVATE);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false); //remove the default title from the action bar
@@ -63,7 +114,6 @@ public class AddWorkoutsActivity extends AppCompatActivity {
 
         event = findViewById(R.id.spinnerEvent);
         workoutEffectiveness = findViewById(R.id.spinnerWorkoutEffectiveness);
-        event.setAdapter(populateSpinner(AddWorkoutsActivity.this, getResources().getStringArray(R.array.spinnerEvents)));
         workoutEffectiveness.setAdapter(populateSpinner(AddWorkoutsActivity.this, getResources().getStringArray(R.array.spinnerWorkoutEfectiveness)));
         event.setOnItemSelectedListener(spinnerListener);
         workoutEffectiveness.setOnItemSelectedListener(spinnerListener);
@@ -142,11 +192,32 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         public void onClick(View view) {
             if (checkInfo()) {
                 Toast.makeText(AddWorkoutsActivity.this, R.string.saved_changes, Toast.LENGTH_SHORT).show();
-                //TODO: make  POST API FUNC
+                addWorkout(Integer.parseInt(spinnerEventData.get(event.getSelectedItem())));
                 finish();
             } else {
                 Toast.makeText(AddWorkoutsActivity.this, R.string.invalid_data, Toast.LENGTH_SHORT).show();
             }
         }
     };
+
+    private void addWorkout(int eventID) {
+        Call<Void> call = apiInterface.addWorkout(pref.getString("token", null),eventID);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("EventDetails", "Workout was added successful");
+                } else {
+                    Log.d("EventDetails", "Error added workout");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                if(t!=null)
+                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                call.cancel();
+            }
+        });
+    }
 }

@@ -76,17 +76,19 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
 
             @Override
             public void onFailure(Call<List<Clubs>> call, Throwable t) {
-                Toast.makeText(getContext(), "Error in getClubs call", Toast.LENGTH_SHORT).show();
+                if(t!=null)
+                    Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                call.cancel();
             }
         });
     }
 
     @Override
     public void onJoinClick(String clubName, int club_id) {
-        joinClubFunction(club_id, this);
+        joinClubFunction(club_id);
     }
 
-    private void joinClubFunction(int club_id, final ClubAdapterListener listener) {
+    private void joinClubFunction(int club_id) {
         Call<Void> call = apiInterface.joinClub(pref.getString(Constants.TOKEN, null), club_id);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -105,6 +107,9 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                if(t!=null)
+                    Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                call.cancel();
 
             }
         });

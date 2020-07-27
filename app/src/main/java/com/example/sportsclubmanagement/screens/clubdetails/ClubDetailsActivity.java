@@ -82,6 +82,11 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
     }
 
     @Override
+    public void onEventJoinClick(EventAdapterModel event) {
+
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
@@ -99,7 +104,7 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
     private List<EventAdapterModel> getMockedList() {
         List<EventAdapterModel> mocks = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            mocks.add(new EventAdapterModel(1,"title test", "loc test", new Date(),false,false));
+            mocks.add(new EventAdapterModel(1,"title test", "loc test", new Date(),false,false,false));
         }
         return mocks;
     }

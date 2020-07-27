@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.sportsclubmanagement.R;
+import com.example.sportsclubmanagement.screens.calendar.CalendarActivity;
 import com.example.sportsclubmanagement.screens.main.fragments.clubs.ClubsFragment;
 import com.example.sportsclubmanagement.screens.main.fragments.events.EventsFragment;
 import com.example.sportsclubmanagement.screens.main.fragments.home.HomeFragment;
@@ -127,7 +128,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Open Notification Screen", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_calendar:
-                Toast.makeText(this, "Open Calendar Screen", Toast.LENGTH_SHORT).show();
+                Intent calendar = new Intent(getApplicationContext(), CalendarActivity.class);
+                startActivity(calendar);
                 break;
             case R.id.nav_log_out:
                 editor.clear();

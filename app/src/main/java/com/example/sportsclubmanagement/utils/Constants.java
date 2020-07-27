@@ -26,5 +26,6 @@ public class Constants {
     public static final String female = "F";
     public static final String Home_get_list_accpet="List of events was accepted";
     public static final String Home_get_list_error="Fail gave all events";
+    public static final String Home_join_event_error="Failed join event";
 
 }

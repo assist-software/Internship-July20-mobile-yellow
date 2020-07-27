@@ -108,7 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+                if(t!=null)
+                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });

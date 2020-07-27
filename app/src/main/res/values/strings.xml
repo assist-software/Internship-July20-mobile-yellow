@@ -28,7 +28,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="clubs">Clubs</string>
     <string name="events">Events</string>
-    <string name="workouts">Workouts</string>
     <string name="account_setup">Account Setup</string>
     <string name="gender">Gender</string>
     <string name="height">Height</string>
@@ -80,6 +79,8 @@
     <string name="pending">Pending</string>
     <string name="future_events">Future events</string>
     <string name="today_s_workout">Today\'s workout</string>
+    <string name="workouts">Workouts</string>
+    <string name="workouts_history">Workouts history</string>
     <string-array name="spinnerPrimarySports">
         <item>Primary Sport</item>
         <item>Ceva 1</item>
