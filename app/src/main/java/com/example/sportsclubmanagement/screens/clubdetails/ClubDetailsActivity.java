@@ -4,10 +4,10 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -39,7 +39,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ClubDetailsActivity extends AppCompatActivity implements ParticipantAdapterListener, EventAdapterListener {
-    private RecyclerView eventsRecycler, membersRecyclerView;
+    private RecyclerView eventsRecyclerView, membersRecyclerView;
     private EventAdapter eventsAdapter;
     private ParticipantAdapter membersAdapter;
     private Toolbar toolbar;
@@ -74,7 +74,7 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
         ownedClubs = findViewById(R.id.ownedClubs);
 
         membersRecyclerView = findViewById(R.id.members_recyclerView);
-        eventsRecycler = findViewById(R.id.events_recyclerView);
+        eventsRecyclerView = findViewById(R.id.events_recyclerView);
 
         //add back button to toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,52 +110,62 @@ public class ClubDetailsActivity extends AppCompatActivity implements Participan
             @Override
             public void onResponse(Call<ClubDetailsObj> call, Response<ClubDetailsObj> response) {
                 ClubDetailsObj clubDetailsObj = response.body();
-                //coach info
-                String coachFirstName = clubDetailsObj.getOwnerInfo().getIdOwner().getCoachFirstName();
-                String coachLastName = clubDetailsObj.getOwnerInfo().getIdOwner().getCoachLastName();
-                String coachAgeString = String.valueOf(clubDetailsObj.getOwnerInfo().getIdOwner().getAge());
-                coachName.setText(coachFirstName + " " + coachLastName);
-                coachAge.setText(coachAgeString + " " + getResources().getString(R.string.years));
-                List<OwnerInfo> coachOwnedClubs = clubDetailsObj.getOwnedClubs();
-                StringBuilder ownedString = new StringBuilder();
-                for (OwnerInfo ownedItem : coachOwnedClubs) {
-                    ownedString.append(ownedItem.getClubName() + " ");
-                }
-                ownedClubs.setText(ownedString);
-
-                //members list
-                List<MembersListItem> memberList = clubDetailsObj.getMembers();
-                List<ParticipantAdapterModel> localList = new ArrayList<>();
-                for (MembersListItem element : memberList) {
-                    if (element.isIs_member()) {
-                        localList.add(new ParticipantAdapterModel(element.getIdUser().getFirst_name() + " " + element.getIdUser().getLast_name()));
-                    }
-                }
-                if(localList.size()!=0){
-                    membersAdapter = new ParticipantAdapter(localList, getApplicationContext(), ClubDetailsActivity.this, false);
-                    membersRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    membersRecyclerView.setAdapter(membersAdapter);
-                }
-                else{
-                    membersRecyclerView.setVisibility(View.GONE);
-                }
-
-                //events list
-                List<EventsAvailable> eventsList = clubDetailsObj.getEvents();
-                List<EventAdapterModel> localEventsList = new ArrayList<>();
-                for (EventsAvailable event : eventsList) {
-                    localEventsList.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), false, false));
-                }
-                eventsAdapter = new EventAdapter(localEventsList, getApplicationContext(), ClubDetailsActivity.this);
-                eventsRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                eventsRecycler.setAdapter(eventsAdapter);
+                initCoachDetails(clubDetailsObj);
+                initMembersAdapter(clubDetailsObj);
+                initEventsAdapter(clubDetailsObj);
             }
 
             @Override
             public void onFailure(Call<ClubDetailsObj> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                Log.e("Response Error", t.getMessage());
             }
         });
     }
 
+    private void initMembersAdapter(ClubDetailsObj clubDetailsObj) {
+        List<MembersListItem> memberList = clubDetailsObj.getMembers();
+        List<ParticipantAdapterModel> localList = new ArrayList<>();
+        for (MembersListItem element : memberList) {
+            if (element.isIs_member()) {
+                localList.add(new ParticipantAdapterModel(element.getIdUser().getFirst_name() + " " + element.getIdUser().getLast_name()));
+            }
+        }
+        if (localList.size() != 0) {
+            membersAdapter = new ParticipantAdapter(localList, getApplicationContext(), ClubDetailsActivity.this, false);
+            membersRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            membersRecyclerView.setAdapter(membersAdapter);
+        } else {
+            membersRecyclerView.setVisibility(View.GONE);
+        }
+    }
+
+    private void initEventsAdapter(ClubDetailsObj clubDetailsObj) {
+        List<EventsAvailable> eventsList = clubDetailsObj.getEvents();
+        List<EventAdapterModel> localEventsList = new ArrayList<>();
+        for (EventsAvailable event : eventsList) {
+            localEventsList.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), false, false));
+        }
+        if (localEventsList.size() != 0) {
+            eventsAdapter = new EventAdapter(localEventsList, getApplicationContext(), ClubDetailsActivity.this);
+            eventsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+            eventsRecyclerView.setAdapter(eventsAdapter);
+        } else {
+            eventsRecyclerView.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void initCoachDetails(ClubDetailsObj clubDetailsObj) {
+        String coachFirstName = clubDetailsObj.getOwnerInfo().getIdOwner().getCoachFirstName();
+        String coachLastName = clubDetailsObj.getOwnerInfo().getIdOwner().getCoachLastName();
+        String coachAgeString = String.valueOf(clubDetailsObj.getOwnerInfo().getIdOwner().getAge());
+        coachName.setText(coachFirstName + " " + coachLastName);
+        coachAge.setText(coachAgeString + " " + getResources().getString(R.string.years));
+        List<OwnerInfo> coachOwnedClubs = clubDetailsObj.getOwnedClubs();
+        StringBuilder ownedString = new StringBuilder();
+        for (OwnerInfo ownedItem : coachOwnedClubs) {
+            ownedString.append(ownedItem.getClubName() + " ");
+        }
+        ownedClubs.setText(ownedString);
+    }
 }
