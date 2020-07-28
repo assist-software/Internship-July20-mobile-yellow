@@ -82,7 +82,7 @@ public class ClubsFragment extends Fragment implements ClubAdapterListener {
             @Override
             public void onFailure(Call<List<Clubs>> call, Throwable t) {
                 if(t!=null)
-                    Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClubsFragment.this.getContext(), t.toString(), Toast.LENGTH_SHORT).show();
                 call.cancel();
             }
         });

@@ -32,6 +32,7 @@ import com.example.sportsclubmanagement.utils.Validations;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,8 +70,10 @@ public class AddWorkoutsActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         spinnerEventData = new HashMap<>();
+                        Date today = new Date();
                         for (EventMainInfo ev : response.body()) {
-                            spinnerEventData.put(ev.getId(), ev.getTitle());
+                            if(ev.getDate().before(today))
+                                spinnerEventData.put(ev.getId(), ev.getTitle());
                         }
                         if (spinnerEventData.size() != 0) {
                             ArrayList<String> lst = new ArrayList<>(spinnerEventData.values());
