@@ -36,6 +36,18 @@
             app:layout_constraintTop_toBottomOf="@id/today_work_text" />
 
         <TextView
+            android:id="@+id/noInformationTextView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_information"
+            android:layout_margin="@dimen/space_8dp"
+            app:layout_constraintTop_toBottomOf="@id/today_work_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/workouts_history_text"
+            android:visibility="gone"/>
+
+        <TextView
             android:id="@+id/workouts_history_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +68,17 @@
             android:layout_marginTop="@dimen/space_13dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/workouts_history_text" />
+
+        <TextView
+            android:id="@+id/noInformationTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_information"
+            android:layout_margin="@dimen/space_8dp"
+            app:layout_constraintTop_toBottomOf="@id/workouts_history_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/addWorkout_btn"
