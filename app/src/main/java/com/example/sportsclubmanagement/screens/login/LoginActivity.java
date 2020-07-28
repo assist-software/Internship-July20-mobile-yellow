@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.apiModels.Request.UserLogin;
 import com.example.sportsclubmanagement.models.apiModels.Response.Token;
-import com.example.sportsclubmanagement.models.apiModels.Response.UserDetails;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.accountsetup.AccountSetupActivity;
@@ -30,7 +29,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private TextView regTxt;
-    private Button logBtn;
+    private Button logBtn,forgotBtn;
     private EditText email, pass;
     private APIInterface apiInterface;
     private SharedPreferences pref;
@@ -60,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("TAG", response.code() + "");
                     Token body_resp = response.body();
                     updatePref(body_resp);
-                    checkIfUserHaveDetails();
+                    redirect(pref.getBoolean(Constants.isSetup, false));
                 } else {
                     Log.d("error message", response.message());
                     Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
@@ -69,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-                if(t!=null)
+                if (t != null)
                     Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
@@ -112,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         apiInterface = APIClient.getClient().create(APIInterface.class);
         pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
         editor = pref.edit();
+        forgotBtn = findViewById(R.id.forgotBtn);
     }
 
     private void initListeners() {
@@ -132,27 +132,33 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        forgotBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!email.getText().toString().isEmpty() && Validations.emailValidation(email.getText().toString())){
+                    resetPasswordCall(email.getText().toString());
+                }else{
+                    Toast.makeText(getApplicationContext(),Constants.EMPTY_OR_INVALID_EMAIL,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
-    private void checkIfUserHaveDetails() {
-        Call<UserDetails> call = apiInterface.userDetails(pref.getString("token", null), pref.getInt("id", 0));
-        call.enqueue(new Callback<UserDetails>() {
+    private void resetPasswordCall(String email) {
+        Call<Void> call = apiInterface.resetPassword(email);
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
-                if (response.isSuccessful()) {
-                    Log.d("TAG", response.code() + "");
-                    UserDetails resp = response.body();
-                    redirect(resp.getAge() != 0);
-                } else {
-                    Log.d("error message", response.message());
-                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),Constants.RESET_PASSWORD_OK,Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),Constants.CONNECTION_ERROR,Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<UserDetails> call, Throwable t) {
-                if(t!=null)
-                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
+            public void onFailure(Call<Void> call, Throwable t) {
                 call.cancel();
             }
         });

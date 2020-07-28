@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
     private ClubAdapter firstClubAdapter, myNewClubsAdapter;
     private EventAdapter futureEventsAdapter, firstEventAdapter;
     private workoutAdapter adapterWorkout;
-    private TextView name, txtClub, txtEvent, clubJoinListTxt, futureEvetnsTxt, noInformation1,
+    private TextView name, joinFirstClubtxt, joinFirstEventTxt, newClubTxt, futureEvetnsTxt, noInformation1,
             noInformation2, noInformation3, noInformation4, noInformation5, workoutTxt;
     private APIInterface apiInterface;
     private SharedPreferences pref;
@@ -91,9 +91,9 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         newClubRecyclerView = view.findViewById(R.id.home_club_recyclerView);
         workoutRecyclerView = view.findViewById(R.id.home_workout_recycler);
 
-        txtClub = view.findViewById(R.id.home_joinClub_textView);
-        txtEvent = view.findViewById(R.id.home_joinEvent_textView);
-        clubJoinListTxt = view.findViewById(R.id.home_club_textView);
+        joinFirstClubtxt = view.findViewById(R.id.home_joinClub_textView);
+        joinFirstEventTxt = view.findViewById(R.id.home_joinEvent_textView);
+        newClubTxt = view.findViewById(R.id.home_club_textView);
         futureEvetnsTxt = view.findViewById(R.id.home_futureEvents_textView);
         workoutTxt = view.findViewById(R.id.home_workout_text);
 
@@ -125,8 +125,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                         initWorkoutAdapter(workouts,adapterWorkout,workoutRecyclerView);
                     }
                     else {
-                        workoutRecyclerView.setVisibility(View.GONE);
-                        noInformation5.setVisibility(View.VISIBLE);
+                        hideWorkoutRecycler();
                     }
                 } else {
                     Log.d("Home", "Error");
@@ -141,6 +140,11 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                 call.cancel();
             }
         });
+    }
+
+    private void hideWorkoutRecycler() {
+        workoutRecyclerView.setVisibility(View.GONE);
+        noInformation5.setVisibility(View.VISIBLE);
     }
 
     private void showUserInfo() {
@@ -167,6 +171,17 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
         });
     }
 
+    private void hideFirstJoinClub() {
+        firstClubsRecyclerView.setVisibility(View.GONE);
+        joinFirstClubtxt.setVisibility(View.GONE);
+        noInformation1.setVisibility(View.GONE);
+    }
+
+    private void hideMyNewClubRecycler() {
+        clubsRecyclerView.setVisibility(View.GONE);
+        noInformation3.setVisibility(View.VISIBLE);
+    }
+
     private void requestClubs() {
         Call<List<Clubs>> call = apiInterface.getAllClubs(pref.getString(Constants.TOKEN, null));
         call.enqueue(new Callback<List<Clubs>>() {
@@ -183,8 +198,10 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                         initClubsAdapter(myNewClubs, firstClubAdapter, firstClubsRecyclerView, true);
                     }
                     if (myNewClubs.size() == 0) {
-                        hideClubTxt();
-                        hideFirstJoinClub();
+                        hideMyNewClubRecycler();
+                        if(joinFirstClubtxt.getVisibility()!=View.GONE)
+                            noInformation1.setVisibility(View.VISIBLE);
+                        noInformation3.setVisibility(View.VISIBLE);
                     } else {
                         initClubsAdapter(myNewClubs, myNewClubsAdapter, newClubRecyclerView, true);
                     }
@@ -200,16 +217,6 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                 call.cancel();
             }
         });
-    }
-
-    private void hideClubTxt() {
-        noInformation3.setVisibility(View.VISIBLE);
-        clubsRecyclerView.setVisibility(View.GONE);
-    }
-
-    private void hideFirstJoinClub() {
-        firstClubsRecyclerView.setVisibility(View.GONE);
-        noInformation1.setVisibility(View.VISIBLE);
     }
 
     private void hasEvents() {
@@ -239,6 +246,8 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
 
     private void hideFirstJoinEvent() {
         firstEventsRecyclerView.setVisibility(View.GONE);
+        joinFirstEventTxt.setVisibility(View.GONE);
+        noInformation2.setVisibility(View.GONE);
     }
 
     private void getAllEvents() {
@@ -251,10 +260,10 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                     allEventsAvailable = new ArrayList<>();
                     for (EventMainInfo event : response.body()) {
                         if (checkIfEventIsInFutureOrToday(event.getDate())) {
-                            futureEvents.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), true, true, true));
-                        }
-                        if (firstEventsRecyclerView.getVisibility() != View.GONE) {
-                            allEventsAvailable.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), true, false, false));
+                            futureEvents.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), true, false, true));
+                            if (firstEventsRecyclerView.getVisibility() != View.GONE) {
+                                allEventsAvailable.add(new EventAdapterModel(event.getId(), event.getTitle(), event.getLocatia(), event.getDate(), true, true, false));
+                            }
                         }
                     }
                     if (futureEvents.size() == 0) {
@@ -266,7 +275,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                         noInformation2.setVisibility(View.VISIBLE);
                     }
                     if(futureEvents.size()==1){
-                        futureEventsRecyclerView.getLayoutParams().height=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getContext().getResources().getDisplayMetrics());
+                        futureEventsRecyclerView.getLayoutParams().height=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300, getContext().getResources().getDisplayMetrics());
                     }
                     //if user has been wasnt join into events
                     if (firstEventsRecyclerView.getVisibility() != View.GONE) {
@@ -315,13 +324,17 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                         club.setRequested(true);
                         myNewClubs.remove(club);
                         allClubs.remove(club);
-                        if (allClubs.stream().filter(p -> p.isMember() || p.isRequested()).collect(Collectors.toList()).isEmpty()) {
+                        if (!allClubs.stream().filter(p -> p.isMember() || p.isRequested()).collect(Collectors.toList()).isEmpty()) {
                             hideFirstJoinClub();
                         }
                         if (firstClubsRecyclerView.getVisibility() != View.GONE) {
                             initClubsAdapter(myNewClubs, firstClubAdapter, firstClubsRecyclerView, true);
                         }
-                        initClubsAdapter(myNewClubs, myNewClubsAdapter, newClubRecyclerView, true);
+                        if(myNewClubs.size()!=0){
+                            initClubsAdapter(myNewClubs, myNewClubsAdapter, newClubRecyclerView, true);
+                        }else{
+                            noInformation1.setVisibility(View.VISIBLE);
+                        }
                     }
 
                 }
