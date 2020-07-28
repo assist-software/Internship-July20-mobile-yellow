@@ -112,8 +112,14 @@ public class EventsFragment extends Fragment implements EventAdapterListener {
             recyclerView.setAdapter(adapter);
         }
         else {
-            recyclerView.setVisibility(View.GONE);
-            noInformation3.setVisibility(View.VISIBLE);
+            if(recyclerView == pastRecycler){
+                recyclerView.setVisibility(View.GONE);
+                noInformation1.setVisibility(View.VISIBLE);
+            }
+            else {
+                recyclerView.setVisibility(View.GONE);
+                noInformation2.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -124,14 +130,8 @@ public class EventsFragment extends Fragment implements EventAdapterListener {
             recyclerView.setAdapter(adapter);
         }
         else {
-            if(recyclerView == pastRecycler){
-                recyclerView.setVisibility(View.GONE);
-                noInformation1.setVisibility(View.VISIBLE);
-            }
-            else {
-                recyclerView.setVisibility(View.GONE);
-                noInformation2.setVisibility(View.VISIBLE);
-            }
+            recyclerView.setVisibility(View.GONE);
+            noInformation3.setVisibility(View.VISIBLE);
         }
     }
 }

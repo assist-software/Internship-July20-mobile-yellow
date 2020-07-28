@@ -10,18 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.ParticipantAdapterModel;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventDetails;
 import com.example.sportsclubmanagement.models.apiModels.Response.EventParticipant;
 import com.example.sportsclubmanagement.models.apiModels.Response.WorkoutForEventParticipation;
-import com.example.sportsclubmanagement.models.apiModels.Response.WorkoutsDetails;
 import com.example.sportsclubmanagement.rest.APIClient;
 import com.example.sportsclubmanagement.rest.APIInterface;
 import com.example.sportsclubmanagement.screens.eventdetails.adapterParticipant.ParticipantAdapter;
@@ -35,13 +28,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EventActivity extends AppCompatActivity implements ParticipantAdapterListener {
     private Toolbar event_toolbar;
-    private TextView title_event,dateEvent,timeEvent,locationEvent,descriptionEvent,titleTextEvent, textHintParticipations, noInformationTextView;
+    private TextView title_event, dateEvent, timeEvent, locationEvent, descriptionEvent, titleTextEvent, textHintParticipations, noInformationTextView;
     private ImageView imgEvent;
     private RecyclerView participantRecycle;
     private ParticipantAdapter participantAdapter;
@@ -60,7 +58,7 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
     }
 
     private void getEventDetails() {
-        Call<EventDetails> call = apiInterface.getEventDetails(pref.getString("token", null),eventID);
+        Call<EventDetails> call = apiInterface.getEventDetails(pref.getString("token", null), eventID);
         call.enqueue(new Callback<EventDetails>() {
             @Override
             public void onResponse(Call<EventDetails> call, Response<EventDetails> response) {
@@ -86,21 +84,20 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
         locationEvent.setText(eventDetails.getLocation());
         SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         timeEvent.setText(formatterTime.format(eventDetails.getTimeEvent()));
-        SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
         dateEvent.setText(formatter.format(eventDetails.getDataEvent()));
         descriptionEvent.setText(eventDetails.getDescription());
         titleTextEvent.setText(eventDetails.getDescription().split(".")[0]);
         //for recycler with participants
-        if(eventDetails.getParticipants().size()!=0){
+        if (eventDetails.getParticipants().size() != 0) {
             participantResult = new HashMap<>();
             List<EventParticipant> participantsFromBackend = eventDetails.getParticipants();
-            for(EventParticipant participant : participantsFromBackend){
-                participantResult.put(new ParticipantAdapterModel(participant.getFirstName()+" "+participant.getLastName()),participant.getWorkout());
+            for (EventParticipant participant : participantsFromBackend) {
+                participantResult.put(new ParticipantAdapterModel(participant.getFirstName() + " " + participant.getLastName()), participant.getWorkout());
             }
             participantAdapter = new ParticipantAdapter(new ArrayList<>(participantResult.keySet()), getApplicationContext(), this, true);
             participantRecycle.setAdapter(participantAdapter);
-        }
-        else {
+        } else {
             participantRecycle.setVisibility(View.GONE);
             textHintParticipations.setVisibility(View.GONE);
             noInformationTextView.setVisibility(View.VISIBLE);
@@ -132,7 +129,7 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
         pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
         editor = pref.edit();
         //event info component
-        eventID = getIntent().getIntExtra("eventId",-1);
+        eventID = getIntent().getIntExtra("eventId", -1);
         dateEvent = findViewById(R.id.text_calendar);
         timeEvent = findViewById(R.id.text_ora);
         locationEvent = findViewById(R.id.text_loc);
