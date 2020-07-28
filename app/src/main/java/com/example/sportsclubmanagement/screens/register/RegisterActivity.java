@@ -81,16 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private UserRegister createEntity() {
         String[] first_last = name.getText().toString().split(" ");
-        String first;
-        String last;
-        if (first_last.length == 3) {
-            first = first_last[0] + " " + first_last[1];
-            last = first_last[2];
-        } else {
-            first = first_last[0];
-            last = first_last[1];
-        }
-        return new UserRegister(first, last, email.getText().toString(), pass.getText().toString());
+        return new UserRegister(first_last[0], first_last[first_last.length-1], email.getText().toString(), pass.getText().toString());
     }
 
     private void restUserRegister(UserRegister userRegister) {

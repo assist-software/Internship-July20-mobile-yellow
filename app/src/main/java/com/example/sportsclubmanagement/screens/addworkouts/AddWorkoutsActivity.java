@@ -32,6 +32,7 @@ import com.example.sportsclubmanagement.utils.Validations;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,11 +67,12 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<EventMainInfo>>() {
             @Override
             public void onResponse(Call<List<EventMainInfo>> call, Response<List<EventMainInfo>> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
+                if (response.isSuccessful() || response.body()!=null) {
                         spinnerEventData = new HashMap<>();
+                        Date today = new Date();
                         for (EventMainInfo ev : response.body()) {
-                            spinnerEventData.put(ev.getId(), ev.getTitle());
+                            if(ev.getDate().before(today))
+                                spinnerEventData.put(ev.getId(), ev.getTitle());
                         }
                         if (spinnerEventData.size() != 0) {
                             ArrayList<String> lst = new ArrayList<>(spinnerEventData.values());
@@ -79,7 +81,6 @@ public class AddWorkoutsActivity extends AppCompatActivity {
                         } else {
                             event.setAdapter(populateSpinner(AddWorkoutsActivity.this, new String[]{"No events available"}));
                         }
-                    }
                 } else {
                     Log.d("AddWorkoutScreen", "No events response from server");
                     Toast.makeText(getApplicationContext(), Constants.ADD_WORKOUT_ERROR, Toast.LENGTH_SHORT).show();

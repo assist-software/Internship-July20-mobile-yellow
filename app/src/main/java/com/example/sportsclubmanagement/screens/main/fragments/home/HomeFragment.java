@@ -161,7 +161,7 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
             @Override
             public void onFailure(Call<UserDetails> call, Throwable t) {
                 if(t!=null)
-                    Toast.makeText(HomeFragment.this.getContext(), t.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });
@@ -239,7 +239,6 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
 
     private void hideFirstJoinEvent() {
         firstEventsRecyclerView.setVisibility(View.GONE);
-        noInformation2.setVisibility(View.VISIBLE);
     }
 
     private void getAllEvents() {
@@ -262,6 +261,9 @@ public class HomeFragment extends Fragment implements ClubAdapterListener, Event
                         hideFutureEvent();
                     } else {
                         initEventsAdapter(futureEvents, futureEventsAdapter, futureEventsRecyclerView);
+                    }
+                    if(allEventsAvailable.size()==0){
+                        noInformation2.setVisibility(View.VISIBLE);
                     }
                     if(futureEvents.size()==1){
                         futureEventsRecyclerView.getLayoutParams().height=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getContext().getResources().getDisplayMetrics());

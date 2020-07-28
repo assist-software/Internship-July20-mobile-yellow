@@ -14,7 +14,7 @@ public final class Validations {
     }
 
     public static boolean passwordValidation(String pass) {
-        return !pass.isEmpty() && Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$", pass);
+        return !pass.isEmpty() && Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!.*()_~])(?=\\S+$).{6,}$", pass);
     }
 
     public static boolean confirmPasswordValidation(String passInit, String passConf) {
