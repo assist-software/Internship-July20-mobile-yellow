@@ -67,8 +67,7 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<EventMainInfo>>() {
             @Override
             public void onResponse(Call<List<EventMainInfo>> call, Response<List<EventMainInfo>> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
+                if (response.isSuccessful() || response.body()!=null) {
                         spinnerEventData = new HashMap<>();
                         Date today = new Date();
                         for (EventMainInfo ev : response.body()) {
@@ -82,7 +81,6 @@ public class AddWorkoutsActivity extends AppCompatActivity {
                         } else {
                             event.setAdapter(populateSpinner(AddWorkoutsActivity.this, new String[]{"No events available"}));
                         }
-                    }
                 } else {
                     Log.d("AddWorkoutScreen", "No events response from server");
                     Toast.makeText(getApplicationContext(), Constants.ADD_WORKOUT_ERROR, Toast.LENGTH_SHORT).show();
