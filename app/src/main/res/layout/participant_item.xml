@@ -33,7 +33,9 @@
             android:layout_alignParentTop="true"
             android:text="Numee par"
             android:textColor="@color/near_white"
-            android:textSize="@dimen/text_24sp" />
+            android:textSize="@dimen/text_24sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
         <ImageView
             android:id="@+id/check_btn_img"
