@@ -67,7 +67,7 @@ public class AddWorkoutsActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<EventMainInfo>>() {
             @Override
             public void onResponse(Call<List<EventMainInfo>> call, Response<List<EventMainInfo>> response) {
-                if (response.isSuccessful() || response.body()!=null) {
+                if (response.isSuccessful() && response.body()!=null) {
                         spinnerEventData = new HashMap<>();
                         Date today = new Date();
                         for (EventMainInfo ev : response.body()) {

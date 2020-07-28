@@ -19,8 +19,8 @@ public class APIClient {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         retrofit = new Retrofit.Builder()
-                //.baseUrl(Constants.URL_SERVER)
-                .baseUrl(Constants.URL_LOCAL) //Se modifica cu endpoint de pe server
+                .baseUrl(Constants.URL_SERVER)
+                //.baseUrl(Constants.URL_LOCAL) //Se modifica cu endpoint de pe server
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

@@ -78,7 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
         return Validations.nameValidation(name.getText().toString()) && Validations.emailValidation(email.getText().toString()) &&
                 Validations.passwordValidation(pass.getText().toString()) && Validations.confirmPasswordValidation(pass.getText().toString(), confirmPass.getText().toString());
     }
-
     private UserRegister createEntity() {
         String[] first_last = name.getText().toString().split(" ");
         return new UserRegister(first_last[0], first_last[first_last.length-1], email.getText().toString(), pass.getText().toString());

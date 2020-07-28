@@ -44,8 +44,13 @@ public class EventsFragment extends Fragment implements EventAdapterListener {
 
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         initComponents(rootView);
-        getListEvents();
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getListEvents();
     }
 
     private void getListEvents() {

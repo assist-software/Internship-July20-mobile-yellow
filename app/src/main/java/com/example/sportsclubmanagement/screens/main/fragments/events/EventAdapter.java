@@ -1,8 +1,6 @@
 package com.example.sportsclubmanagement.screens.main.fragments.events;
 
-import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,7 +18,6 @@ import com.example.sportsclubmanagement.R;
 import com.example.sportsclubmanagement.models.EventAdapterModel;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder> {
@@ -54,7 +52,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView title, loc, data;
         private ImageView img;
-        private LinearLayout layout;
+        private ConstraintLayout layout;
         private Button upBtn;
         private Button downBtn;
 
@@ -64,7 +62,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
             title = (TextView) view.findViewById(R.id.card_title);
             loc = (TextView) view.findViewById(R.id.card_location);
             data = (TextView) view.findViewById(R.id.card_date);
-            layout = view.findViewById(R.id.linear_card);
+            layout = view.findViewById(R.id.rootLayout);
             upBtn = view.findViewById(R.id.join_event_btn_up);
             downBtn = view.findViewById(R.id.joinEvent_btn_down);
         }
@@ -93,20 +91,20 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
                     listener.onEventJoinClick(eventAdapterModel);
                 }
             });
-            if(eventAdapterModel.isVisibleBtn()){
-                if(eventAdapterModel.isUpPositionBtn()){
+            if (eventAdapterModel.isVisibleBtn()) {
+                if (eventAdapterModel.isUpPositionBtn()) {
                     downBtn.setVisibility(View.GONE);
                     img.requestLayout();
-                }else{
+                } else {
                     upBtn.setVisibility(View.GONE);
                 }
-            }else{
+            } else {
                 downBtn.setVisibility(View.GONE);
                 upBtn.setVisibility(View.GONE);
             }
-            if(eventAdapterModel.isBig()){
-                img.getLayoutParams().width= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 350, ctx.getResources().getDisplayMetrics());
-                img.getLayoutParams().height= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180, ctx.getResources().getDisplayMetrics());
+            if (eventAdapterModel.isBig()) {
+                img.getLayoutParams().width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 350, ctx.getResources().getDisplayMetrics());
+                img.getLayoutParams().height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 180, ctx.getResources().getDisplayMetrics());
             }
         }
     }

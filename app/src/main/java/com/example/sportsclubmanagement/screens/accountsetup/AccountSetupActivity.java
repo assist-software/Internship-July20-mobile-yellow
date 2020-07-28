@@ -45,6 +45,7 @@ public class AccountSetupActivity extends AppCompatActivity {
     private AdapterView.OnItemSelectedListener spinnerListener;
     private List<String> sports;
     private List<String> prm, scd;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,21 @@ public class AccountSetupActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         initSpinnerListeners();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    private void dontSetAccoutSetup() {
+        editor.putBoolean(Constants.isSetup,false);
+        editor.commit();
     }
 
     private void fillSpinners() {
@@ -81,6 +97,8 @@ public class AccountSetupActivity extends AppCompatActivity {
                 if (checkInfo()) {
                     restAccountSetup(createEntity());
                     startActivity(intent_home);
+                    editor.putBoolean(Constants.isSetup,true);
+                    editor.commit();
                     finish();
                 } else {
                     Toast.makeText(AccountSetupActivity.this, "Invalid data", Toast.LENGTH_SHORT).show();
@@ -173,6 +191,8 @@ public class AccountSetupActivity extends AppCompatActivity {
         sports = new ArrayList<>();
         prm = new ArrayList<>();
         scd = new ArrayList<>();
+        pref = getApplicationContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES,MODE_PRIVATE);
+        editor = pref.edit();
     }
 
     private UserAccountSetup createEntity() {

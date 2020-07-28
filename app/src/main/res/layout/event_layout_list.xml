@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,26 +26,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/join_event_btn_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_100dp"
-            android:layout_marginEnd="@dimen/space_12dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/join_button"
-            android:text="@string/join"
-            android:textColor="@color/colorGreen"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linear_card"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/join_event_btn_up"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/join_button"
+        android:text="@string/join"
+        android:textColor="@color/colorGreen"
+        android:layout_marginEnd="@dimen/space_10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/card_img_event"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
             android:id="@+id/card_img_event"
             android:layout_width="261dp"
             android:layout_height="131dp"
@@ -57,6 +51,8 @@
             android:id="@+id/info_linear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/card_img_event"
+            app:layout_constraintStart_toStartOf="parent"
             android:orientation="vertical">
 
             <TextView
@@ -82,6 +78,7 @@
                     android:layout_width="@dimen/size_10dp"
                     android:layout_height="@dimen/size_10dp"
                     android:layout_marginStart="@dimen/space_16dp"
+                    android:layout_marginEnd="@dimen/space_5dp"
                     android:src="@drawable/loc_icon" />
 
                 <TextView
@@ -108,6 +105,7 @@
                     android:layout_width="@dimen/size_10dp"
                     android:layout_height="@dimen/size_10dp"
                     android:layout_marginStart="@dimen/space_16dp"
+                    android:layout_marginEnd="@dimen/space_5dp"
                     android:src="@drawable/time_icon" />
 
                 <TextView
@@ -121,6 +119,4 @@
             </LinearLayout>
         </LinearLayout>
 
-
-    </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
