@@ -82,12 +82,16 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
     private void fillEventDetailsOnPage(EventDetails eventDetails) {
         title_event.setText(eventDetails.getTitle());
         locationEvent.setText(eventDetails.getLocation());
-        SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
-        timeEvent.setText(formatterTime.format(eventDetails.getTimeEvent()));
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
+        String[] timesOfEvent = eventDetails.getTimeEvent().split(":");
+        timeEvent.setText(timesOfEvent[0]+":"+timesOfEvent[1]);
+        SimpleDateFormat formatter= new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
         dateEvent.setText(formatter.format(eventDetails.getDataEvent()));
         descriptionEvent.setText(eventDetails.getDescription());
-        titleTextEvent.setText(eventDetails.getDescription().split(".")[0]);
+        if(eventDetails.getDescription().split(".").length>=1)
+            titleTextEvent.setText(eventDetails.getDescription().split(".")[0]);
+        else{
+            titleTextEvent.setText(eventDetails.getDescription());
+        }
         //for recycler with participants
         if (eventDetails.getParticipants().size() != 0) {
             participantResult = new HashMap<>();
@@ -136,6 +140,8 @@ public class EventActivity extends AppCompatActivity implements ParticipantAdapt
         imgEvent = findViewById(R.id.img_event);
         title_event = findViewById(R.id.title_event);
         textHintParticipations = findViewById(R.id.text_hint_participants);
+        descriptionEvent = findViewById(R.id.text_body);
+        titleTextEvent = findViewById(R.id.text_head);
     }
 
     @Override
