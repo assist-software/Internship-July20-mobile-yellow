@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ public class WorkoutsFragment extends Fragment {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private APIInterface apiInterface;
+    private TextView noInformation1, noInformation2;
 
     @Nullable
     @Override
@@ -95,9 +97,21 @@ public class WorkoutsFragment extends Fragment {
     }
 
     private void initAWorkoutsRecycler(List<WorkoutAdapterModel> workoutsListForRecycler,RecyclerView recyclerView) {
-        workoutAdapter adapter = new workoutAdapter(workoutsListForRecycler, getActivity().getApplicationContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(adapter);
+        if(workoutsListForRecycler.size()!=0){
+            workoutAdapter adapter = new workoutAdapter(workoutsListForRecycler, getActivity().getApplicationContext());
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+            recyclerView.setAdapter(adapter);
+        }
+        else {
+            if(recyclerView == todayWorkouts){
+                todayWorkouts.setVisibility(View.GONE);
+                noInformation1.setVisibility(View.VISIBLE);
+            }
+            else {
+                allWorkoutRecycler.setVisibility(View.GONE);
+                noInformation2.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void initComp() {
@@ -107,6 +121,8 @@ public class WorkoutsFragment extends Fragment {
         pref = getContext().getSharedPreferences(Constants.TOKEN_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         editor = pref.edit();
         apiInterface = APIClient.getClient().create(APIInterface.class);
+        noInformation1 = this.getView().findViewById(R.id.noInformationTextView1);
+        noInformation2 = this.getView().findViewById(R.id.noInformationTextView2);
     }
 
     private void initListeners() {
